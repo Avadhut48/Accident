@@ -1,0 +1,66 @@
+[
+  {
+    "id": "rh_20260209_211024_628387",
+    "timestamp": "2026-02-09T21:10:24.629387",
+    "start": "Thane",
+    "end": "Dadar",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 38.88,
+      "risk_level": "medium",
+      "distance_km": 25.86,
+      "time_minutes": 51
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28
+  },
+  {
+    "id": "rh_20260209_211019_794766",
+    "timestamp": "2026-02-09T21:10:19.794766",
+    "start": "Thane",
+    "end": "Mulund",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 40.0,
+      "risk_level": "medium",
+      "distance_km": 7.06,
+      "time_minutes": 14
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28
+  },
+  {
+    "id": "rh_20260209_211004_416875",
+    "timestamp": "2026-02-09T21:10:04.416875",
+    "start": "Thane",
+    "end": "Dadar",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 35.14,
+      "risk_level": "medium",
+      "distance_km": 25.8,
+      "time_minutes": 51
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28
+  },
+  {
+    "id": "rh_20260209_210954_698336",
+    "timestamp": "2026-02-09T21:09:54.698336",
+    "start": "Thane",
+    "end": "Mulund",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 40.0,
+      "risk_level": "medium",
+      "distance_km": 7.06,
+      "time_minutes": 14
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28
+  }
+]
