@@ -947,6 +947,55 @@ body::before {
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
+.btn-whatsapp-modern {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp-modern:hover {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+}
+
+.share-route-option {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-route-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #25D366;
+    transform: translateX(5px);
+}
+
+.share-route-option .route-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.share-route-option .route-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin: 1rem 0;
+}
+
 .favorites-list {
     padding: 0.75rem;
 }

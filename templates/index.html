@@ -17,142 +17,14 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
-    <style>
-        /* Route History Styles */
-        .history-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .history-item:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(102,126,234,0.5);
-            transform: translateX(4px);
-        }
-        .history-route-path {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-        .history-location {
-            font-weight: 600;
-            color: #fff;
-            font-size: 0.9rem;
-        }
-        .history-arrow {
-            color: #667eea;
-            font-size: 0.75rem;
-        }
-        .history-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: #aaa;
-        }
-        .history-timestamp {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .history-risk-badge {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.7rem;
-        }
-        .history-risk-low { background: #28a745; color: #fff; }
-        .history-risk-medium { background: #ffc107; color: #000; }
-        .history-risk-high { background: #dc3545; color: #fff; }
-        
-        .history-stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .history-stat-box {
-            background: rgba(255,255,255,0.06);
-            border-radius: 6px;
-            padding: 8px;
-            text-align: center;
-        }
-        .history-stat-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #667eea;
-        }
-        .history-stat-label {
-            font-size: 0.7rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-        }
-        
-        .popular-route-item {
-            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
-            border: 1px solid rgba(102,126,234,0.3);
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .popular-route-item:hover {
-            border-color: rgba(102,126,234,0.6);
-            transform: translateX(4px);
-        }
-        .popular-route-count {
-            background: #667eea;
-            color: #fff;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-        
-        .clear-history-btn {
-            background: rgba(220,53,69,0.15);
-            border: 1px solid rgba(220,53,69,0.3);
-            color: #dc3545;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .clear-history-btn:hover {
-            background: rgba(220,53,69,0.25);
-            border-color: rgba(220,53,69,0.5);
-        }
-        
-        .empty-history {
-            text-align: center;
-            padding: 24px 12px;
-            color: #888;
-        }
-        .empty-history i {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-            color: #555;
-        }
-    </style>
 </head>
 <body>
-    <!-- Modern Header (unchanged) -->
+    <!-- Modern Header -->
     <nav class="navbar navbar-expand-lg navbar-dark modern-navbar">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center" href="#">
@@ -173,9 +45,9 @@
                     <i class="fas fa-road"></i>
                     <span>20 Major Roads</span>
                 </div>
-                <div class="stat-item" id="navbarWeather">
-                    <i class="fas fa-cloud" id="navWeatherIcon"></i>
-                    <span id="navWeatherText">Loading weather…</span>
+                <div class="stat-item">
+                    <i class="fas fa-brain"></i>
+                    <span>AI-Powered</span>
                 </div>
             </div>
         </div>
@@ -185,97 +57,8 @@
         <div class="row g-3">
             <!-- Left Sidebar -->
             <div class="col-lg-3">
-
-                <!-- Weather Card (unchanged) -->
-                <div class="glass-card slide-in-left" id="weatherCard">
-                    <div class="card-header-modern">
-                        <div class="header-icon" id="weatherHeaderIcon" style="background: linear-gradient(135deg,#667eea,#764ba2);">
-                            <i class="fas fa-cloud" id="weatherMainIcon"></i>
-                        </div>
-                        <h5>Live Weather</h5>
-                    </div>
-                    <div class="card-body-modern">
-                        <div id="weatherSkeleton" style="text-align:center; padding:12px 0;">
-                            <div class="spinner" style="width:28px;height:28px;margin:0 auto 8px;"></div>
-                            <small style="color:#aaa;">Fetching Mumbai weather…</small>
-                        </div>
-                        <div id="weatherContent" style="display:none;">
-                            <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:12px;">
-                                <div style="font-size:2.6rem;" id="weatherEmoji">⛅</div>
-                                <div style="text-align:left;">
-                                    <div style="font-size:1.6rem; font-weight:700; color:#fff;" id="weatherCondition">–</div>
-                                    <div style="font-size:0.8rem; color:#aaa;" id="weatherDesc">–</div>
-                                </div>
-                            </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                                <div class="weather-stat-box">
-                                    <i class="fas fa-thermometer-half" style="color:#ff6b6b;"></i>
-                                    <span id="weatherTemp">–</span>
-                                    <small>Temp</small>
-                                </div>
-                                <div class="weather-stat-box">
-                                    <i class="fas fa-tint" style="color:#4fc3f7;"></i>
-                                    <span id="weatherHumidity">–</span>
-                                    <small>Humidity</small>
-                                </div>
-                                <div class="weather-stat-box">
-                                    <i class="fas fa-wind" style="color:#81c784;"></i>
-                                    <span id="weatherWind">–</span>
-                                    <small>Wind</small>
-                                </div>
-                                <div class="weather-stat-box">
-                                    <i class="fas fa-cloud-rain" style="color:#42a5f5;"></i>
-                                    <span id="weatherRain">–</span>
-                                    <small>Rain/h</small>
-                                </div>
-                            </div>
-                            <div id="weatherRiskBanner" class="weather-risk-banner mt-3">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <span id="weatherRiskText">Weather is factored into route risk scores.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ═══ ROUTE HISTORY CARD ═══ (NEW) -->
-                <div class="glass-card slide-in-left mt-3" id="historyCard">
-                    <div class="card-header-modern">
-                        <div class="header-icon bg-info">
-                            <i class="fas fa-history"></i>
-                        </div>
-                        <h5>Recent Searches</h5>
-                    </div>
-                    <div class="card-body-modern" style="max-height: 350px; overflow-y: auto;">
-                        <div id="historyContent">
-                            <!-- Will be populated by JS -->
-                            <div class="empty-history">
-                                <i class="fas fa-clock-rotate-left"></i>
-                                <p>No searches yet</p>
-                            </div>
-                        </div>
-                        <div id="historyActions" style="margin-top:12px; display:none;">
-                            <button class="clear-history-btn w-100" id="clearHistoryBtn">
-                                <i class="fas fa-trash-alt"></i> Clear All History
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ═══ POPULAR ROUTES CARD ═══ (NEW) -->
-                <div class="glass-card slide-in-left mt-3" id="popularCard" style="display:none;">
-                    <div class="card-header-modern">
-                        <div class="header-icon" style="background: linear-gradient(135deg,#f093fb,#f5576c);">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h5>Popular Routes</h5>
-                    </div>
-                    <div class="card-body-modern" id="popularContent">
-                        <!-- Will be populated by JS -->
-                    </div>
-                </div>
-
                 <!-- Route Planner Card -->
-                <div class="glass-card slide-in-left mt-3">
+                <div class="glass-card slide-in-left">
                     <div class="card-header-modern">
                         <div class="header-icon">
                             <i class="fas fa-map-marked-alt"></i>
@@ -283,6 +66,22 @@
                         <h5>Plan Your Route</h5>
                     </div>
                     <div class="card-body-modern">
+                        <!-- Favorites Dropdown -->
+                        <div class="input-group-modern mb-3" id="favoritesSection">
+                            <label>
+                                <i class="fas fa-star text-warning"></i>
+                                Quick Select Favorites
+                            </label>
+                            <div class="select-wrapper">
+                                <select class="form-select-modern" id="favoritesDropdown">
+                                    <option value="">Choose a saved route...</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="divider-text">OR</div>
+                        
                         <form id="routeForm">
                             <div class="input-group-modern mb-3">
                                 <label for="startLocation">
@@ -326,13 +125,23 @@
                                 <i class="fas fa-search"></i>
                                 Find Safe Routes
                             </button>
+                            
+                            <button type="button" class="btn-modern btn-secondary-modern w-100 mt-2" id="saveFavoriteBtn" style="display: none;">
+                                <i class="fas fa-star"></i>
+                                Save as Favorite
+                            </button>
+                            
+                            <button type="button" class="btn-modern btn-whatsapp-modern w-100 mt-2" id="shareWhatsAppBtn" style="display: none;">
+                                <i class="fab fa-whatsapp"></i>
+                                Share via WhatsApp
+                            </button>
                         </form>
                         
                         <div id="loadingIndicator" class="loading-container" style="display: none;">
                             <div class="loading-spinner">
                                 <div class="spinner"></div>
                             </div>
-                            <p class="loading-text">Analyzing routes with AI…</p>
+                            <p class="loading-text">Analyzing routes with AI...</p>
                             <div class="loading-dots">
                                 <span></span><span></span><span></span>
                             </div>
@@ -340,7 +149,7 @@
                     </div>
                 </div>
 
-                <!-- Route Results (unchanged) -->
+                <!-- Route Results -->
                 <div id="routeResults" class="mt-3 slide-in-left" style="display: none;">
                     <div class="glass-card">
                         <div class="card-header-modern">
@@ -349,11 +158,43 @@
                             </div>
                             <h5>Route Options</h5>
                         </div>
-                        <div class="route-cards-container" id="routeCards"></div>
+                        <div class="route-cards-container" id="routeCards">
+                            <!-- Routes will be inserted here -->
+                        </div>
                     </div>
                 </div>
 
-                <!-- Quick Stats (unchanged) -->
+                <!-- Route Comparison Chart -->
+                <div id="comparisonChart" class="mt-3 slide-in-left" style="display: none;">
+                    <div class="glass-card">
+                        <div class="card-header-modern">
+                            <div class="header-icon bg-info">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h5>Route Comparison</h5>
+                        </div>
+                        <div class="card-body-modern">
+                            <canvas id="routeComparisonChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Favorites Card -->
+                <div id="savedFavorites" class="mt-3 slide-in-left" style="display: none;">
+                    <div class="glass-card">
+                        <div class="card-header-modern">
+                            <div class="header-icon bg-warning">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5>Saved Favorites</h5>
+                        </div>
+                        <div class="favorites-list" id="favoritesList">
+                            <!-- Favorites will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
                 <div class="glass-card mt-3 slide-in-left">
                     <div class="quick-stats">
                         <div class="stat-box">
@@ -377,7 +218,7 @@
                     </div>
                 </div>
 
-                <!-- Legend (unchanged) -->
+                <!-- Legend -->
                 <div class="glass-card mt-3 slide-in-left">
                     <div class="legend-header">
                         <i class="fas fa-palette"></i>
@@ -415,7 +256,7 @@
                 </div>
             </div>
 
-            <!-- Main Content (unchanged) -->
+            <!-- Main Content -->
             <div class="col-lg-9">
                 <!-- Map Container -->
                 <div class="glass-card map-card slide-in-right">
@@ -439,7 +280,9 @@
                             </div>
                             <h5>Route Details</h5>
                         </div>
-                        <div class="card-body-modern" id="detailsContent"></div>
+                        <div class="card-body-modern" id="detailsContent">
+                            <!-- Details will be inserted here -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -474,23 +317,89 @@
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h6>Find Routes</h6>
-                            <p>Click "Find Safe Routes" — the app fetches live Mumbai weather and factors it into every route's risk score automatically.</p>
+                            <p>Click "Find Safe Routes" to generate AI-powered route recommendations.</p>
                         </div>
                     </div>
                     <div class="help-step">
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h6>Compare & Choose</h6>
-                            <p>Review the safety scores and select the route that best fits your needs. Notice how scores change when it rains.</p>
+                            <p>Review the safety scores and select the route that best fits your needs.</p>
                         </div>
                     </div>
-                    <div class="help-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h6>View History</h6>
-                            <p>Your recent searches are saved automatically. Click any history item to re-run that search instantly!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Favorite Modal -->
+    <div class="modal fade" id="saveFavoriteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-star text-warning"></i>
+                        Save as Favorite
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="favoriteName" class="form-label">Give this route a name:</label>
+                        <input type="text" class="form-control" id="favoriteName" 
+                               placeholder="e.g., Daily Commute, Home to Office">
+                        <div class="form-text">Choose a memorable name to easily find this route later.</div>
+                    </div>
+                    <div class="route-summary">
+                        <div class="summary-item">
+                            <i class="fas fa-map-marker-alt text-success"></i>
+                            <span>From: <strong id="modalStartLocation"></strong></span>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-flag-checkered text-danger"></i>
+                            <span>To: <strong id="modalEndLocation"></strong></span>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmSaveFavorite">
+                        <i class="fas fa-save"></i> Save Favorite
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share via WhatsApp Modal -->
+    <div class="modal fade" id="shareWhatsAppModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fab fa-whatsapp text-success"></i>
+                        Share Safe Route
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Choose which route to share:</p>
+                    <div id="shareRouteOptions">
+                        <!-- Route options will be inserted here -->
+                    </div>
+                    <div class="route-summary mt-3">
+                        <div class="summary-item">
+                            <i class="fas fa-map-marker-alt text-success"></i>
+                            <span>From: <strong id="shareStartLocation"></strong></span>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-flag-checkered text-danger"></i>
+                            <span>To: <strong id="shareEndLocation"></strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

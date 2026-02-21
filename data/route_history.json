@@ -1,66 +1,114 @@
 [
   {
-    "id": "rh_20260209_211024_628387",
-    "timestamp": "2026-02-09T21:10:24.629387",
+    "id": "rh_20260221_171354_024303",
+    "timestamp": "2026-02-21T17:13:54.024303",
     "start": "Thane",
-    "end": "Dadar",
+    "end": "Navi Mumbai",
     "chosen_route": {
       "name": "Via Highway",
-      "risk_score": 38.88,
-      "risk_level": "medium",
-      "distance_km": 25.86,
-      "time_minutes": 51
+      "risk_score": 34.19,
+      "risk_level": "low",
+      "distance_km": 18.49,
+      "time_minutes": 36
     },
     "all_routes_count": 3,
     "weather": "Clear",
-    "weather_temp": 28
+    "weather_temp": 28.0
   },
   {
-    "id": "rh_20260209_211019_794766",
-    "timestamp": "2026-02-09T21:10:19.794766",
-    "start": "Thane",
-    "end": "Mulund",
+    "id": "rh_20260221_171321_177626",
+    "timestamp": "2026-02-21T17:13:21.177626",
+    "start": "CST",
+    "end": "Thane",
     "chosen_route": {
-      "name": "Scenic Route",
-      "risk_score": 40.0,
-      "risk_level": "medium",
-      "distance_km": 7.06,
-      "time_minutes": 14
+      "name": "Direct Route",
+      "risk_score": 31.61,
+      "risk_level": "low",
+      "distance_km": 33.61,
+      "time_minutes": 67
     },
     "all_routes_count": 3,
     "weather": "Clear",
-    "weather_temp": 28
+    "weather_temp": 28.0
   },
   {
-    "id": "rh_20260209_211004_416875",
-    "timestamp": "2026-02-09T21:10:04.416875",
+    "id": "rh_20260221_134417_126668",
+    "timestamp": "2026-02-21T13:44:17.126668",
     "start": "Thane",
-    "end": "Dadar",
+    "end": "Navi Mumbai",
     "chosen_route": {
-      "name": "Via Highway",
-      "risk_score": 35.14,
-      "risk_level": "medium",
-      "distance_km": 25.8,
-      "time_minutes": 51
+      "name": "OSM Smart Route",
+      "risk_score": 60.68,
+      "risk_level": "high",
+      "distance_km": 2.16,
+      "time_minutes": 43.0
     },
-    "all_routes_count": 3,
+    "all_routes_count": 1,
     "weather": "Clear",
-    "weather_temp": 28
+    "weather_temp": null
   },
   {
-    "id": "rh_20260209_210954_698336",
-    "timestamp": "2026-02-09T21:09:54.698336",
+    "id": "rh_20260221_134416_659924",
+    "timestamp": "2026-02-21T13:44:16.659924",
     "start": "Thane",
-    "end": "Mulund",
+    "end": "Navi Mumbai",
     "chosen_route": {
-      "name": "Scenic Route",
-      "risk_score": 40.0,
-      "risk_level": "medium",
-      "distance_km": 7.06,
-      "time_minutes": 14
+      "name": "OSM Smart Route",
+      "risk_score": 68.05,
+      "risk_level": "high",
+      "distance_km": 2.16,
+      "time_minutes": 43.0
     },
-    "all_routes_count": 3,
+    "all_routes_count": 1,
     "weather": "Clear",
-    "weather_temp": 28
+    "weather_temp": null
+  },
+  {
+    "id": "rh_20260221_134346_066144",
+    "timestamp": "2026-02-21T13:43:46.066144",
+    "start": "Thane",
+    "end": "Navi Mumbai",
+    "chosen_route": {
+      "name": "OSM Smart Route",
+      "risk_score": 48.64,
+      "risk_level": "medium",
+      "distance_km": 2.16,
+      "time_minutes": 43.0
+    },
+    "all_routes_count": 1,
+    "weather": "Clear",
+    "weather_temp": null
+  },
+  {
+    "id": "rh_20260221_134345_596391",
+    "timestamp": "2026-02-21T13:43:45.596391",
+    "start": "Thane",
+    "end": "Navi Mumbai",
+    "chosen_route": {
+      "name": "OSM Smart Route",
+      "risk_score": 38.14,
+      "risk_level": "medium",
+      "distance_km": 2.16,
+      "time_minutes": 43.0
+    },
+    "all_routes_count": 1,
+    "weather": "Clear",
+    "weather_temp": null
+  },
+  {
+    "id": "rh_20260221_134344_837104",
+    "timestamp": "2026-02-21T13:43:44.837104",
+    "start": "Thane",
+    "end": "Navi Mumbai",
+    "chosen_route": {
+      "name": "OSM Smart Route",
+      "risk_score": 48.85,
+      "risk_level": "medium",
+      "distance_km": 2.16,
+      "time_minutes": 43.0
+    },
+    "all_routes_count": 1,
+    "weather": "Clear",
+    "weather_temp": null
   }
 ]

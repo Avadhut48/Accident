@@ -85,6 +85,30 @@ MUMBAI_LOCATIONS = {
     "Nariman Point": [18.9256, 72.8235],
 }
 
+
+MODEL_TRAINING_REQUIREMENTS = {
+    "accidents_csv": {
+        "required_columns": [
+            "latitude", "longitude", "date", "time", "severity",
+            "weather", "vehicle_type", "road_name", "road_risk_level"
+        ]
+    },
+    "road_segments_csv": {
+        "required_columns": [
+            "segment_id", "road_name", "start_lat", "start_lon",
+            "end_lat", "end_lon", "risk_level", "avg_traffic"
+        ]
+    },
+    "training_preferences": {
+        "target_style_options": ["regression_0_to_100", "classification_3_class"],
+        "default_target_style": "regression_0_to_100",
+        "city_scope_options": ["mumbai_only", "expandable_multi_city"],
+        "default_city_scope": "mumbai_only",
+        "retraining_cadence_options": ["weekly", "monthly", "manual"],
+        "default_retraining_cadence": "monthly"
+    }
+}
+
 # ===========================================================================
 # Weather helpers (unchanged from v3)
 # ===========================================================================
@@ -186,8 +210,28 @@ def generate_route_waypoints(start, end, route_type='direct'):
     waypoints.append([end_lat, end_lon])
     return waypoints
 
-def calculate_route_risk(waypoints, weather_condition="Clear"):
+def _predict_leg_risk(weather_condition, rain_mm, humidity, road_level, leg_hour, leg_day_of_week, vehicle_encoded=0):
+    """Predict risk score for a route leg using the trained regression model."""
+    model = model_data["model"]
+    weather_sev       = WEATHER_SEVERITY_SCORE.get(weather_condition, 3)
+    road_risk_encoded = {'low':0, 'medium':1, 'high':2}.get(road_level, 1)
+    is_rush_hour      = 1 if (7 <= leg_hour <= 10) or (17 <= leg_hour <= 21) else 0
+    is_night          = 1 if leg_hour >= 22 or leg_hour <= 5 else 0
+    is_weekend        = 1 if leg_day_of_week >= 5 else 0
+
+    features = np.array([[
+        leg_hour, leg_day_of_week, datetime.now().month,
+        is_rush_hour, is_night, is_weekend,
+        weather_sev, rain_mm, humidity,
+        road_risk_encoded, vehicle_encoded,
+    ]])
+    predicted = float(model.predict(features)[0])
+    return max(0.0, min(100.0, predicted))
+
+
+def calculate_route_risk(waypoints, weather_condition="Clear", rain_mm=0.0, humidity=55):
     multiplier = WEATHER_RISK_MULTIPLIER.get(weather_condition, 1.0)
+    now = datetime.now()
     total_risk = 0.0
     total_dist = 0.0
     risk_details = []
@@ -211,10 +255,26 @@ def calculate_route_risk(waypoints, weather_condition="Clear"):
             sid = nearest['segment_id']
             base_risk = segment_risk_scores.get(sid, {}).get('risk_score',
                         {'low':20,'medium':40,'high':70}.get(nearest['risk_level'], 40))
-            adjusted_risk = min(100, base_risk * multiplier)
+            leg_model_risk = _predict_leg_risk(
+                weather_condition=weather_condition,
+                rain_mm=rain_mm,
+                humidity=humidity,
+                road_level=nearest['risk_level'],
+                leg_hour=now.hour,
+                leg_day_of_week=now.weekday(),
+            )
+
+            # Blend geo historical risk with ML temporal-weather risk.
+            # Keep segment risk dominant because it encodes localized accident history.
+            adjusted_risk = min(100, ((0.6 * base_risk) + (0.4 * leg_model_risk)) * multiplier)
             total_risk += adjusted_risk * leg_dist
             total_dist += leg_dist
-            risk_details.append({'road': nearest['road_name'], 'risk': round(adjusted_risk, 2)})
+            risk_details.append({
+                'road': nearest['road_name'],
+                'risk': round(adjusted_risk, 2),
+                'segment_risk': round(base_risk, 2),
+                'model_risk': round(leg_model_risk, 2),
+            })
         else:
             total_risk += 40 * multiplier * leg_dist
             total_dist += leg_dist
@@ -245,6 +305,15 @@ def index():
 def get_locations():
     return jsonify(MUMBAI_LOCATIONS)
 
+
+@app.route('/api/model/training-requirements', methods=['GET'])
+def get_model_training_requirements():
+    """Return required datasets and options needed for model training."""
+    return jsonify({
+        'success': True,
+        'requirements': MODEL_TRAINING_REQUIREMENTS,
+    })
+
 @app.route('/api/weather', methods=['GET'])
 def get_weather():
     return jsonify(_fetch_weather())
@@ -274,7 +343,12 @@ def get_safe_routes():
     routes = []
     for route_type, route_name in [('direct','Direct Route'),('highway','Via Highway'),('scenic','Scenic Route')]:
         wp = generate_route_waypoints(start_coords, end_coords, route_type)
-        risk, details = calculate_route_risk(wp, weather_condition)
+        risk, details = calculate_route_risk(
+            wp,
+            weather_condition=weather_condition,
+            rain_mm=weather.get('rain_mm', WEATHER_RAIN_MM.get(weather_condition, 0.0)),
+            humidity=weather.get('humidity', WEATHER_HUMIDITY.get(weather_condition, 55)),
+        )
         meta = get_route_metadata(wp, risk)
         routes.append({
             'id':           len(routes)+1,
