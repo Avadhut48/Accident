@@ -1,5 +1,85 @@
 [
   {
+    "id": "rh_20260222_133625_815007",
+    "timestamp": "2026-02-22T13:36:25.815007",
+    "start": "CST",
+    "end": "Kurla",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 33.4,
+      "risk_level": "low",
+      "distance_km": 16.22,
+      "time_minutes": 32
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_013221_141568",
+    "timestamp": "2026-02-22T01:32:21.141568",
+    "start": "CST",
+    "end": "Churchgate",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 56.56,
+      "risk_level": "medium",
+      "distance_km": 1.58,
+      "time_minutes": 3
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260221_231919_212159",
+    "timestamp": "2026-02-21T23:19:19.212159",
+    "start": "Worli",
+    "end": "Kurla",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 35.38,
+      "risk_level": "medium",
+      "distance_km": 10.96,
+      "time_minutes": 21
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260221_190055_841137",
+    "timestamp": "2026-02-21T19:00:55.841137",
+    "start": "Thane",
+    "end": "Mulund",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 40.0,
+      "risk_level": "medium",
+      "distance_km": 7.06,
+      "time_minutes": 14
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260221_181840_156190",
+    "timestamp": "2026-02-21T18:18:40.156190",
+    "start": "Andheri",
+    "end": "CST",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 33.2,
+      "risk_level": "low",
+      "distance_km": 20.01,
+      "time_minutes": 40
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
     "id": "rh_20260221_171354_024303",
     "timestamp": "2026-02-21T17:13:54.024303",
     "start": "Thane",
