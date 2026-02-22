@@ -1,5 +1,261 @@
 [
   {
+    "id": "rh_20260222_191142_652169",
+    "timestamp": "2026-02-22T19:11:42.652169",
+    "start": "Borivali",
+    "end": "CST",
+    "chosen_route": {
+      "name": "Direct Route",
+      "risk_score": 29.1,
+      "risk_level": "low",
+      "distance_km": 32.39,
+      "time_minutes": 64
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_183601_156738",
+    "timestamp": "2026-02-22T18:36:01.156738",
+    "start": "CST",
+    "end": "Marine Drive",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 52.41,
+      "risk_level": "medium",
+      "distance_km": 4.64,
+      "time_minutes": 9
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_183426_032308",
+    "timestamp": "2026-02-22T18:34:26.033306",
+    "start": "Worli",
+    "end": "Lower Parel",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 58.86,
+      "risk_level": "medium",
+      "distance_km": 3.45,
+      "time_minutes": 8
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_183404_660193",
+    "timestamp": "2026-02-22T18:34:04.661191",
+    "start": "Worli",
+    "end": "Lower Parel",
+    "chosen_route": {
+      "name": "Direct Route",
+      "risk_score": 51.51,
+      "risk_level": "medium",
+      "distance_km": 2.74,
+      "time_minutes": 5
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_171309_231198",
+    "timestamp": "2026-02-22T17:13:09.231198",
+    "start": "Powai",
+    "end": "Ghatkopar",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 43.08,
+      "risk_level": "medium",
+      "distance_km": 5.42,
+      "time_minutes": 12
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_171305_422166",
+    "timestamp": "2026-02-22T17:13:05.422166",
+    "start": "Powai",
+    "end": "Ghatkopar",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 35.9,
+      "risk_level": "medium",
+      "distance_km": 5.42,
+      "time_minutes": 10
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_171301_930007",
+    "timestamp": "2026-02-22T17:13:01.930007",
+    "start": "Powai",
+    "end": "Ghatkopar",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 46.67,
+      "risk_level": "medium",
+      "distance_km": 5.42,
+      "time_minutes": 14
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_171255_449069",
+    "timestamp": "2026-02-22T17:12:55.449069",
+    "start": "Powai",
+    "end": "Ghatkopar",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 35.9,
+      "risk_level": "medium",
+      "distance_km": 5.42,
+      "time_minutes": 10
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_171255_408808",
+    "timestamp": "2026-02-22T17:12:55.408808",
+    "start": "Powai",
+    "end": "Ghatkopar",
+    "chosen_route": {
+      "name": "Scenic Route",
+      "risk_score": 35.9,
+      "risk_level": "medium",
+      "distance_km": 5.42,
+      "time_minutes": 10
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_170958_788865",
+    "timestamp": "2026-02-22T17:09:58.788865",
+    "start": "Ghatkopar",
+    "end": "Mulund",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 45.37,
+      "risk_level": "medium",
+      "distance_km": 11.01,
+      "time_minutes": 22
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_170841_168065",
+    "timestamp": "2026-02-22T17:08:41.168065",
+    "start": "Kurla",
+    "end": "Lower Parel",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 43.1,
+      "risk_level": "medium",
+      "distance_km": 11.41,
+      "time_minutes": 22
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_170149_017663",
+    "timestamp": "2026-02-22T17:01:49.017663",
+    "start": "Nariman Point",
+    "end": "Juhu",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 32.84,
+      "risk_level": "low",
+      "distance_km": 19.12,
+      "time_minutes": 38
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_170140_372370",
+    "timestamp": "2026-02-22T17:01:40.372370",
+    "start": "Nariman Point",
+    "end": "Juhu",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 33.86,
+      "risk_level": "low",
+      "distance_km": 19.07,
+      "time_minutes": 38
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_165553_567585",
+    "timestamp": "2026-02-22T16:55:53.567585",
+    "start": "Kurla",
+    "end": "Juhu",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 34.72,
+      "risk_level": "low",
+      "distance_km": 8.05,
+      "time_minutes": 16
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_163134_079061",
+    "timestamp": "2026-02-22T16:31:34.079061",
+    "start": "Ghatkopar",
+    "end": "Mulund",
+    "chosen_route": {
+      "name": "Direct Route",
+      "risk_score": 60.81,
+      "risk_level": "high",
+      "distance_km": 10.99,
+      "time_minutes": 34
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
+    "id": "rh_20260222_163134_037749",
+    "timestamp": "2026-02-22T16:31:34.037749",
+    "start": "Ghatkopar",
+    "end": "Mulund",
+    "chosen_route": {
+      "name": "Direct Route",
+      "risk_score": 60.81,
+      "risk_level": "high",
+      "distance_km": 10.99,
+      "time_minutes": 34
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
     "id": "rh_20260222_133625_815007",
     "timestamp": "2026-02-22T13:36:25.815007",
     "start": "CST",

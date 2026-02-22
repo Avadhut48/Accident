@@ -22,6 +22,95 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Vehicle Type Styles -->
+    <style>
+        /* ========== VEHICLE TYPE STYLES ========== */
+        .vehicle-info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: white;
+        }
+        
+        .vehicle-info-badge span {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .vehicle-impact-warning {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #ffc107;
+        }
+        
+        .vehicle-impact-warning.high-risk {
+            background: rgba(220, 53, 69, 0.15);
+            border-color: rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+        }
+        
+        .vehicle-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+        }
+        
+        .vehicle-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+        }
+        
+        .vehicle-stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.7rem;
+        }
+        
+        .vehicle-stat-value {
+            font-weight: 600;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .vehicle-stat-value.increased {
+            color: #dc3545;
+        }
+        
+        .vehicle-stat-value.decreased {
+            color: #28a745;
+        }
+        
+        .vehicle-info-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-text {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .form-text i {
+            margin-right: 0.25rem;
+        }
+    </style>
+</head>
 </head>
 <body>
     <!-- Modern Header -->
@@ -81,104 +170,32 @@
                         </div>
                         
                         <div class="divider-text">OR</div>
-                        !-- ═══ ACCIDENT REPORTING CARD ═══ (NEW) -->
-<div class="glass-card slide-in-left mt-3" id="accidentReportCard">
-    <div class="card-header-modern">
-        <div class="header-icon bg-danger">
-            <i class="fas fa-exclamation-triangle"></i>
-        </div>
-        <h5>Report Accident</h5>
-    </div>
-    <div class="card-body-modern">
-        <p style="font-size:0.85rem; color:#aaa; margin-bottom:12px;">
-            Click on the map to report an accident you see or just encountered.
-        </p>
-        
-        <div id="reportModeToggle">
-            <button class="btn-modern btn-danger-modern w-100" id="enableReportMode">
-                <i class="fas fa-map-marker-alt"></i>
-                Click Map to Report
-            </button>
-        </div>
-        
-        <!-- Report Form (hidden until map clicked) -->
-        <div id="accidentReportForm" style="display:none;">
-            <div class="input-group-modern mb-3">
-                <label>Severity</label>
-                <select class="form-select-modern" id="accidentSeverity">
-                    <option value="minor">🟢 Minor (fender bender)</option>
-                    <option value="moderate" selected>🟡 Moderate (traffic blocked)</option>
-                    <option value="severe">🟠 Severe (injuries)</option>
-                    <option value="fatal">🔴 Fatal</option>
-                </select>
-            </div>
-            
-            <div class="input-group-modern mb-3">
-                <label>Description (optional)</label>
-                <textarea class="form-control-modern" id="accidentDescription" 
-                          rows="2" placeholder="e.g., 2-car collision, slow traffic"></textarea>
-            </div>
-            
-            <div style="display:flex; gap:8px;">
-                <button class="btn-modern btn-danger-modern flex-1" id="submitAccidentReport">
-                    <i class="fas fa-paper-plane"></i>
-                    Submit Report
-                </button>
-                <button class="btn-modern btn-secondary-modern" id="cancelAccidentReport">
-                    Cancel
-                </button>
-            </div>
-            
-            <div style="margin-top:8px; font-size:0.75rem; color:#888;">
-                📍 Location: <span id="accidentLocationPreview">–</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="glass-card slide-in-left mt-3" id="activeAccidentsCard">
-    <div class="card-header-modern">
-        <div class="header-icon" style="background: linear-gradient(135deg,#f093fb,#f5576c);">
-            <i class="fas fa-warning"></i>
-        </div>
-        <div style="flex:1; display:flex; justify-content:space-between; align-items:center;">
-            <h5 style="margin:0;">Active Accidents</h5>
-            <span class="badge bg-danger" id="accidentCountBadge">0</span>
-        </div>
-    </div>
-    <div class="card-body-modern" style="max-height: 300px; overflow-y: auto;">
-        <div id="activeAccidentsContent">
-            <div class="empty-history">
-                <i class="fas fa-check-circle" style="color:#28a745;"></i>
-                <p>No active accidents reported</p>
-            </div>
-        </div>
-    </div>
-</div>
- Place this BEFORE the "Start Location" dropdown -->
-
-<div class="input-group-modern mb-3">
-    <label>
-        <i class="fas fa-car"></i>
-        Your Vehicle Type
-    </label>
-    <div class="select-wrapper">
-        <select class="form-select-modern" id="vehicleType">
-            <option value="car" selected>🚗 Car (Standard)</option>
-            <option value="bike">🏍️ Motorcycle/Bike (+80% risk)</option>
-            <option value="auto">🛺 Auto Rickshaw (+50% risk)</option>
-            <option value="truck">🚚 Truck (+30% risk)</option>
-            <option value="bus">🚌 Bus (+20% risk)</option>
-        </select>
-        <i class="fas fa-chevron-down select-arrow"></i>
-    </div>
-    <small class="form-text" id="vehicleHelpText" style="color: rgba(255,255,255,0.6); font-size: 0.75rem; margin-top: 0.5rem;">
-        Risk scores are adjusted based on vehicle vulnerability
-    </small>
-</div>
+                        
                         
                         <form id="routeForm">
+                            <!-- ========== NEW: VEHICLE TYPE DROPDOWN ========== -->
+                            <div class="input-group-modern mb-3">
+                                <label for="vehicleType">
+                                    <i class="fas fa-car"></i>
+                                    Your Vehicle Type
+                                </label>
+                                <div class="select-wrapper">
+                                    <select class="form-select-modern" id="vehicleType" required>
+                                        <option value="car" selected>🚗 Car (Standard)</option>
+                                        <option value="bike">🏍️ Motorcycle/Bike (+80% risk)</option>
+                                        <option value="auto">🛺 Auto Rickshaw (+50% risk)</option>
+                                        <option value="truck">🚚 Truck (+30% risk)</option>
+                                        <option value="bus">🚌 Bus (+20% risk)</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-arrow"></i>
+                                </div>
+                                <small class="form-text" id="vehicleHelpText" style="color: rgba(255,255,255,0.6); font-size: 0.75rem; margin-top: 0.5rem; display: block;">
+                                    <i class="fas fa-info-circle"></i>
+                                    Risk scores are adjusted based on vehicle vulnerability
+                                </small>
+                            </div>
+                            <!-- ========== END VEHICLE TYPE DROPDOWN ========== -->
+                            
                             <div class="input-group-modern mb-3">
                                 <label for="startLocation">
                                     <i class="fas fa-map-pin text-success"></i>
@@ -380,7 +397,6 @@
                             <!-- Details will be inserted here -->
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>

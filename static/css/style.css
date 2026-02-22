@@ -1143,7 +1143,7 @@ body::before {
 .leaflet-popup-tip {
     background: rgba(255, 255, 255, 0.95);
 }
-accident-marker {
+.accident-marker {
     width: 32px;
     height: 32px;
     background: #dc3545;
@@ -1254,4 +1254,110 @@ accident-marker {
 
 .flex-1 {
     flex: 1;
+}
+
+
+/* Route card default state */
+.route-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+/* Route card hover effect */
+.route-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Route card selected state */
+.route-card-selected {
+    border: 3px solid #667eea !important;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4) !important;
+    transform: scale(1.02) !important;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+/* Add a "SELECTED" badge to selected route */
+.route-card-selected::before {
+    content: "✓ SELECTED";
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
+    z-index: 10;
+}
+
+/* Pulse animation for selected card */
+.route-card-selected {
+    animation: pulse-selection 2s infinite;
+}
+
+@keyframes pulse-selection {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.7);
+    }
+}
+
+/* Route card stats styling */
+.route-card .stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Selected route in details panel */
+.route-details-selected-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Make unselected routes slightly dimmed */
+.route-card:not(.route-card-selected) {
+    opacity: 0.85;
+}
+
+.route-card:not(.route-card-selected):hover {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .route-card-selected {
+        transform: scale(1.01) !important;
+    }
+    
+    .route-card-selected::before {
+        font-size: 0.65rem;
+        padding: 3px 10px;
+    }
 }
