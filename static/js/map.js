@@ -414,6 +414,288 @@ document.getElementById('submitAccidentReport')?.addEventListener('click', async
 
     showToast('success', 'Accident reported');
 });
+// ═══════════════════════════════════════════════════════════════════
+// ADD THESE FUNCTIONS TO YOUR map.js FILE
+// Place at the end of the file, before window.addEventListener('load')
+// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════
+// ACCIDENT REPORTING FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+// Load and display active accidents
+async function loadActiveAccidents() {
+    try {
+        const resp = await fetch('/api/accidents/active');
+        if (!resp.ok) {
+            console.warn('Accident API not available');
+            return;
+        }
+        
+        const data = await resp.json();
+        
+        if (data.success) {
+            renderAccidentMarkers(data.accidents);
+            renderAccidentsList(data.accidents);
+            
+            // Update badge count
+            const badge = document.getElementById('accidentCountBadge');
+            if (badge) {
+                badge.textContent = data.count;
+            }
+        }
+    } catch (e) {
+        console.error('Failed to load accidents:', e);
+    }
+}
+
+// Render accident markers on map
+function renderAccidentMarkers(accidents) {
+    // Remove old markers
+    accidentMarkers.forEach(m => map.removeLayer(m));
+    accidentMarkers = [];
+    
+    accidents.forEach(acc => {
+        const severityColors = {
+            'minor': '#28a745',
+            'moderate': '#ffc107',
+            'severe': '#ff6b35',
+            'fatal': '#dc3545'
+        };
+        
+        const color = severityColors[acc.severity] || '#dc3545';
+        
+        // Create pulsing red marker
+        const icon = L.divIcon({
+            className: 'accident-marker-container',
+            html: `
+                <div class="accident-marker-pulse" style="background:${color};"></div>
+                <div class="accident-marker-icon" style="background:${color};">
+                    <i class="fas fa-exclamation" style="color:#fff;"></i>
+                </div>
+            `,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+        
+        const marker = L.marker([acc.latitude, acc.longitude], {
+            icon: icon,
+            zIndexOffset: 2000
+        }).addTo(map);
+        
+        const timeAgo = formatTimeAgo(new Date(acc.timestamp));
+        
+        // Marker popup
+        marker.bindPopup(`
+            <div style="font-family:'Poppins',sans-serif; min-width:180px;">
+                <div style="font-weight:600; color:${color}; margin-bottom:8px;">
+                    <i class="fas fa-exclamation-triangle"></i> Accident Reported
+                </div>
+                <div style="margin-bottom:6px;">
+                    <span style="background:${color}; color:white; padding:2px 8px; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">
+                        ${acc.severity}
+                    </span>
+                </div>
+                ${acc.description ? `<div style="font-size:0.85rem; color:#666; margin-bottom:6px;">"${acc.description}"</div>` : ''}
+                <div style="font-size:0.75rem; color:#999;">
+                    <i class="fas fa-clock"></i> ${timeAgo}
+                    ${acc.verified ? '<i class="fas fa-check-circle" style="color:#28a745; margin-left:8px;"></i> Verified' : ''}
+                </div>
+                <div style="margin-top:8px; display:flex; gap:8px;">
+                    <button onclick="voteAccident('${acc.id}', 'up')" 
+                            style="padding:4px 12px; background:#28a745; color:white; border:none; border-radius:4px; cursor:pointer; font-size:0.75rem;">
+                        👍 ${acc.upvotes}
+                    </button>
+                    <button onclick="voteAccident('${acc.id}', 'down')" 
+                            style="padding:4px 12px; background:#dc3545; color:white; border:none; border-radius:4px; cursor:pointer; font-size:0.75rem;">
+                        👎 ${acc.downvotes}
+                    </button>
+                </div>
+            </div>
+        `);
+        
+        accidentMarkers.push(marker);
+    });
+}
+
+// Render accidents list in sidebar
+function renderAccidentsList(accidents) {
+    const container = document.getElementById('activeAccidentsContent');
+    if (!container) return;
+    
+    if (accidents.length === 0) {
+        container.innerHTML = `
+            <div class="empty-history" style="text-align:center; padding:20px; color:#999;">
+                <i class="fas fa-check-circle" style="color:#28a745; font-size:40px; margin-bottom:10px;"></i>
+                <p>No active accidents reported</p>
+            </div>`;
+        return;
+    }
+    
+    container.innerHTML = accidents.slice(0, 10).map(acc => {
+        const timeAgo = formatTimeAgo(new Date(acc.timestamp));
+        const severityColors = {
+            'minor': '#28a745',
+            'moderate': '#ffc107',
+            'severe': '#ff6b35',
+            'fatal': '#dc3545'
+        };
+        const color = severityColors[acc.severity] || '#dc3545';
+        
+        return `
+            <div class="accident-item" onclick="map.setView([${acc.latitude}, ${acc.longitude}], 15, {animate: true})" 
+                 style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px; margin-bottom:10px; cursor:pointer; transition:all 0.3s;">
+                <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:6px;">
+                    <span style="background:${color}; color:white; padding:3px 10px; border-radius:4px; font-size:0.7rem; text-transform:uppercase; font-weight:600;">
+                        ${acc.severity}
+                    </span>
+                    <div style="font-size:0.7rem; color:#999;">
+                        <i class="fas fa-clock"></i> ${timeAgo}
+                    </div>
+                </div>
+                ${acc.description ? `<div style="font-size:0.8rem; color:#ccc; margin-bottom:6px;">${acc.description}</div>` : ''}
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                    <div style="display:flex; gap:8px;">
+                        <button onclick="event.stopPropagation(); voteAccident('${acc.id}', 'up');" 
+                                style="padding:3px 8px; background:#28a745; color:white; border:none; border-radius:4px; font-size:0.7rem; cursor:pointer;">
+                            👍 ${acc.upvotes}
+                        </button>
+                        <button onclick="event.stopPropagation(); voteAccident('${acc.id}', 'down');" 
+                                style="padding:3px 8px; background:#dc3545; color:white; border:none; border-radius:4px; font-size:0.7rem; cursor:pointer;">
+                            👎 ${acc.downvotes}
+                        </button>
+                    </div>
+                    ${acc.verified ? '<span style="color:#28a745; font-size:0.7rem;"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
+                </div>
+            </div>`;
+    }).join('');
+}
+
+// Vote on accident (upvote/downvote)
+window.voteAccident = async function(accidentId, voteType) {
+    try {
+        const resp = await fetch('/api/accidents/vote', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                accident_id: accidentId,
+                vote_type: voteType
+            })
+        });
+        
+        const data = await resp.json();
+        
+        if (data.success) {
+            loadActiveAccidents();  // Refresh
+        }
+    } catch (e) {
+        console.error('Failed to vote:', e);
+    }
+};
+
+// Format time ago (e.g., "5m ago", "1h ago")
+function formatTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    
+    if (seconds < 60) return 'just now';
+    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+    return Math.floor(seconds / 86400) + 'd ago';
+}
+
+// Cancel accident report
+function cancelAccidentReport() {
+    accidentReportMode = false;
+    selectedAccidentLocation = null;
+    
+    if (tempAccidentMarker) {
+        map.removeLayer(tempAccidentMarker);
+        tempAccidentMarker = null;
+    }
+    
+    const form = document.getElementById('accidentReportForm');
+    const toggle = document.getElementById('reportModeToggle');
+    const desc = document.getElementById('accidentDescription');
+    
+    if (form) form.style.display = 'none';
+    if (toggle) toggle.style.display = 'block';
+    if (desc) desc.value = '';
+    
+    document.getElementById('map').style.cursor = '';
+    showToast('info', 'Report mode canceled');
+}
+
+// Cancel button handler
+document.getElementById('cancelAccidentReport')?.addEventListener('click', cancelAccidentReport);
+
+// ═══════════════════════════════════════════════════════════════════
+// MODIFY YOUR window.addEventListener('load') TO INCLUDE:
+// ═══════════════════════════════════════════════════════════════════
+
+// CHANGE FROM:
+// window.addEventListener('load', () => {
+//     initMap();
+// });
+
+// TO:
+window.addEventListener('load', () => {
+    initMap();
+    loadActiveAccidents();  // ADD THIS LINE
+    
+    // Auto-refresh accidents every 60 seconds
+    setInterval(loadActiveAccidents, 60000);  // ADD THIS LINE
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// ADD THIS CSS FOR PULSING ACCIDENT MARKERS
+// ═══════════════════════════════════════════════════════════════════
+
+const accidentStyles = document.createElement('style');
+accidentStyles.textContent = `
+    .accident-marker-container {
+        position: relative;
+        background: none !important;
+        border: none !important;
+    }
+    
+    .accident-marker-pulse {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: pulse-accident 2s infinite;
+    }
+    
+    .accident-marker-icon {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+    
+    @keyframes pulse-accident {
+        0%, 100% { 
+            transform: scale(1); 
+            opacity: 0.6; 
+        }
+        50% { 
+            transform: scale(1.3); 
+            opacity: 0.3; 
+        }
+    }
+    
+    .accident-item:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        transform: translateX(4px);
+    }
+`;
+document.head.appendChild(accidentStyles);
 
 // ═══════════════════════════════════════════════════════
 // TOAST SYSTEM

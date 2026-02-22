@@ -1,5 +1,21 @@
 [
   {
+    "id": "rh_20260222_233439_411590",
+    "timestamp": "2026-02-22T23:34:39.411590",
+    "start": "Thane",
+    "end": "Dadar",
+    "chosen_route": {
+      "name": "Via Highway",
+      "risk_score": 41.05,
+      "risk_level": "medium",
+      "distance_km": 25.8,
+      "time_minutes": 51
+    },
+    "all_routes_count": 3,
+    "weather": "Clear",
+    "weather_temp": 28.0
+  },
+  {
     "id": "rh_20260222_191142_652169",
     "timestamp": "2026-02-22T19:11:42.652169",
     "start": "Borivali",
