@@ -4,469 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mumbai Safe Route Navigator 🚗</title>
-    
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Chart.js for graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
-    <style>
-        /* Accident reporting styles */
-        .btn-danger-modern {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-danger-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
-        }
-
-        .empty-history {
-            text-align: center;
-            padding: 2rem;
-            color: #999;
-        }
-
-        .empty-history i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        #accidentReportForm {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .form-control-modern {
-            width: 100%;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            resize: vertical;
-        }
-
-        .form-control-modern:focus {
-            outline: none;
-            border-color: rgba(102, 126, 234, 0.5);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .flex-1 {
-            flex: 1;
-        }
-        
-        /* Route card styles */
-        .route-card {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-        }
-
-        .route-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
-
-        .route-card-selected {
-            border: 3px solid #667eea !important;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4) !important;
-            transform: scale(1.02) !important;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-        }
-
-        .route-card-selected::before {
-            content: "✓ SELECTED";
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
-            z-index: 10;
-        }
-
-        .route-card:not(.route-card-selected) {
-            opacity: 0.85;
-        }
-
-        .route-card:not(.route-card-selected):hover {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body>
-    <!-- Modern Header -->
     <nav class="navbar navbar-expand-lg navbar-dark modern-navbar">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <div class="brand-icon">
-                    <i class="fas fa-route"></i>
-                </div>
+                <div class="brand-icon"><i class="fas fa-route"></i></div>
                 <div class="ms-3">
                     <div class="brand-title">Mumbai Safe Route</div>
                     <div class="brand-subtitle">AI-Powered Navigation</div>
                 </div>
             </a>
             <div class="navbar-stats d-none d-lg-flex">
-                <div class="stat-item">
-                    <i class="fas fa-database"></i>
-                    <span>1000+ Data Points</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-road"></i>
-                    <span>20 Major Roads</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-brain"></i>
-                    <span>AI-Powered</span>
-                </div>
+                <div class="stat-item"><i class="fas fa-brain"></i><span>AI-Powered Risk Analysis</span></div>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid main-container">
         <div class="row g-3">
-            <!-- Left Sidebar -->
             <div class="col-lg-3">
-                <!-- Route Planner Card -->
                 <div class="glass-card slide-in-left">
                     <div class="card-header-modern">
-                        <div class="header-icon">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
+                        <div class="header-icon"><i class="fas fa-map-marked-alt"></i></div>
                         <h5>Plan Your Route</h5>
                     </div>
                     <div class="card-body-modern">
-                        <form id="routeForm">
-                            <!-- Vehicle Type Selector -->
-                            <div class="input-group-modern mb-3">
-                                <label for="vehicleType">
-                                    <i class="fas fa-car"></i>
-                                    Your Vehicle Type
-                                </label>
-                                <div class="select-wrapper">
-                                    <select class="form-select-modern" id="vehicleType" required>
-                                        <option value="car" selected>🚗 Car (Standard)</option>
-                                        <option value="bike">🏍️ Motorcycle/Bike (+80% risk)</option>
-                                        <option value="auto">🛺 Auto Rickshaw (+50% risk)</option>
-                                        <option value="truck">🚚 Truck (+30% risk)</option>
-                                        <option value="bus">🚌 Bus (+20% risk)</option>
-                                    </select>
-                                    <i class="fas fa-chevron-down select-arrow"></i>
-                                </div>
-                                <small class="form-text" id="vehicleHelpText" style="color: rgba(255,255,255,0.6); font-size: 0.75rem; margin-top: 0.5rem; display: block;">
-                                    <i class="fas fa-info-circle"></i>
-                                    Risk scores are adjusted based on vehicle vulnerability
-                                </small>
+                        <div class="input-group-modern mb-3" id="favoritesSection">
+                            <label><i class="fas fa-star text-warning"></i> Quick Select Favorites</label>
+                            <div id="favoritesContainer" class="d-flex flex-wrap gap-2 mt-2">
+                                <span class="text-muted" style="font-size: 0.8rem;">Loading favorites...</span>
                             </div>
-                            
+                        </div>
+                        
+                        <div class="divider-text">OR</div>
+                        
+                        <div class="glass-card slide-in-left mb-3" id="accidentReportCard">
+                            <div class="card-header-modern">
+                                <div class="header-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
+                                <h5>Report Accident</h5>
+                            </div>
+                            <div class="card-body-modern">
+                                <div id="reportModeToggle">
+                                    <button class="btn-modern btn-danger-modern w-100" id="enableReportMode">
+                                        <i class="fas fa-map-marker-alt"></i> Click Map to Report
+                                    </button>
+                                </div>
+                                <div id="accidentReportForm" style="display:none;">
+                                    <div class="input-group-modern mb-3">
+                                        <label>Severity</label>
+                                        <select class="form-select-modern" id="accidentSeverity">
+                                            <option value="minor">🟢 Minor</option>
+                                            <option value="moderate" selected>🟡 Moderate</option>
+                                            <option value="severe">🟠 Severe</option>
+                                            <option value="fatal">🔴 Fatal</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group-modern mb-3">
+                                        <label>Description (optional)</label>
+                                        <textarea class="form-control-modern" id="accidentDescription" rows="2"></textarea>
+                                    </div>
+                                    <div style="display:flex; gap:8px;">
+                                        <button class="btn-modern btn-danger-modern flex-1 w-100" id="submitAccidentReport">Submit</button>
+                                        <button class="btn-modern btn-secondary-modern" id="cancelAccidentReport">Cancel</button>
+                                    </div>
+                                    <div class="mt-2" style="font-size:0.75rem; color:#888;">📍 <span id="accidentLocationPreview">–</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group-modern mb-3">
+                            <label><i class="fas fa-car"></i> Your Vehicle Type</label>
+                            <div class="select-wrapper">
+                                <select class="form-select-modern" id="vehicleType">
+                                    <option value="car" selected>🚗 Car</option>
+                                    <option value="bike">🏍️ Motorcycle/Bike</option>
+                                    <option value="auto">🛺 Auto Rickshaw</option>
+                                    <option value="truck">🚚 Truck</option>
+                                    <option value="bus">🚌 Bus</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+                        
+                        <form id="routeForm">
                             <div class="input-group-modern mb-3">
-                                <label for="startLocation">
-                                    <i class="fas fa-map-pin text-success"></i>
-                                    Starting Point
-                                </label>
+                                <label><i class="fas fa-map-pin text-success"></i> Starting Point</label>
                                 <div class="select-wrapper">
                                     <select class="form-select-modern" id="startLocation" required>
                                         <option value="">Choose your starting point...</option>
-                                        {% for location in locations %}
-                                        <option value="{{ location }}">{{ location }}</option>
-                                        {% endfor %}
+                                        {% for location in locations %}<option value="{{ location }}">{{ location }}</option>{% endfor %}
                                     </select>
                                     <i class="fas fa-chevron-down select-arrow"></i>
                                 </div>
                             </div>
                             
                             <div class="swap-button-container">
-                                <button type="button" class="swap-btn" id="swapLocations" title="Swap locations">
-                                    <i class="fas fa-exchange-alt"></i>
-                                </button>
+                                <button type="button" class="swap-btn" id="swapLocations"><i class="fas fa-exchange-alt"></i></button>
                             </div>
                             
                             <div class="input-group-modern mb-4">
-                                <label for="endLocation">
-                                    <i class="fas fa-flag-checkered text-danger"></i>
-                                    Destination
-                                </label>
+                                <label><i class="fas fa-flag-checkered text-danger"></i> Destination</label>
                                 <div class="select-wrapper">
                                     <select class="form-select-modern" id="endLocation" required>
                                         <option value="">Choose your destination...</option>
-                                        {% for location in locations %}
-                                        <option value="{{ location }}">{{ location }}</option>
-                                        {% endfor %}
+                                        {% for location in locations %}<option value="{{ location }}">{{ location }}</option>{% endfor %}
                                     </select>
                                     <i class="fas fa-chevron-down select-arrow"></i>
                                 </div>
                             </div>
                             
                             <button type="submit" class="btn-modern btn-primary-modern w-100" id="findRoutesBtn">
-                                <i class="fas fa-search"></i>
-                                Find Safe Routes
+                                <i class="fas fa-search"></i> Find Safe Routes
+                            </button>
+                            
+                            <button type="button" class="btn-modern btn-secondary-modern w-100 mt-2" id="saveFavoriteBtn" style="display: none;">
+                                <i class="fas fa-star"></i> Save as Favorite
+                            </button>
+                            
+                            <button type="button" class="btn-modern btn-whatsapp-modern w-100 mt-2" id="shareWhatsAppBtn" style="display: none;" onclick="triggerShareWhatsApp()">
+                                <i class="fab fa-whatsapp"></i> Share via WhatsApp
                             </button>
                         </form>
                         
-                        <div id="loadingIndicator" class="loading-container" style="display: none;">
-                            <div class="loading-spinner">
-                                <div class="spinner"></div>
-                            </div>
-                            <p class="loading-text">Analyzing routes with AI...</p>
-                            <div class="loading-dots">
-                                <span></span><span></span><span></span>
-                            </div>
+                        <div id="loadingIndicator" class="loading-container" style="display: none; text-align: center; margin-top: 20px;">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-2 text-muted">Analyzing routes with AI...</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Route Results -->
+            <div class="col-lg-9">
+                <div class="glass-card map-card slide-in-right">
+                    <div id="map"></div>
+                </div>
+
                 <div id="routeResults" class="mt-3 slide-in-left" style="display: none;">
                     <div class="glass-card">
                         <div class="card-header-modern">
-                            <div class="header-icon bg-success">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
+                            <div class="header-icon bg-success"><i class="fas fa-chart-line"></i></div>
                             <h5>Route Options</h5>
                         </div>
-                        <div class="route-cards-container" id="routeCards" style="padding: 1rem;">
-                            <!-- Routes will be inserted here -->
-                        </div>
+                        <div class="route-cards-container" id="routeCards"></div>
                     </div>
                 </div>
 
-                <!-- Accident Report Card -->
-                <div class="glass-card slide-in-left mt-3" id="accidentReportCard">
-                    <div class="card-header-modern">
-                        <div class="header-icon bg-danger">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <h5>Report Accident</h5>
-                    </div>
-                    <div class="card-body-modern">
-                        <p style="font-size:0.85rem; color:#aaa; margin-bottom:12px;">
-                            Click on the map to report an accident you see or just encountered.
-                        </p>
-                        
-                        <div id="reportModeToggle">
-                            <button class="btn-modern btn-danger-modern w-100" id="enableReportMode">
-                                <i class="fas fa-map-marker-alt"></i>
-                                Click Map to Report
-                            </button>
-                        </div>
-                        
-                        <!-- Report Form (hidden until map clicked) -->
-                        <div id="accidentReportForm" style="display:none;">
-                            <div class="input-group-modern mb-3">
-                                <label>Severity</label>
-                                <select class="form-select-modern" id="accidentSeverity">
-                                    <option value="minor">🟢 Minor (fender bender)</option>
-                                    <option value="moderate" selected>🟡 Moderate (traffic blocked)</option>
-                                    <option value="severe">🟠 Severe (injuries)</option>
-                                    <option value="fatal">🔴 Fatal</option>
-                                </select>
-                            </div>
-                            
-                            <div class="input-group-modern mb-3">
-                                <label>Description (optional)</label>
-                                <textarea class="form-control-modern" id="accidentDescription" 
-                                          rows="2" placeholder="e.g., 2-car collision, slow traffic"></textarea>
-                            </div>
-                            
-                            <div style="display:flex; gap:8px;">
-                                <button class="btn-modern btn-danger-modern flex-1" id="submitAccidentReport">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Submit Report
-                                </button>
-                                <button class="btn-modern btn-secondary-modern" id="cancelAccidentReport">
-                                    Cancel
-                                </button>
-                            </div>
-                            
-                            <div style="margin-top:8px; font-size:0.75rem; color:#888;">
-                                📍 Location: <span id="accidentLocationPreview">–</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Active Accidents List -->
-                <div class="glass-card slide-in-left mt-3" id="activeAccidentsCard">
-                    <div class="card-header-modern">
-                        <div class="header-icon" style="background: linear-gradient(135deg,#f093fb,#f5576c);">
-                            <i class="fas fa-warning"></i>
-                        </div>
-                        <div style="flex:1; display:flex; justify-content:space-between; align-items:center;">
-                            <h5 style="margin:0;">Active Accidents</h5>
-                            <span class="badge bg-danger" id="accidentCountBadge">0</span>
-                        </div>
-                    </div>
-                    <div class="card-body-modern" style="max-height: 300px; overflow-y: auto;">
-                        <div id="activeAccidentsContent">
-                            <div class="empty-history">
-                                <i class="fas fa-check-circle" style="color:#28a745;"></i>
-                                <p>No active accidents reported</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="glass-card mt-3 slide-in-left">
-                    <div class="quick-stats">
-                        <div class="stat-box">
-                            <div class="stat-icon bg-success">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="stat-label">Safety First</div>
-                                <div class="stat-value">AI-Verified</div>
-                            </div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-icon bg-info">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="stat-label">Real-time</div>
-                                <div class="stat-value">Analysis</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Legend -->
-                <div class="glass-card mt-3 slide-in-left">
-                    <div class="legend-header">
-                        <i class="fas fa-palette"></i>
-                        Risk Levels
-                    </div>
-                    <div class="legend-items">
-                        <div class="legend-item">
-                            <div class="legend-color bg-success">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="legend-info">
-                                <div class="legend-title">Low Risk</div>
-                                <div class="legend-range">0-35%</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color bg-warning">
-                                <i class="fas fa-exclamation"></i>
-                            </div>
-                            <div class="legend-info">
-                                <div class="legend-title">Medium Risk</div>
-                                <div class="legend-range">35-60%</div>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color bg-danger">
-                                <i class="fas fa-times"></i>
-                            </div>
-                            <div class="legend-info">
-                                <div class="legend-title">High Risk</div>
-                                <div class="legend-range">60%+</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="col-lg-9">
-                <!-- Map Container -->
-                <div class="glass-card map-card slide-in-right">
-                    <div id="map" style="height: 650px; border-radius: 12px;"></div>
-                    <div class="map-overlay-controls">
-                        <button class="map-control-btn" id="recenterMap" title="Recenter map">
-                            <i class="fas fa-crosshairs"></i>
-                        </button>
-                        <button class="map-control-btn" id="fullscreenMap" title="Fullscreen">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Route Details -->
                 <div id="routeDetails" class="mt-3 slide-in-up" style="display: none;">
                     <div class="glass-card">
                         <div class="card-header-modern">
-                            <div class="header-icon bg-info">
-                                <i class="fas fa-info-circle"></i>
-                            </div>
+                            <div class="header-icon bg-info"><i class="fas fa-info-circle"></i></div>
                             <h5>Route Details</h5>
                         </div>
-                        <div class="card-body-modern" id="detailsContent">
-                            <!-- Details will be inserted here -->
-                        </div>
+                        <div class="card-body-modern" id="detailsContent"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notifications -->
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
-        <div id="successToast" class="toast" role="alert">
-            <div class="toast-header bg-success text-white">
-                <i class="fas fa-check-circle me-2"></i>
-                <strong class="me-auto">Success</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+    <div class="modal fade" id="saveFavoriteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-star text-warning"></i> Save Favorite</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="favoriteName" placeholder="e.g., Office, Gym, Home">
+                    <div class="mt-3">From: <strong id="modalStartLocation"></strong><br>To: <strong id="modalEndLocation"></strong></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmSaveFavorite" onclick="confirmSaveFavoriteAction()">Save Favorite</button>
+                </div>
             </div>
-            <div class="toast-body" id="successToastBody"></div>
-        </div>
-        <div id="errorToast" class="toast" role="alert">
-            <div class="toast-header bg-danger text-white">
-                <i class="fas fa-exclamation-circle me-2"></i>
-                <strong class="me-auto">Error</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-            </div>
-            <div class="toast-body" id="errorToastBody"></div>
-        </div>
-        <div id="infoToast" class="toast" role="alert">
-            <div class="toast-header bg-info text-white">
-                <i class="fas fa-info-circle me-2"></i>
-                <strong class="me-auto">Info</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-            </div>
-            <div class="toast-body" id="infoToastBody"></div>
         </div>
     </div>
 
-    <!-- Leaflet JS -->
+    <div class="modal fade" id="shareWhatsAppModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fab fa-whatsapp text-success"></i> Share Route</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="shareRouteOptions"></div>
+                    <div class="mt-3">From: <strong id="shareStartLocation"></strong><br>To: <strong id="shareEndLocation"></strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="successToast" class="toast text-white bg-success border-0" role="alert"><div class="toast-body" id="successToastBody"></div></div>
+        <div id="errorToast" class="toast text-white bg-danger border-0" role="alert"><div class="toast-body" id="errorToastBody"></div></div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script>
+        const preloadedRouteData = {{ preloaded_route | safe | default('null') }};
+        window.openFavoriteModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('saveFavoriteModal')).show();
+        window.openShareModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('shareWhatsAppModal')).show();
+    </script>
 </body>
 </html>

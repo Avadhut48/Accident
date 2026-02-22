@@ -1,44 +1,26 @@
 // ═══════════════════════════════════════════════════════
-// MUMBAI SAFE ROUTE NAVIGATOR - UPDATED MAP.JS
-// NEW: Shows which route is selected with visual highlighting
+// MUMBAI SAFE ROUTE NAVIGATOR - COMPLETE MAP.JS
 // ═══════════════════════════════════════════════════════
 
 let map;
 let routeLayers = [];
-let markers = [];
-let currentRoutes = [];
 let accidentMarkers = [];
+let currentRoutes = [];
 let accidentReportMode = false;
 let tempAccidentMarker = null;
 let selectedAccidentLocation = null;
-let currentWeather = null;
-let selectedRouteId = null;  // NEW: Track selected route
+let selectedRouteId = null; 
 
 // ═══════════════════════════════════════════════════════
 // 🚗 VEHICLE CONFIG
 // ═══════════════════════════════════════════════════════
 
 const VEHICLE_INFO = {
-    car: {
-        text: 'Cars are baseline. Standard risk applies.',
-        warning: null
-    },
-    bike: {
-        text: '🏍️ Bikes are 1.8x more risky.',
-        warning: 'Motorcycles are highly vulnerable in rain.'
-    },
-    auto: {
-        text: '🛺 Auto rickshaws are 1.5x more risky.',
-        warning: 'Autos may tip on sharp turns.'
-    },
-    bus: {
-        text: '🚌 Buses are 1.2x more risky.',
-        warning: 'Large turning radius required.'
-    },
-    truck: {
-        text: '🚚 Trucks are 1.3x more risky.',
-        warning: 'Allow longer braking distance.'
-    }
+    car: { text: 'Cars are baseline. Standard risk applies.' },
+    bike: { text: '🏍️ Bikes are 1.8x more risky.' },
+    auto: { text: '🛺 Auto rickshaws are 1.5x more risky.' },
+    bus: { text: '🚌 Buses are 1.2x more risky.' },
+    truck: { text: '🚚 Trucks are 1.3x more risky.' }
 };
 
 // ═══════════════════════════════════════════════════════
@@ -46,19 +28,15 @@ const VEHICLE_INFO = {
 // ═══════════════════════════════════════════════════════
 
 function initMap() {
-
     map = L.map('map').setView([19.0760, 72.8777], 11);
 
-    L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-        {
-            attribution: '© OpenStreetMap contributors © CARTO',
-            maxZoom: 18
-        }
-    ).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors © CARTO',
+        maxZoom: 18
+    }).addTo(map);
 
+    // Map Click Listener for Accident Reporting
     map.on('click', function (e) {
-
         if (!accidentReportMode) return;
 
         selectedAccidentLocation = e.latlng;
@@ -76,94 +54,68 @@ function initMap() {
 }
 
 // ═══════════════════════════════════════════════════════
-// VEHICLE SELECTOR
+// ROUTE FORM SUBMISSION
 // ═══════════════════════════════════════════════════════
 
-document.getElementById('vehicleType')?.addEventListener('change', function () {
+document.getElementById('routeForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    const info = VEHICLE_INFO[this.value];
+    const start = document.getElementById('startLocation').value;
+    const end = document.getElementById('endLocation').value;
+    const vehicleType = document.getElementById('vehicleType')?.value || 'car';
 
-    const text = document.getElementById('vehicleInfoText');
-    const banner = document.getElementById('vehicleWarningBanner');
-    const warning = document.getElementById('vehicleWarningText');
+    if (!start || !end) {
+        showToast('error', 'Select both locations');
+        return;
+    }
 
-    if (text) text.textContent = info.text;
+    document.getElementById('loadingIndicator').style.display = 'block';
+    
+    // Reveal the Save and Share buttons
+    const saveBtn = document.getElementById('saveFavoriteBtn');
+    const shareBtn = document.getElementById('shareWhatsAppBtn');
+    if (saveBtn) saveBtn.style.display = 'block';
+    if (shareBtn) shareBtn.style.display = 'block';
 
-    if (info.warning) {
-        warning.textContent = info.warning;
-        banner.style.display = 'block';
-    } else {
-        banner.style.display = 'none';
+    try {
+        const response = await fetch('/api/routes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                start,
+                end,
+                vehicle_type: vehicleType
+            })
+        });
+
+        const data = await response.json();
+        currentRoutes = data.routes;
+
+        displayRoutes(data.routes);
+        displayRouteCards(data.routes);
+
+        const rec = data.routes.find(r => r.recommended);
+        if (rec) {
+            selectRoute(rec.id);
+            showRouteDetails(rec);
+        }
+
+    } catch (err) {
+        showToast('error', 'Failed to load routes');
+    } finally {
+        document.getElementById('loadingIndicator').style.display = 'none';
     }
 });
 
 // ═══════════════════════════════════════════════════════
-// ROUTE FORM SUBMISSION
-// ═══════════════════════════════════════════════════════
-
-const routeForm = document.getElementById('routeForm');
-
-if (routeForm) {
-    routeForm.addEventListener('submit', async (e) => {
-
-        e.preventDefault();
-
-        const start = document.getElementById('startLocation').value;
-        const end = document.getElementById('endLocation').value;
-        const vehicleType =
-            document.getElementById('vehicleType')?.value || 'car';
-
-        if (!start || !end) {
-            showToast('error', 'Select both locations');
-            return;
-        }
-
-        document.getElementById('loadingIndicator').style.display = 'block';
-
-        try {
-
-            const response = await fetch('/api/routes', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    start,
-                    end,
-                    vehicle_type: vehicleType
-                })
-            });
-
-            const data = await response.json();
-
-            currentRoutes = data.routes;
-
-            displayRoutes(data.routes, data.start, data.end);
-            displayRouteCards(data.routes);
-
-            const rec = data.routes.find(r => r.recommended);
-            if (rec) {
-                selectRoute(rec.id);  // NEW: Auto-select recommended route
-                showRouteDetails(rec);
-            }
-
-        } catch (err) {
-            showToast('error', 'Failed to load routes');
-        } finally {
-            document.getElementById('loadingIndicator').style.display = 'none';
-        }
-    });
-}
-
-// ═══════════════════════════════════════════════════════
-// DISPLAY ROUTES ON MAP
+// DISPLAY ROUTES ON MAP & UI
 // ═══════════════════════════════════════════════════════
 
 function displayRoutes(routes) {
-
     routeLayers.forEach(l => map.removeLayer(l));
     routeLayers = [];
 
     routes.forEach(route => {
-
         const color =
             route.risk_level === 'low' ? '#28a745' :
             route.risk_level === 'medium' ? '#ffc107' :
@@ -172,11 +124,11 @@ function displayRoutes(routes) {
         const polyline = L.polyline(route.waypoints, {
             color: color,
             weight: route.recommended ? 6 : 4,
-            routeId: route.id  // NEW: Add route ID to polyline
+            routeId: route.id
         }).addTo(map);
 
         polyline.on('click', () => {
-            selectRoute(route.id);  // NEW: Select route on click
+            selectRoute(route.id);
             showRouteDetails(route);
         });
 
@@ -186,115 +138,62 @@ function displayRoutes(routes) {
     map.fitBounds(routes[0].waypoints);
 }
 
-// ═══════════════════════════════════════════════════════
-// NEW: SELECT ROUTE FUNCTION
-// ═══════════════════════════════════════════════════════
-
 function selectRoute(routeId) {
     selectedRouteId = routeId;
     
-    // Update all route cards
+    // Update route cards UI
     const allCards = document.querySelectorAll('.route-card');
     allCards.forEach(card => {
         const cardRouteId = parseInt(card.dataset.routeId);
-        
         if (cardRouteId === routeId) {
-            // Highlight selected card
             card.classList.add('route-card-selected');
-            card.style.borderColor = '#667eea';
-            card.style.borderWidth = '3px';
-            card.style.transform = 'scale(1.02)';
-            card.style.boxShadow = '0 8px 32px rgba(102, 126, 234, 0.4)';
         } else {
-            // Un-highlight other cards
             card.classList.remove('route-card-selected');
-            card.style.borderColor = 'rgba(255,255,255,0.1)';
-            card.style.borderWidth = '1px';
-            card.style.transform = 'scale(1)';
-            card.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.3)';
         }
     });
     
-    // Update polylines on map
+    // Update map polylines
     routeLayers.forEach(layer => {
         if (layer.options && layer.options.routeId === routeId) {
-            // Highlight selected route
-            layer.setStyle({
-                weight: 8,
-                opacity: 1.0
-            });
+            layer.setStyle({ weight: 8, opacity: 1.0 });
             layer.bringToFront();
         } else {
-            // Dim other routes
-            layer.setStyle({
-                weight: 4,
-                opacity: 0.5
-            });
+            layer.setStyle({ weight: 4, opacity: 0.5 });
         }
     });
 }
 
-// ═══════════════════════════════════════════════════════
-// DISPLAY ROUTE CARDS (UPDATED)
-// ═══════════════════════════════════════════════════════
-
 function displayRouteCards(routes) {
-
     const container = document.getElementById('routeCards');
     container.innerHTML = '';
 
     routes.forEach(route => {
-
         const card = document.createElement('div');
-        card.className = 'route-card';
-        card.dataset.routeId = route.id;  // NEW: Add data attribute
+        card.className = 'route-card p-3 mb-2 rounded glass-card';
+        card.dataset.routeId = route.id;
 
-        let vehicleBadge = '';
+        const color =
+            route.risk_level === 'low' ? '#28a745' :
+            route.risk_level === 'medium' ? '#ffc107' :
+            '#dc3545';
 
-        if (route.vehicle_info &&
-            route.vehicle_info.combined_multiplier > 1) {
-
-            const impact =
-                Math.round(
-                    (route.vehicle_info.combined_multiplier - 1) * 100
-                );
-
-            vehicleBadge =
-                `<span style="color:#ffc107;font-size:0.9rem;margin-left:8px;">${route.vehicle_info.vehicle_icon} +${impact}%</span>`;
-        }
-
-        // NEW: Add selected indicator
         const selectedBadge = route.recommended ? 
-            '<span style="background:#28a745;color:white;padding:2px 8px;border-radius:4px;font-size:0.7rem;margin-left:8px;">RECOMMENDED</span>' : 
-            '';
+            '<span class="badge bg-success">Recommended</span>' : '';
 
         card.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <h6 style="margin:0;">${route.name} ${vehicleBadge}</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0 text-white">${route.name}</h6>
                 ${selectedBadge}
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;">
-                <div style="text-align:center;padding:8px;background:rgba(255,255,255,0.05);border-radius:6px;">
-                    <div style="font-size:1.2rem;font-weight:bold;color:#667eea;">${route.distance_km}</div>
-                    <div style="font-size:0.7rem;color:#999;">KM</div>
-                </div>
-                <div style="text-align:center;padding:8px;background:rgba(255,255,255,0.05);border-radius:6px;">
-                    <div style="font-size:1.2rem;font-weight:bold;color:#667eea;">${route.time_minutes}</div>
-                    <div style="font-size:0.7rem;color:#999;">MIN</div>
-                </div>
-                <div style="text-align:center;padding:8px;background:rgba(255,255,255,0.05);border-radius:6px;">
-                    <div style="font-size:1.2rem;font-weight:bold;color:${
-                        route.risk_level === 'low' ? '#28a745' :
-                        route.risk_level === 'medium' ? '#ffc107' :
-                        '#dc3545'
-                    };">${route.risk_score}%</div>
-                    <div style="font-size:0.7rem;color:#999;">RISK</div>
-                </div>
+            <div class="d-flex justify-content-between text-muted small">
+                <span><i class="fas fa-road"></i> ${route.distance_km} km</span>
+                <span><i class="fas fa-clock"></i> ${route.time_minutes} min</span>
+                <span style="color:${color}; font-weight:bold;"><i class="fas fa-shield-alt"></i> Risk: ${route.risk_score}%</span>
             </div>
         `;
 
         card.onclick = () => {
-            selectRoute(route.id);  // NEW: Select on click
+            selectRoute(route.id);
             showRouteDetails(route);
         };
 
@@ -304,87 +203,26 @@ function displayRouteCards(routes) {
     document.getElementById('routeResults').style.display = 'block';
 }
 
-// ═══════════════════════════════════════════════════════
-// ROUTE DETAILS (UPDATED)
-// ═══════════════════════════════════════════════════════
-
 function showRouteDetails(route) {
-
     const container = document.getElementById('detailsContent');
-
-    let vehicleImpact = '';
-
-    if (route.vehicle_info &&
-        route.vehicle_info.combined_multiplier > 1) {
-
-        const impact =
-            Math.round(
-                (route.vehicle_info.combined_multiplier - 1) * 100
-            );
-
-        vehicleImpact = `
-            <div class="alert alert-warning mt-3" style="border-left:4px solid #ffc107;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:1.5rem;">${route.vehicle_info.vehicle_icon}</span>
-                    <div>
-                        <strong>Vehicle Risk Adjustment</strong>
-                        <div style="font-size:0.9rem;margin-top:4px;">
-                            Risk increased by <strong>+${impact}%</strong> for ${route.vehicle_info.vehicle_name}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    // NEW: Show which route is selected
-    const routeNumber = route.id;
-    const routeLabel = route.recommended ? 
-        `<span style="color:#28a745;"><i class="fas fa-star"></i> SELECTED (Recommended)</span>` :
-        `<span style="color:#667eea;"><i class="fas fa-check-circle"></i> SELECTED</span>`;
-
+    const color = route.risk_level === 'low' ? '#28a745' : route.risk_level === 'medium' ? '#ffc107' : '#dc3545';
+    
     container.innerHTML = `
-        <div class="alert ${route.recommended ? 'alert-success' : 'alert-info'}" style="border-left:4px solid ${route.recommended ? '#28a745' : '#667eea'};">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <strong>${route.name}</strong>
-                ${routeLabel}
-            </div>
+        <div class="alert ${route.recommended ? 'alert-success' : 'alert-info'} mb-3" style="border-left: 4px solid ${color};">
+            <strong>${route.name}</strong> - Currently Selected Route
         </div>
-
-        <table class="table table-sm table-dark" style="margin-top:16px;">
-            <tr>
-                <td><i class="fas fa-road"></i> Distance</td>
-                <td><strong>${route.distance_km} km</strong></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-clock"></i> Time</td>
-                <td><strong>${route.time_minutes} minutes</strong></td>
-            </tr>
-            <tr>
-                <td><i class="fas fa-exclamation-triangle"></i> Risk Score</td>
-                <td><strong style="color:${
-                    route.risk_level === 'low' ? '#28a745' :
-                    route.risk_level === 'medium' ? '#ffc107' :
-                    '#dc3545'
-                };">${route.risk_score}% (${route.risk_level.toUpperCase()})</strong></td>
-            </tr>
-        </table>
-
-        ${vehicleImpact}
-        
-        <div style="margin-top:16px;padding:12px;background:rgba(102,126,234,0.1);border-radius:8px;border:1px solid rgba(102,126,234,0.3);">
-            <div style="font-size:0.85rem;color:#aaa;">
-                <i class="fas fa-info-circle"></i> 
-                Click on other route cards above to compare different routes
-            </div>
-        </div>
+        <ul class="list-group list-group-flush bg-transparent">
+            <li class="list-group-item bg-transparent text-white border-secondary"><i class="fas fa-road text-primary"></i> Distance: <strong>${route.distance_km} km</strong></li>
+            <li class="list-group-item bg-transparent text-white border-secondary"><i class="fas fa-clock text-info"></i> Time: <strong>${route.time_minutes} mins</strong></li>
+            <li class="list-group-item bg-transparent text-white border-secondary"><i class="fas fa-exclamation-triangle text-warning"></i> Risk Score: <strong style="color:${color}">${route.risk_score}% (${route.risk_level.toUpperCase()})</strong></li>
+        </ul>
     `;
 
     document.getElementById('routeDetails').style.display = 'block';
 }
 
 // ═══════════════════════════════════════════════════════
-// ACCIDENT REPORTING
+// ACCIDENT REPORTING & DISPLAY
 // ═══════════════════════════════════════════════════════
 
 document.getElementById('enableReportMode')?.addEventListener('click', () => {
@@ -393,217 +231,34 @@ document.getElementById('enableReportMode')?.addEventListener('click', () => {
 });
 
 document.getElementById('submitAccidentReport')?.addEventListener('click', async () => {
-
     if (!selectedAccidentLocation) {
         showToast('error', 'Select location first');
         return;
     }
 
-    const severity =
-        document.getElementById('accidentSeverity').value;
+    const severity = document.getElementById('accidentSeverity').value;
+    const desc = document.getElementById('accidentDescription')?.value || '';
 
-    await fetch('/api/accidents/report', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            latitude: selectedAccidentLocation.lat,
-            longitude: selectedAccidentLocation.lng,
-            severity: severity
-        })
-    });
-
-    showToast('success', 'Accident reported');
-});
-// ═══════════════════════════════════════════════════════════════════
-// ADD THESE FUNCTIONS TO YOUR map.js FILE
-// Place at the end of the file, before window.addEventListener('load')
-// ═══════════════════════════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════════════════════════
-// ACCIDENT REPORTING FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════
-
-// Load and display active accidents
-async function loadActiveAccidents() {
     try {
-        const resp = await fetch('/api/accidents/active');
-        if (!resp.ok) {
-            console.warn('Accident API not available');
-            return;
-        }
-        
-        const data = await resp.json();
-        
-        if (data.success) {
-            renderAccidentMarkers(data.accidents);
-            renderAccidentsList(data.accidents);
-            
-            // Update badge count
-            const badge = document.getElementById('accidentCountBadge');
-            if (badge) {
-                badge.textContent = data.count;
-            }
-        }
-    } catch (e) {
-        console.error('Failed to load accidents:', e);
-    }
-}
-
-// Render accident markers on map
-function renderAccidentMarkers(accidents) {
-    // Remove old markers
-    accidentMarkers.forEach(m => map.removeLayer(m));
-    accidentMarkers = [];
-    
-    accidents.forEach(acc => {
-        const severityColors = {
-            'minor': '#28a745',
-            'moderate': '#ffc107',
-            'severe': '#ff6b35',
-            'fatal': '#dc3545'
-        };
-        
-        const color = severityColors[acc.severity] || '#dc3545';
-        
-        // Create pulsing red marker
-        const icon = L.divIcon({
-            className: 'accident-marker-container',
-            html: `
-                <div class="accident-marker-pulse" style="background:${color};"></div>
-                <div class="accident-marker-icon" style="background:${color};">
-                    <i class="fas fa-exclamation" style="color:#fff;"></i>
-                </div>
-            `,
-            iconSize: [32, 32],
-            iconAnchor: [16, 16]
-        });
-        
-        const marker = L.marker([acc.latitude, acc.longitude], {
-            icon: icon,
-            zIndexOffset: 2000
-        }).addTo(map);
-        
-        const timeAgo = formatTimeAgo(new Date(acc.timestamp));
-        
-        // Marker popup
-        marker.bindPopup(`
-            <div style="font-family:'Poppins',sans-serif; min-width:180px;">
-                <div style="font-weight:600; color:${color}; margin-bottom:8px;">
-                    <i class="fas fa-exclamation-triangle"></i> Accident Reported
-                </div>
-                <div style="margin-bottom:6px;">
-                    <span style="background:${color}; color:white; padding:2px 8px; border-radius:4px; font-size:0.75rem; text-transform:uppercase;">
-                        ${acc.severity}
-                    </span>
-                </div>
-                ${acc.description ? `<div style="font-size:0.85rem; color:#666; margin-bottom:6px;">"${acc.description}"</div>` : ''}
-                <div style="font-size:0.75rem; color:#999;">
-                    <i class="fas fa-clock"></i> ${timeAgo}
-                    ${acc.verified ? '<i class="fas fa-check-circle" style="color:#28a745; margin-left:8px;"></i> Verified' : ''}
-                </div>
-                <div style="margin-top:8px; display:flex; gap:8px;">
-                    <button onclick="voteAccident('${acc.id}', 'up')" 
-                            style="padding:4px 12px; background:#28a745; color:white; border:none; border-radius:4px; cursor:pointer; font-size:0.75rem;">
-                        👍 ${acc.upvotes}
-                    </button>
-                    <button onclick="voteAccident('${acc.id}', 'down')" 
-                            style="padding:4px 12px; background:#dc3545; color:white; border:none; border-radius:4px; cursor:pointer; font-size:0.75rem;">
-                        👎 ${acc.downvotes}
-                    </button>
-                </div>
-            </div>
-        `);
-        
-        accidentMarkers.push(marker);
-    });
-}
-
-// Render accidents list in sidebar
-function renderAccidentsList(accidents) {
-    const container = document.getElementById('activeAccidentsContent');
-    if (!container) return;
-    
-    if (accidents.length === 0) {
-        container.innerHTML = `
-            <div class="empty-history" style="text-align:center; padding:20px; color:#999;">
-                <i class="fas fa-check-circle" style="color:#28a745; font-size:40px; margin-bottom:10px;"></i>
-                <p>No active accidents reported</p>
-            </div>`;
-        return;
-    }
-    
-    container.innerHTML = accidents.slice(0, 10).map(acc => {
-        const timeAgo = formatTimeAgo(new Date(acc.timestamp));
-        const severityColors = {
-            'minor': '#28a745',
-            'moderate': '#ffc107',
-            'severe': '#ff6b35',
-            'fatal': '#dc3545'
-        };
-        const color = severityColors[acc.severity] || '#dc3545';
-        
-        return `
-            <div class="accident-item" onclick="map.setView([${acc.latitude}, ${acc.longitude}], 15, {animate: true})" 
-                 style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px; margin-bottom:10px; cursor:pointer; transition:all 0.3s;">
-                <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:6px;">
-                    <span style="background:${color}; color:white; padding:3px 10px; border-radius:4px; font-size:0.7rem; text-transform:uppercase; font-weight:600;">
-                        ${acc.severity}
-                    </span>
-                    <div style="font-size:0.7rem; color:#999;">
-                        <i class="fas fa-clock"></i> ${timeAgo}
-                    </div>
-                </div>
-                ${acc.description ? `<div style="font-size:0.8rem; color:#ccc; margin-bottom:6px;">${acc.description}</div>` : ''}
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                    <div style="display:flex; gap:8px;">
-                        <button onclick="event.stopPropagation(); voteAccident('${acc.id}', 'up');" 
-                                style="padding:3px 8px; background:#28a745; color:white; border:none; border-radius:4px; font-size:0.7rem; cursor:pointer;">
-                            👍 ${acc.upvotes}
-                        </button>
-                        <button onclick="event.stopPropagation(); voteAccident('${acc.id}', 'down');" 
-                                style="padding:3px 8px; background:#dc3545; color:white; border:none; border-radius:4px; font-size:0.7rem; cursor:pointer;">
-                            👎 ${acc.downvotes}
-                        </button>
-                    </div>
-                    ${acc.verified ? '<span style="color:#28a745; font-size:0.7rem;"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
-                </div>
-            </div>`;
-    }).join('');
-}
-
-// Vote on accident (upvote/downvote)
-window.voteAccident = async function(accidentId, voteType) {
-    try {
-        const resp = await fetch('/api/accidents/vote', {
+        await fetch('/api/accidents/report', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                accident_id: accidentId,
-                vote_type: voteType
+                latitude: selectedAccidentLocation.lat,
+                longitude: selectedAccidentLocation.lng,
+                severity: severity,
+                description: desc
             })
         });
-        
-        const data = await resp.json();
-        
-        if (data.success) {
-            loadActiveAccidents();  // Refresh
-        }
-    } catch (e) {
-        console.error('Failed to vote:', e);
+
+        showToast('success', 'Accident reported successfully');
+        cancelAccidentReport();
+        loadActiveAccidents();
+    } catch (err) {
+        showToast('error', 'Failed to report accident');
     }
-};
+});
 
-// Format time ago (e.g., "5m ago", "1h ago")
-function formatTimeAgo(date) {
-    const seconds = Math.floor((new Date() - date) / 1000);
-    
-    if (seconds < 60) return 'just now';
-    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
-    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
-    return Math.floor(seconds / 86400) + 'd ago';
-}
-
-// Cancel accident report
 function cancelAccidentReport() {
     accidentReportMode = false;
     selectedAccidentLocation = null;
@@ -614,112 +269,276 @@ function cancelAccidentReport() {
     }
     
     const form = document.getElementById('accidentReportForm');
-    const toggle = document.getElementById('reportModeToggle');
     const desc = document.getElementById('accidentDescription');
     
     if (form) form.style.display = 'none';
-    if (toggle) toggle.style.display = 'block';
     if (desc) desc.value = '';
-    
-    document.getElementById('map').style.cursor = '';
-    showToast('info', 'Report mode canceled');
 }
 
-// Cancel button handler
 document.getElementById('cancelAccidentReport')?.addEventListener('click', cancelAccidentReport);
 
-// ═══════════════════════════════════════════════════════════════════
-// MODIFY YOUR window.addEventListener('load') TO INCLUDE:
-// ═══════════════════════════════════════════════════════════════════
+async function loadActiveAccidents() {
+    try {
+        const resp = await fetch('/api/accidents/active');
+        const data = await resp.json();
+        
+        if (data.success) {
+            // Remove old markers
+            accidentMarkers.forEach(m => map.removeLayer(m));
+            accidentMarkers = [];
+            
+            data.accidents.forEach(acc => {
+                const color = acc.severity === 'minor' ? '#28a745' : acc.severity === 'moderate' ? '#ffc107' : '#dc3545';
+                
+                // Create pulsing marker (Requires CSS injected below)
+                const icon = L.divIcon({
+                    className: 'accident-marker-container',
+                    html: `
+                        <div class="accident-marker-pulse" style="background:${color};"></div>
+                        <div class="accident-marker-icon" style="background:${color};">
+                            <i class="fas fa-exclamation" style="color:#fff;"></i>
+                        </div>
+                    `,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 16]
+                });
+                
+                const marker = L.marker([acc.latitude, acc.longitude], { icon: icon }).addTo(map);
+                marker.bindPopup(`<b>${acc.severity.toUpperCase()} Accident</b><br>${acc.description || 'Watch out for delays.'}`);
+                accidentMarkers.push(marker);
+            });
+        }
+    } catch (e) {
+        console.error('Failed to load accidents:', e);
+    }
+}
 
-// CHANGE FROM:
-// window.addEventListener('load', () => {
-//     initMap();
-// });
+// ═══════════════════════════════════════════════════════
+// FOOLPROOF MODAL TRIGGERS (FAVORITES & WHATSAPP)
+// ═══════════════════════════════════════════════════════
 
-// TO:
-window.addEventListener('load', () => {
-    initMap();
-    loadActiveAccidents();  // ADD THIS LINE
+// 1. Load Favorites on Boot
+async function loadFavorites() {
+    try {
+        const response = await fetch('/api/favorites');
+        const data = await response.json();
+        
+        if (data.success && data.favorites) {
+            const container = document.getElementById('favoritesContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            data.favorites.forEach(fav => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-sm btn-outline-secondary m-1';
+                btn.innerHTML = fav.name;
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    const startInput = document.getElementById('startLocation');
+                    const endInput = document.getElementById('endLocation');
+                    
+                    if (!startInput.value) {
+                        startInput.value = fav.locationName;
+                    } else {
+                        endInput.value = fav.locationName;
+                    }
+                };
+                container.appendChild(btn);
+            });
+        }
+    } catch (err) {
+        console.error('Failed to load favorites');
+    }
+}
+
+// 2. Open Save Favorite Modal
+window.triggerSaveFavorite = function() {
+    const start = document.getElementById('startLocation').value;
+    const end = document.getElementById('endLocation').value;
     
-    // Auto-refresh accidents every 60 seconds
-    setInterval(loadActiveAccidents, 60000);  // ADD THIS LINE
+    if (!start || !end) return showToast('error', 'Please calculate a route first.');
+
+    document.getElementById('modalStartLocation').textContent = start;
+    document.getElementById('modalEndLocation').textContent = end;
+    
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('saveFavoriteModal'));
+    modal.show();
+};
+
+// 3. Save Favorite Action
+window.confirmSaveFavoriteAction = async function() {
+    const name = document.getElementById('favoriteName').value;
+    const end = document.getElementById('endLocation').value;
+    
+    if (!name) return showToast('error', 'Enter a name for this favorite');
+    
+    try {
+        const getResp = await fetch('/api/favorites');
+        let favs = (await getResp.json()).favorites || [];
+        favs.push({ id: 'fav_' + Date.now(), name: '⭐ ' + name, locationName: end });
+        
+        await fetch('/api/favorites', { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify({ favorites: favs }) 
+        });
+        
+        showToast('success', 'Favorite saved successfully!');
+        document.getElementById('favoriteName').value = ''; 
+        
+        bootstrap.Modal.getInstance(document.getElementById('saveFavoriteModal')).hide();
+        loadFavorites();
+    } catch (err) { 
+        showToast('error', 'Failed to save favorite'); 
+    }
+};
+
+// 4. Open WhatsApp Share Modal
+window.triggerShareWhatsApp = function() {
+    if (!selectedRouteId) return showToast('error', 'Select a route to share first.');
+    
+    document.getElementById('shareStartLocation').textContent = document.getElementById('startLocation').value;
+    document.getElementById('shareEndLocation').textContent = document.getElementById('endLocation').value;
+    
+    const route = currentRoutes.find(r => r.id === selectedRouteId);
+    document.getElementById('shareRouteOptions').innerHTML = `
+        <div class="alert alert-info">Sharing: <strong>${route.name}</strong></div>
+        <button class="btn btn-success w-100" onclick="executeShare()">
+            <i class="fab fa-whatsapp"></i> Send Now
+        </button>
+    `;
+    
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('shareWhatsAppModal'));
+    modal.show();
+};
+
+// 5. Execute WhatsApp Share (with Popup Bypass)
+window.executeShare = async function() {
+    const route = currentRoutes.find(r => r.id === selectedRouteId);
+    if (!route) return;
+
+    const routeData = {
+        start: document.getElementById('startLocation').value,
+        end: document.getElementById('endLocation').value,
+        vehicle_type: document.getElementById('vehicleType')?.value || 'car',
+        selected_route_id: route.id
+    };
+
+    let fallbackPopup = null;
+    if (!navigator.share || !window.isSecureContext) {
+        fallbackPopup = window.open('about:blank', '_blank');
+    }
+
+    try {
+        const response = await fetch('/api/share-route', { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(routeData) 
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            const shareUrl = `${window.location.origin}/route/${data.route_id}`;
+            const text = `🚗 I'm taking the "${route.name}" from ${routeData.start} to ${routeData.end}.\nRisk level: ${route.risk_level.toUpperCase()}.\nTrack my safe route here: ${shareUrl}`;
+            
+            if (navigator.share && window.isSecureContext) {
+                try {
+                    await navigator.share({ title: 'Safe Route', text: text, url: shareUrl });
+                } catch (shareErr) {
+                    console.warn("Share cancelled or failed");
+                }
+            } else if (fallbackPopup) {
+                fallbackPopup.location.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            }
+
+            const modalEl = document.getElementById('shareWhatsAppModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+        }
+    } catch (err) {
+        console.error('Error sharing route:', err);
+        showToast('error', 'Could not generate share link.');
+        if (fallbackPopup) fallbackPopup.close(); 
+    }
+};
+
+// ═══════════════════════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════════════════════
+
+function showToast(type, message) {
+    const toastBody = document.getElementById(type + 'ToastBody');
+    if (toastBody) toastBody.textContent = message;
+    
+    const toastEl = document.getElementById(type + 'Toast');
+    if (toastEl) {
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    } else {
+        alert(message);
+    }
+}
+
+// Swap locations button
+document.getElementById('swapLocations')?.addEventListener('click', () => {
+    const start = document.getElementById('startLocation');
+    const end = document.getElementById('endLocation');
+    const temp = start.value;
+    start.value = end.value;
+    end.value = temp;
 });
 
-// ═══════════════════════════════════════════════════════════════════
-// ADD THIS CSS FOR PULSING ACCIDENT MARKERS
-// ═══════════════════════════════════════════════════════════════════
-
+// CSS for Pulsing Accident Markers
 const accidentStyles = document.createElement('style');
 accidentStyles.textContent = `
-    .accident-marker-container {
-        position: relative;
-        background: none !important;
-        border: none !important;
-    }
-    
-    .accident-marker-pulse {
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        opacity: 0.6;
-        animation: pulse-accident 2s infinite;
-    }
-    
-    .accident-marker-icon {
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        z-index: 1;
-    }
-    
-    @keyframes pulse-accident {
-        0%, 100% { 
-            transform: scale(1); 
-            opacity: 0.6; 
-        }
-        50% { 
-            transform: scale(1.3); 
-            opacity: 0.3; 
-        }
-    }
-    
-    .accident-item:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        transform: translateX(4px);
-    }
+    .accident-marker-container { position: relative; background: none !important; border: none !important; }
+    .accident-marker-pulse { position: absolute; width: 32px; height: 32px; border-radius: 50%; opacity: 0.6; animation: pulse-accident 2s infinite; }
+    .accident-marker-icon { position: absolute; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); z-index: 1; }
+    @keyframes pulse-accident { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.3); opacity: 0.3; } }
 `;
 document.head.appendChild(accidentStyles);
 
 // ═══════════════════════════════════════════════════════
-// TOAST SYSTEM
+// UNIFIED INIT ON LOAD
 // ═══════════════════════════════════════════════════════
-
-function showToast(type, message) {
-
-    const toastEl = document.getElementById(type + 'Toast');
-    const toastBody = document.getElementById(type + 'ToastBody');
-
-    if (!toastEl) {
-        alert(message);
-        return;
-    }
-
-    toastBody.textContent = message;
-    const toast = new bootstrap.Toast(toastEl);
-    toast.show();
-}
-
 // ═══════════════════════════════════════════════════════
-// INIT
+// FORCE-BIND EVENT LISTENERS (Failsafe)
 // ═══════════════════════════════════════════════════════
+setTimeout(() => {
+    // 1. Bind the main "Save as Favorite" button under the route form
+    const saveBtn = document.getElementById('saveFavoriteBtn');
+    if (saveBtn) saveBtn.onclick = window.triggerSaveFavorite;
 
+    // 2. Bind the "Save Favorite" confirm button inside the modal
+    const confirmSaveBtn = document.getElementById('confirmSaveFavorite');
+    if (confirmSaveBtn) confirmSaveBtn.onclick = window.confirmSaveFavoriteAction;
+
+    // 3. Bind the "Share via WhatsApp" button
+    const shareBtn = document.getElementById('shareWhatsAppBtn');
+    if (shareBtn) shareBtn.onclick = window.triggerShareWhatsApp;
+}, 500); // Slight delay to ensure HTML is fully rendered
 window.addEventListener('load', () => {
     initMap();
+    loadActiveAccidents();
+    loadFavorites(); 
+    
+    // Auto-refresh accidents every 60 seconds
+    setInterval(loadActiveAccidents, 60000); 
+
+    // Handle shared routes (hydration)
+    if (typeof preloadedRouteData !== 'undefined' && preloadedRouteData) {
+        document.getElementById('startLocation').value = preloadedRouteData.start;
+        document.getElementById('endLocation').value = preloadedRouteData.end;
+        if (document.getElementById('vehicleType')) {
+            document.getElementById('vehicleType').value = preloadedRouteData.vehicle_type;
+        }
+        
+        // Programmatically submit the form
+        const routeForm = document.getElementById('routeForm');
+        if (routeForm) {
+            routeForm.dispatchEvent(new Event('submit'));
+        }
+    }
 });
