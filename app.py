@@ -1,3 +1,4 @@
+import sqlite3
 from flask import Flask, render_template, request, jsonify
 import pickle
 import numpy as np
@@ -11,102 +12,16 @@ import uuid
 
 app = Flask(__name__)
 
-# ═══════════════════════════════════════════════════════════════════════
-# ACCIDENT REPORTER CLASS
-# ═══════════════════════════════════════════════════════════════════════
-class AccidentReporter:
-    def __init__(self, storage_path="data/live_accidents.json"):
-        self.storage_path = storage_path
-        os.makedirs(os.path.dirname(storage_path), exist_ok=True)
-        if not os.path.exists(storage_path):
-            with open(storage_path, 'w') as f:
-                json.dump([], f)
-    
-    def report_accident(self, latitude, longitude, severity="moderate", description=""):
-        accidents = self._load_accidents()
-        accident = {
-            "id": f"acc_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000,9999)}",
-            "timestamp": datetime.now().isoformat(),
-            "expires_at": (datetime.now() + timedelta(hours=2)).isoformat(),
-            "latitude": latitude,
-            "longitude": longitude,
-            "severity": severity,
-            "description": description,
-            "upvotes": 0,
-            "downvotes": 0,
-            "verified": False
-        }
-        accidents.append(accident)
-        self._save_accidents(accidents)
-        return {"success": True, "accident": accident}
-    
-    def get_active_accidents(self):
-        accidents = self._load_accidents()
-        now = datetime.now()
-        active = [acc for acc in accidents if datetime.fromisoformat(acc['expires_at']) > now]
-        self._save_accidents(active) 
-        return active
-    
-    def vote_accident(self, accident_id, vote_type):
-        accidents = self._load_accidents()
-        for acc in accidents:
-            if acc['id'] == accident_id:
-                if vote_type == 'up':
-                    acc['upvotes'] += 1
-                    if acc['upvotes'] >= 3:
-                        acc['verified'] = True
-                elif vote_type == 'down':
-                    acc['downvotes'] += 1
-                if acc['downvotes'] >= 5:
-                    accidents.remove(acc)
-                    self._save_accidents(accidents)
-                    return {"success": True, "removed": True}
-                break
-        self._save_accidents(accidents)
-        return {"success": True}
-    
-    def get_accidents_on_route(self, waypoints, buffer_km=0.5):
-        accidents = self.get_active_accidents()
-        route_accidents = []
-        for acc in accidents:
-            acc_lat, acc_lon = acc['latitude'], acc['longitude']
-            for wp in waypoints:
-                dist = self._haversine(wp[0], wp[1], acc_lat, acc_lon)
-                if dist <= buffer_km:
-                    route_accidents.append({
-                        'severity': acc['severity'],
-                        'distance_from_route_km': round(dist, 2),
-                        'description': acc.get('description', '')
-                    })
-                    break
-        return route_accidents
-    
-    def get_accident_impact_multiplier(self, waypoints):
-        accidents = self.get_accidents_on_route(waypoints, buffer_km=1.0)
-        if not accidents: return 1.0
-        severity_weights = {'minor': 1.05, 'moderate': 1.15, 'severe': 1.30, 'fatal': 1.50}
-        total_mult = 1.0
-        for acc in accidents:
-            weight = severity_weights.get(acc['severity'], 1.10)
-            total_mult *= weight
-        return min(total_mult, 2.0)
-    
-    def _haversine(self, lat1, lon1, lat2, lon2):
-        R = 6371
-        lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
-        dlat, dlon = lat2 - lat1, lon2 - lon1
-        a = math.sin(dlat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dlon/2)**2
-        return R * 2 * math.asin(math.sqrt(a))
-    
-    def _load_accidents(self):
-        try:
-            with open(self.storage_path, 'r') as f: return json.load(f)
-        except: return []
-    
-    def _save_accidents(self, accidents):
-        with open(self.storage_path, 'w') as f: json.dump(accidents, f, indent=2)
+from accident_reporter import AccidentReporter
+from weather_service import WeatherService
+from traffic_integration import TrafficIntegration
 
+weather_service = WeatherService()
 accident_reporter = AccidentReporter()
+
+# Get Google Maps API Key from environment or placeholder
+GMAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
+traffic_client = TrafficIntegration(api_key=GMAPS_API_KEY) if GMAPS_API_KEY else None
 
 # ═══════════════════════════════════════════════════════════════════════
 # VEHICLE & ROUTE LOGIC
@@ -125,13 +40,31 @@ def get_vehicle_multiplier(vehicle_type: str) -> dict:
     vehicle = VEHICLE_TYPES[vehicle_type]
     return {'vehicle_type': vehicle_type, 'vehicle_name': vehicle['name'], 'vehicle_icon': vehicle['icon'], 'combined_multiplier': vehicle['risk_multiplier'], 'speed_factor': vehicle['speed_factor']}
 
+# Load segments coordinates
 try:
-    with open('models/risk_model.pkl', 'rb') as f: model_data = pickle.load(f)
-    with open('models/segment_risk_scores.pkl', 'rb') as f: segment_risk_scores = pickle.load(f)
     segments_df = pd.read_csv('data/road_segments.csv')
-except:
-    model_data, segment_risk_scores = None, {}
+    print(f"Loaded {len(segments_df)} road segments.")
+except Exception as e:
+    print(f"ERROR: Could not load road_segments.csv: {e}")
     segments_df = pd.DataFrame(columns=['segment_id', 'start_lat', 'start_lon', 'end_lat', 'end_lon', 'road_name'])
+
+# Load granular risk scores for heatmap
+try:
+    with open('models/segment_risk_scores.pkl', 'rb') as f: 
+        segment_risk_scores = pickle.load(f)
+    print(f"Loaded {len(segment_risk_scores)} segment risk scores.")
+except Exception as e:
+    print(f"ERROR: Could not load segment_risk_scores.pkl: {e}")
+    segment_risk_scores = {}
+
+# Load main prediction model
+try:
+    with open('models/risk_model.pkl', 'rb') as f: 
+        model_data = pickle.load(f)
+    print("Loaded main risk model.")
+except Exception as e:
+    print(f"WARNING: Could not load main risk model: {e}")
+    model_data = None
 
 MUMBAI_LOCATIONS = {
     "Bandra": [19.0596, 72.8295], "Andheri": [19.1136, 72.8697], "Powai": [19.1197, 72.9067], "Worli": [19.0176, 72.8125],
@@ -172,7 +105,13 @@ def calculate_route_risk(waypoints, vehicle_type="car"):
     accident_mult = accident_reporter.get_accident_impact_multiplier(waypoints)
     vehicle_info = get_vehicle_multiplier(vehicle_type)
     vehicle_mult = vehicle_info['combined_multiplier']
-    combined_mult = accident_mult * vehicle_mult
+    
+    # Weather multiplier
+    weather_data = weather_service.get_current_weather()
+    weather_weights = {'Clear': 1.0, 'Rain': 1.25, 'Fog': 1.35, 'Heavy Rain': 1.6}
+    weather_mult = weather_weights.get(weather_data['weather_category'], 1.0)
+    
+    combined_mult = accident_mult * vehicle_mult * weather_mult
     total_risk, total_dist, risk_details = 0.0, 0.0, []
 
     for i in range(len(waypoints) - 1):
@@ -197,7 +136,61 @@ def calculate_route_risk(waypoints, vehicle_type="car"):
         total_dist += leg_dist
 
     avg_risk = total_risk / max(total_dist, 0.001)
-    return {'risk_score': round(avg_risk, 2), 'accident_multiplier': accident_mult, 'vehicle_multiplier': vehicle_mult, 'vehicle_info': vehicle_info, 'combined_multiplier': round(combined_mult, 2), 'risk_details': risk_details}
+    return {
+        'risk_score': round(avg_risk, 2), 
+        'accident_multiplier': accident_mult, 
+        'vehicle_multiplier': vehicle_mult, 
+        'weather_multiplier': weather_mult,
+        'weather_data': weather_data,
+        'vehicle_info': vehicle_info, 
+        'combined_multiplier': round(combined_mult, 2), 
+        'risk_details': risk_details
+    }
+
+def predict_risk_for_hour(base_risk_score, hour_offset, vehicle_type, road_risk_encoded):
+    """Predicts a risk score for a future hour using the ML model."""
+    if not model_data:
+        return base_risk_score
+    
+    now = datetime.now()
+    future_time = now + timedelta(hours=hour_offset)
+    h = future_time.hour
+    dow = future_time.weekday()
+    month = future_time.month
+    
+    # Prepare feature vector
+    # 0: hour, 1: day_of_week, 2: month, 3: is_rush_hour, 4: is_night, 5: is_weekend
+    # 6: weather_severity_score, 7: rain_mm, 8: humidity, 9: road_risk_encoded, 10: vehicle_encoded
+    
+    is_rush = 1 if (7<=h<=10) or (17<=h<=21) else 0
+    is_night = 1 if h>=22 or h<=5 else 0
+    is_weekend = 1 if dow>=5 else 0
+    
+    # Use current weather as baseline for future prediction (simplified)
+    weather_data = weather_service.get_current_weather()
+    w_sev = model_data['weather_severity_score'].get(weather_data['weather_category'], 3)
+    w_rain = weather_data.get('rain_mm', 0.0)
+    w_hum = weather_data.get('humidity', 60.0)
+    
+    v_encoded = model_data['le_vehicle'].transform([vehicle_type])[0] if vehicle_type in model_data['le_vehicle'].classes_ else 0
+    
+    features = [[
+        h, dow, month, is_rush, is_night, is_weekend,
+        w_sev, w_rain, w_hum, road_risk_encoded, v_encoded
+    ]]
+    
+    # The model predicts historical segment risk directly in the training script.
+    # To get a *relative* risk for the current route, we use the model's prediction 
+    # to adjust the base_risk_score.
+    
+    predicted_risk = model_data['model'].predict(features)[0]
+    
+    # Normalize: model prediction is roughly 15-95. 
+    # We use a simple multiplier approach to scale the current base_risk_score.
+    # Base multiplier is roughly predicted_risk / average_risk (around 40)
+    multiplier = predicted_risk / 40.0
+    
+    return round(min(100, base_risk_score * multiplier), 2)
 
 def get_route_metadata(waypoints, risk_score, vehicle_type="car"):
     total_distance = sum(haversine_distance(waypoints[i][0], waypoints[i][1], waypoints[i+1][0], waypoints[i+1][1]) for i in range(len(waypoints)-1))
@@ -212,31 +205,166 @@ def get_route_metadata(waypoints, risk_score, vehicle_type="car"):
 # ═══════════════════════════════════════════════════════════════════════
 @app.route('/')
 def index():
-    return render_template('index.html', locations=MUMBAI_LOCATIONS)
+    return render_template('index.html', locations=MUMBAI_LOCATIONS, preloaded_route=None)
+
+def get_coords(location):
+    """Extracts [lat, lng] from location name, dict, or list."""
+    if isinstance(location, dict):
+        return [location.get('lat'), location.get('lng')]
+    if isinstance(location, str) and location in MUMBAI_LOCATIONS:
+        return MUMBAI_LOCATIONS[location]
+    if isinstance(location, (list, tuple)) and len(location) == 2:
+        return list(location)
+    return None
 
 @app.route('/api/routes', methods=['POST'])
 def get_safe_routes():
     data = request.get_json()
-    start_name, end_name, vehicle_type = data.get('start'), data.get('end'), data.get('vehicle_type', 'car')
-    if start_name not in MUMBAI_LOCATIONS or end_name not in MUMBAI_LOCATIONS:
-        return jsonify({'error': 'Location not found'}), 400
+    start_input, end_input, vehicle_type = data.get('start'), data.get('end'), data.get('vehicle_type', 'car')
+    
+    # Standardize locations for both real and simulator
+    start_coords = get_coords(start_input)
+    end_coords = get_coords(end_input)
+    
+    # For Google Maps, it can handle both names and coordinates
+    start_loc = start_input if isinstance(start_input, str) else start_coords
+    end_loc = end_input if isinstance(end_input, str) else end_coords
 
     routes = []
-    for route_type, route_name in [('direct','Direct Route'),('highway','Via Highway'),('scenic','Scenic Route')]:
-        wp = generate_route_waypoints(MUMBAI_LOCATIONS[start_name], MUMBAI_LOCATIONS[end_name], route_type)
-        risk_result = calculate_route_risk(wp, vehicle_type)
-        meta = get_route_metadata(wp, risk_result['risk_score'], vehicle_type)
-        route_accidents = accident_reporter.get_accidents_on_route(wp, buffer_km=0.5)
-        routes.append({
-            'id': len(routes)+1, 'name': route_name, 'waypoints': wp, 'risk_score': risk_result['risk_score'],
-            'risk_level': 'low' if risk_result['risk_score']<35 else ('medium' if risk_result['risk_score']<60 else 'high'),
-            'distance_km': meta['distance_km'], 'time_minutes': meta['time_minutes'], 'risk_details': risk_result['risk_details'][:5],
-            'vehicle_info': risk_result['vehicle_info'], 'accidents_on_route': len(route_accidents)
-        })
+    
+    # Check if we can use real Google Maps data
+    if traffic_client and GMAPS_API_KEY and start_loc and end_loc:
+        traffic_result = traffic_client.get_route_with_traffic(start_loc, end_loc)
+        if traffic_result.get('success'):
+            for idx, r in enumerate(traffic_result['routes']):
+                # Simple fallback: use endpoints for risk if no polyline decoder
+                # If start_coords/end_coords are None (failed geocode), fallback to default
+                sc = start_coords or [19.05, 72.82]
+                ec = end_coords or [19.06, 72.86]
+                wp = generate_route_waypoints(sc, ec)
+                
+                risk_result = calculate_route_risk(wp, vehicle_type)
+                
+                routes.append({
+                    'id': idx + 1,
+                    'name': f"Route {idx + 1}: {r['summary']}",
+                    'waypoints': wp,
+                    'risk_score': risk_result['risk_score'],
+                    'risk_level': 'low' if risk_result['risk_score'] < 35 else ('medium' if risk_result['risk_score'] < 60 else 'high'),
+                    'distance_km': round(r['distance_km'], 2),
+                    'time_minutes': int(r['traffic_duration_min']),
+                    'traffic_delay': round(r['traffic_delay_min'], 1),
+                    'risk_details': risk_result['risk_details'][:5],
+                    'weather_data': risk_result['weather_data']
+                })
+
+    # Fallback to simulator if no API key or API call failed
+    if not routes:
+        if not start_coords or not end_coords:
+            missing = []
+            if not start_coords: missing.append(f"'{start_input}'")
+            if not end_coords: missing.append(f"'{end_input}'")
+            return jsonify({'error': f"Location(s) not found in Mumbai database: {', '.join(missing)}. Please try a known location like Bandra or BKC."}), 400
+            
+        for route_type, route_name in [('direct','Direct Route'),('highway','Via Highway'),('scenic','Scenic Route')]:
+            wp = generate_route_waypoints(start_coords, end_coords, route_type)
+            risk_result = calculate_route_risk(wp, vehicle_type)
+            meta = get_route_metadata(wp, risk_result['risk_score'], vehicle_type)
+            route_accidents = accident_reporter.get_accidents_on_route(wp, buffer_km=0.5)
+            
+            traffic_delay = 0
+            if risk_result['risk_score'] > 50:
+                traffic_delay = random.randint(5, 15)
+            elif risk_result['risk_score'] > 30:
+                traffic_delay = random.randint(1, 4)
+            
+            routes.append({
+                'id': len(routes)+1, 'name': route_name, 'waypoints': wp, 'risk_score': risk_result['risk_score'],
+                'risk_level': 'low' if risk_result['risk_score']<35 else ('medium' if risk_result['risk_score']<60 else 'high'),
+                'distance_km': meta['distance_km'], 'time_minutes': meta['time_minutes'] + traffic_delay, 
+                'traffic_delay': traffic_delay,
+                'risk_details': risk_result['risk_details'][:5],
+                'vehicle_info': risk_result['vehicle_info'], 
+                'accidents_on_route': len(route_accidents),
+                'weather_data': risk_result['weather_data']
+            })
 
     routes.sort(key=lambda x: x['risk_score'])
-    routes[0]['recommended'] = True
-    return jsonify({'start': start_name, 'end': end_name, 'vehicle_type': vehicle_type, 'routes': routes, 'active_accidents_count': len(accident_reporter.get_active_accidents())})
+    if routes: routes[0]['recommended'] = True
+    return jsonify({
+        'start': start_input if isinstance(start_input, str) else "Custom Location", 
+        'end': end_input if isinstance(end_input, str) else "Custom Location", 
+        'vehicle_type': vehicle_type, 
+        'routes': routes, 
+        'active_accidents_count': len(accident_reporter.get_active_accidents())
+    })
+
+@app.route('/api/time-risk', methods=['POST'])
+def get_time_risk_forecast():
+    data = request.get_json()
+    start_input = data.get('start')
+    end_input = data.get('end')
+    vehicle_type = data.get('vehicle_type', 'car')
+    
+    start_coords = get_coords(start_input)
+    end_coords = get_coords(end_input)
+    
+    if not start_coords or not end_coords:
+        return jsonify({'error': 'Invalid locations'}), 400
+        
+    # Get base risk for direct route as baseline
+    wp = generate_route_waypoints(start_coords, end_coords, 'direct')
+    base_result = calculate_route_risk(wp, vehicle_type)
+    base_score = base_result['risk_score']
+    
+    # Assume a default road risk encoding for simplicity if not easily mapped
+    # Average road risk level based on the route
+    road_risk_encoded = 1 # Medium baseline
+    
+    predictions = []
+    now = datetime.now()
+    
+    for i in range(13): # 0 to 12 hours
+        future_time = now + timedelta(hours=i)
+        pred_score = predict_risk_for_hour(base_score, i, vehicle_type, road_risk_encoded)
+        predictions.append({
+            'hour': future_time.strftime('%I %p'),
+            'offset': i,
+            'risk_score': pred_score
+        })
+        
+    # Find optimal time
+    optimal = min(predictions, key=lambda x: x['risk_score'])
+    
+    return jsonify({
+        'predictions': predictions,
+        'optimal_time': optimal,
+        'current_risk': base_score
+    })
+
+@app.route('/api/heatmap-data')
+def get_heatmap_data():
+    """Returns all road segments with their coordinates and risk scores."""
+    print(f"Heatmap request received. Current segments count: {len(segments_df)}")
+    try:
+        data = []
+        for _, row in segments_df.iterrows():
+            sid = row['segment_id']
+            # Get risk score from the pkl, fallback to row's risk_level if needed
+            # (Though road_segments.csv already has a risk_level column, 
+            # we want the granular score from the ML results pkl)
+            risk_info = segment_risk_scores.get(sid, {})
+            score = risk_info.get('risk_score', 30) # Default mid-low if missing
+            
+            data.append({
+                'id': sid,
+                'name': row['road_name'],
+                'coords': [[row['start_lat'], row['start_lon']], [row['end_lat'], row['end_lon']]],
+                'risk_score': score
+            })
+        return jsonify({'success': True, 'segments': data})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/accidents/report', methods=['POST'])
 def report_accident():
@@ -255,40 +383,61 @@ def vote_accident():
     if not data.get('accident_id') or data.get('vote_type') not in ['up', 'down']: return jsonify({'success': False, 'error': 'Invalid vote'}), 400
     return jsonify(accident_reporter.vote_accident(data.get('accident_id'), data.get('vote_type')))
 
-FAVORITES_FILE = 'data/favorites.json'
+# ═══════════════════════════════════════════════════════════════════════
+# DATABASE HELPERS
+# ═══════════════════════════════════════════════════════════════════════
+DB_PATH = 'data/mumbai_safe_route.db'
+
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
 @app.route('/api/favorites', methods=['GET', 'POST'])
 def manage_favorites():
-    os.makedirs(os.path.dirname(FAVORITES_FILE), exist_ok=True)
+    conn = get_db_connection()
     if request.method == 'POST':
         favorites_data = request.json.get('favorites', [])
-        with open(FAVORITES_FILE, 'w') as f: json.dump(favorites_data, f, indent=2)
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM favorites')
+        for fav in favorites_data:
+            cursor.execute('INSERT INTO favorites (id, name, locationName) VALUES (?, ?, ?)',
+                         (fav['id'], fav['name'], fav['locationName']))
+        conn.commit()
+        conn.close()
         return jsonify({"success": True, "favorites": favorites_data})
     else:
-        try:
-            with open(FAVORITES_FILE, 'r') as f: favorites = json.load(f)
-        except: favorites = [{'id': 'home', 'name': '🏠 Home', 'locationName': 'Bandra'}, {'id': 'work', 'name': '💼 Work', 'locationName': 'BKC'}]
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM favorites')
+        rows = cursor.fetchall()
+        favorites = [dict(row) for row in rows]
+        if not favorites:
+            favorites = [{'id': 'home', 'name': '🏠 Home', 'locationName': 'Bandra'}, {'id': 'work', 'name': '💼 Work', 'locationName': 'BKC'}]
+        conn.close()
         return jsonify({"success": True, "favorites": favorites})
 
-ROUTES_FILE = 'data/shared_routes.json'
 @app.route('/api/share-route', methods=['POST'])
 def save_shared_route():
     route_id = str(uuid.uuid4())[:6]
-    os.makedirs(os.path.dirname(ROUTES_FILE), exist_ok=True)
-    try:
-        with open(ROUTES_FILE, 'r') as f: routes = json.load(f)
-    except: routes = {}
-    routes[route_id] = request.json
-    with open(ROUTES_FILE, 'w') as f: json.dump(routes, f, indent=2)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO shared_routes (route_id, route_data, created_at) VALUES (?, ?, ?)',
+                 (route_id, json.dumps(request.json), datetime.now().isoformat()))
+    conn.commit()
+    conn.close()
     return jsonify({'success': True, 'route_id': route_id}), 200
 
 @app.route('/route/<route_id>', methods=['GET'])
 def view_shared_route(route_id):
-    try:
-        with open(ROUTES_FILE, 'r') as f: routes = json.load(f)
-        if route_id in routes:
-            return render_template('index.html', locations=MUMBAI_LOCATIONS, preloaded_route=json.dumps(routes[route_id]))
-    except: pass
-    return render_template('index.html', locations=MUMBAI_LOCATIONS, error="Shared route not found.")
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT route_data FROM shared_routes WHERE route_id = ?', (route_id,))
+    row = cursor.fetchone()
+    conn.close()
+    
+    if row:
+        return render_template('index.html', locations=MUMBAI_LOCATIONS, preloaded_route=row['route_data'])
+    return render_template('index.html', locations=MUMBAI_LOCATIONS, preloaded_route=None, error="Shared route not found.")
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

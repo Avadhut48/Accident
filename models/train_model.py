@@ -16,7 +16,7 @@ What changed vs v2:
 """
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import GradientBoostingRegressor
+from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import mean_absolute_error, r2_score
@@ -179,9 +179,15 @@ def train_model(accidents_df, segments_df):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    model = GradientBoostingRegressor(
-        n_estimators=300, max_depth=5, learning_rate=0.07,
-        subsample=0.8, min_samples_leaf=8, random_state=42,
+    model = XGBRegressor(
+        n_estimators=500, 
+        max_depth=6, 
+        learning_rate=0.05,
+        subsample=0.8, 
+        colsample_bytree=0.8,
+        n_jobs=-1,
+        random_state=42,
+        objective='reg:squarederror'
     )
     model.fit(X_train, y_train)
 

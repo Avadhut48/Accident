@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mumbai Safe Route Navigator 🚗</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Leaflet Geocoder -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark modern-navbar">
         <div class="container-fluid px-4">
@@ -42,9 +47,9 @@
                                 <span class="text-muted" style="font-size: 0.8rem;">Loading favorites...</span>
                             </div>
                         </div>
-                        
+
                         <div class="divider-text">OR</div>
-                        
+
                         <div class="glass-card slide-in-left mb-3" id="accidentReportCard">
                             <div class="card-header-modern">
                                 <div class="header-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
@@ -68,17 +73,21 @@
                                     </div>
                                     <div class="input-group-modern mb-3">
                                         <label>Description (optional)</label>
-                                        <textarea class="form-control-modern" id="accidentDescription" rows="2"></textarea>
+                                        <textarea class="form-control-modern" id="accidentDescription"
+                                            rows="2"></textarea>
                                     </div>
                                     <div style="display:flex; gap:8px;">
-                                        <button class="btn-modern btn-danger-modern flex-1 w-100" id="submitAccidentReport">Submit</button>
-                                        <button class="btn-modern btn-secondary-modern" id="cancelAccidentReport">Cancel</button>
+                                        <button class="btn-modern btn-danger-modern flex-1 w-100"
+                                            id="submitAccidentReport">Submit</button>
+                                        <button class="btn-modern btn-secondary-modern"
+                                            id="cancelAccidentReport">Cancel</button>
                                     </div>
-                                    <div class="mt-2" style="font-size:0.75rem; color:#888;">📍 <span id="accidentLocationPreview">–</span></div>
+                                    <div class="mt-2" style="font-size:0.75rem; color:#888;">📍 <span
+                                            id="accidentLocationPreview">–</span></div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="input-group-modern mb-3">
                             <label><i class="fas fa-car"></i> Your Vehicle Type</label>
                             <div class="select-wrapper">
@@ -92,48 +101,75 @@
                                 <i class="fas fa-chevron-down select-arrow"></i>
                             </div>
                         </div>
-                        
+
                         <form id="routeForm">
                             <div class="input-group-modern mb-3">
                                 <label><i class="fas fa-map-pin text-success"></i> Starting Point</label>
-                                <div class="select-wrapper">
-                                    <select class="form-select-modern" id="startLocation" required>
-                                        <option value="">Choose your starting point...</option>
-                                        {% for location in locations %}<option value="{{ location }}">{{ location }}</option>{% endfor %}
-                                    </select>
-                                    <i class="fas fa-chevron-down select-arrow"></i>
+                                <div class="d-flex gap-2">
+                                    <div class="flex-grow-1 position-relative">
+                                        <select class="form-select-modern" id="startLocation" required>
+                                            <option value="" disabled selected>Select starting point...</option>
+                                            {% for name in locations %}
+                                            <option value="{{ name }}">{{ name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <i class="fas fa-chevron-down select-arrow"></i>
+                                    </div>
                                 </div>
                             </div>
-                            
+
                             <div class="swap-button-container">
-                                <button type="button" class="swap-btn" id="swapLocations"><i class="fas fa-exchange-alt"></i></button>
+                                <button type="button" class="swap-btn" id="swapLocations"><i
+                                        class="fas fa-exchange-alt"></i></button>
                             </div>
-                            
+
                             <div class="input-group-modern mb-4">
                                 <label><i class="fas fa-flag-checkered text-danger"></i> Destination</label>
-                                <div class="select-wrapper">
+                                <div class="position-relative">
                                     <select class="form-select-modern" id="endLocation" required>
-                                        <option value="">Choose your destination...</option>
-                                        {% for location in locations %}<option value="{{ location }}">{{ location }}</option>{% endfor %}
+                                        <option value="" disabled selected>Select destination...</option>
+                                        {% for name in locations %}
+                                        <option value="{{ name }}">{{ name }}</option>
+                                        {% endfor %}
                                     </select>
                                     <i class="fas fa-chevron-down select-arrow"></i>
                                 </div>
                             </div>
-                            
+
+                            <div class="input-group-modern mb-4">
+                                <label><i class="fas fa-clock text-info"></i> Departure Time: <span
+                                        id="departureTimeLabel">Now</span></label>
+                                <input type="range" class="form-range-modern" id="departureSlider" min="0" max="12"
+                                    value="0" step="1">
+                                <div class="d-flex justify-content-between mt-1 text-muted" style="font-size: 0.75rem;">
+                                    <span>Now</span>
+                                    <span>+12h</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <button type="button" class="btn-modern btn-outline-modern w-100" id="heatmapToggle">
+                                    <i class="fas fa-layer-group"></i> Show Risk Heatmap
+                                </button>
+                            </div>
+
                             <button type="submit" class="btn-modern btn-primary-modern w-100" id="findRoutesBtn">
                                 <i class="fas fa-search"></i> Find Safe Routes
                             </button>
-                            
-                            <button type="button" class="btn-modern btn-secondary-modern w-100 mt-2" id="saveFavoriteBtn" style="display: none;">
+
+                            <button type="button" class="btn-modern btn-secondary-modern w-100 mt-2"
+                                id="saveFavoriteBtn" style="display: none;">
                                 <i class="fas fa-star"></i> Save as Favorite
                             </button>
-                            
-                            <button type="button" class="btn-modern btn-whatsapp-modern w-100 mt-2" id="shareWhatsAppBtn" style="display: none;" onclick="triggerShareWhatsApp()">
+
+                            <button type="button" class="btn-modern btn-whatsapp-modern w-100 mt-2"
+                                id="shareWhatsAppBtn" style="display: none;" onclick="triggerShareWhatsApp()">
                                 <i class="fab fa-whatsapp"></i> Share via WhatsApp
                             </button>
                         </form>
-                        
-                        <div id="loadingIndicator" class="loading-container" style="display: none; text-align: center; margin-top: 20px;">
+
+                        <div id="loadingIndicator" class="loading-container"
+                            style="display: none; text-align: center; margin-top: 20px;">
                             <div class="spinner-border text-primary" role="status"></div>
                             <p class="mt-2 text-muted">Analyzing routes with AI...</p>
                         </div>
@@ -165,6 +201,21 @@
                         <div class="card-body-modern" id="detailsContent"></div>
                     </div>
                 </div>
+
+                <div id="riskForecastSection" class="mt-3 slide-in-up" style="display: none;">
+                    <div class="glass-card">
+                        <div class="card-header-modern">
+                            <div class="header-icon bg-warning"><i class="fas fa-chart-area"></i></div>
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <h5>Risk Forecast (Next 12 Hours)</h5>
+                                <div id="optimalTimeBadge"></div>
+                            </div>
+                        </div>
+                        <div class="card-body-modern">
+                            <canvas id="riskChart" style="max-height: 300px; width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -178,10 +229,12 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" class="form-control" id="favoriteName" placeholder="e.g., Office, Gym, Home">
-                    <div class="mt-3">From: <strong id="modalStartLocation"></strong><br>To: <strong id="modalEndLocation"></strong></div>
+                    <div class="mt-3">From: <strong id="modalStartLocation"></strong><br>To: <strong
+                            id="modalEndLocation"></strong></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="confirmSaveFavorite" onclick="confirmSaveFavoriteAction()">Save Favorite</button>
+                    <button type="button" class="btn btn-primary" id="confirmSaveFavorite"
+                        onclick="confirmSaveFavoriteAction()">Save Favorite</button>
                 </div>
             </div>
         </div>
@@ -196,24 +249,33 @@
                 </div>
                 <div class="modal-body">
                     <div id="shareRouteOptions"></div>
-                    <div class="mt-3">From: <strong id="shareStartLocation"></strong><br>To: <strong id="shareEndLocation"></strong></div>
+                    <div class="mt-3">From: <strong id="shareStartLocation"></strong><br>To: <strong
+                            id="shareEndLocation"></strong></div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
-        <div id="successToast" class="toast text-white bg-success border-0" role="alert"><div class="toast-body" id="successToastBody"></div></div>
-        <div id="errorToast" class="toast text-white bg-danger border-0" role="alert"><div class="toast-body" id="errorToastBody"></div></div>
+        <div id="successToast" class="toast text-white bg-success border-0" role="alert">
+            <div class="toast-body" id="successToastBody"></div>
+        </div>
+        <div id="errorToast" class="toast text-white bg-danger border-0" role="alert">
+            <div class="toast-body" id="errorToastBody"></div>
+        </div>
     </div>
 
+
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-<script>
-        const preloadedRouteData = {{ preloaded_route | safe | default('null') }};
+    <script>
+        const preloadedRouteData = {{ preloaded_route | tojson | safe }};
         window.openFavoriteModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('saveFavoriteModal')).show();
         window.openShareModal = () => bootstrap.Modal.getOrCreateInstance(document.getElementById('shareWhatsAppModal')).show();
     </script>
 </body>
+
 </html>

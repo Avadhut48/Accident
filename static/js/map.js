@@ -9,7 +9,11 @@ let currentRoutes = [];
 let accidentReportMode = false;
 let tempAccidentMarker = null;
 let selectedAccidentLocation = null;
-let selectedRouteId = null; 
+let selectedRouteId = null;
+let userMarker = null;
+let geocoder = null;
+let riskChart = null;
+let riskHeatmapLayer = null;
 
 // ═══════════════════════════════════════════════════════
 // 🚗 VEHICLE CONFIG
@@ -35,6 +39,9 @@ function initMap() {
         maxZoom: 18
     }).addTo(map);
 
+    // Initialize Geocoder
+    geocoder = L.Control.Geocoder.nominatim();
+
     // Map Click Listener for Accident Reporting
     map.on('click', function (e) {
         if (!accidentReportMode) return;
@@ -54,6 +61,13 @@ function initMap() {
 }
 
 // ═══════════════════════════════════════════════════════
+// 🔍 SEARCH & GEOLOCATION
+// ═══════════════════════════════════════════════════════
+
+
+
+
+// ═══════════════════════════════════════════════════════
 // ROUTE FORM SUBMISSION
 // ═══════════════════════════════════════════════════════
 
@@ -69,8 +83,13 @@ document.getElementById('routeForm')?.addEventListener('submit', async (e) => {
         return;
     }
 
+    if (start === end) {
+        showToast('error', 'Starting point and destination cannot be the same');
+        return;
+    }
+
     document.getElementById('loadingIndicator').style.display = 'block';
-    
+
     // Reveal the Save and Share buttons
     const saveBtn = document.getElementById('saveFavoriteBtn');
     const shareBtn = document.getElementById('shareWhatsAppBtn');
@@ -82,14 +101,26 @@ document.getElementById('routeForm')?.addEventListener('submit', async (e) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                start,
-                end,
+                start: document.getElementById('startLocation').dataset.latlng ?
+                    JSON.parse(document.getElementById('startLocation').dataset.latlng) : start,
+                end: document.getElementById('endLocation').dataset.latlng ?
+                    JSON.parse(document.getElementById('endLocation').dataset.latlng) : end,
                 vehicle_type: vehicleType
             })
         });
 
         const data = await response.json();
-        currentRoutes = data.routes;
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to load routes');
+        }
+
+        currentRoutes = data.routes || [];
+
+        if (currentRoutes.length === 0) {
+            showToast('info', 'No routes found for this journey.');
+            return;
+        }
 
         displayRoutes(data.routes);
         displayRouteCards(data.routes);
@@ -101,11 +132,182 @@ document.getElementById('routeForm')?.addEventListener('submit', async (e) => {
         }
 
     } catch (err) {
-        showToast('error', 'Failed to load routes');
+        showToast('error', err.message || 'Failed to load routes');
     } finally {
         document.getElementById('loadingIndicator').style.display = 'none';
     }
+
+    // New: Fetch Time-Based Risk Forecast
+    fetchTimeRisk(start, end, vehicleType);
 });
+
+// ═══════════════════════════════════════════════════════
+// TIME-BASED RISK FORECAST (CHART.JS)
+// ═══════════════════════════════════════════════════════
+
+async function fetchTimeRisk(start, end, vehicleType) {
+    try {
+        const response = await fetch('/api/time-risk', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ start, end, vehicle_type: vehicleType })
+        });
+        const data = await response.json();
+        if (data.predictions) {
+            renderRiskChart(data.predictions, data.optimal_time);
+            document.getElementById('riskForecastSection').style.display = 'block';
+        }
+    } catch (err) {
+        console.error('Failed to fetch time-based risk:', err);
+    }
+}
+
+function renderRiskChart(predictions, optimal) {
+    const ctx = document.getElementById('riskChart').getContext('2d');
+
+    if (riskChart) {
+        riskChart.destroy();
+    }
+
+    const labels = predictions.map(p => p.hour);
+    const scores = predictions.map(p => p.risk_score);
+
+    // Determine chart colors based on risk levels
+    const bgGradient = ctx.createLinearGradient(0, 0, 0, 300);
+    bgGradient.addColorStop(0, 'rgba(56, 239, 125, 0.4)');
+    bgGradient.addColorStop(1, 'rgba(56, 239, 125, 0.0)');
+
+    riskChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Route Risk Score (%)',
+                data: scores,
+                borderColor: '#38ef7d',
+                backgroundColor: bgGradient,
+                fill: true,
+                tension: 0.4,
+                borderWidth: 3,
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#38ef7d',
+                pointHoverRadius: 6,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(20, 20, 40, 0.9)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    borderWidth: 1,
+                    displayColors: false,
+                    callbacks: {
+                        label: (context) => `Risk: ${context.parsed.y}%`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: 'rgba(255, 255, 255, 0.7)', font: { family: 'Poppins' } }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { color: 'rgba(255, 255, 255, 0.7)', font: { family: 'Poppins' } }
+                }
+            }
+        }
+    });
+
+    // Update optimal time badge
+    const badge = document.getElementById('optimalTimeBadge');
+    if (optimal.offset === 0) {
+        badge.innerHTML = `<span class="optimal-departure-badge bg-success">Optimal: Leave Now!</span>`;
+    } else {
+        const riskDiff = (predictions[0].risk_score - optimal.risk_score).toFixed(0);
+        badge.innerHTML = `<span class="optimal-departure-badge" style="background:var(--primary-gradient)">
+            Optimal: Leave at ${optimal.hour} (${riskDiff}% safer)</span>`;
+    }
+}
+
+// Handle departure range slider
+document.getElementById('departureSlider')?.addEventListener('input', (e) => {
+    const val = parseInt(e.target.value);
+    const label = document.getElementById('departureTimeLabel');
+    if (val === 0) {
+        label.textContent = 'Now';
+    } else {
+        const now = new Date();
+        now.setHours(now.getHours() + val);
+        label.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+});
+
+// ═══════════════════════════════════════════════════════
+// 🌡️ ROUTE RISK HEATMAP
+// ═══════════════════════════════════════════════════════
+
+async function toggleRiskHeatmap() {
+    const btn = document.getElementById('heatmapToggle');
+
+    if (riskHeatmapLayer && map.hasLayer(riskHeatmapLayer)) {
+        map.removeLayer(riskHeatmapLayer);
+        btn.innerHTML = '<i class="fas fa-layer-group"></i> Show Risk Heatmap';
+        btn.classList.remove('heatmap-active');
+        return;
+    }
+
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading Heatmap...';
+
+    if (!riskHeatmapLayer) {
+        try {
+            const resp = await fetch('/api/heatmap-data');
+            const data = await resp.json();
+
+            if (data.success) {
+                riskHeatmapLayer = L.featureGroup();
+
+                data.segments.forEach(seg => {
+                    const score = seg.risk_score;
+                    // Color gradient: Green (0) -> Yellow (50) -> Red (100)
+                    const color = score < 30 ? '#28a745' : (score < 60 ? '#ffc107' : '#dc3545');
+
+                    const poly = L.polyline(seg.coords, {
+                        color: color,
+                        weight: 5,
+                        opacity: 0.7,
+                        lineCap: 'round'
+                    });
+
+                    poly.bindPopup(`<strong>${seg.name}</strong><br>Risk Score: ${score}%`);
+                    poly.on('mouseover', function () { this.setStyle({ opacity: 1, weight: 8 }); });
+                    poly.on('mouseout', function () { this.setStyle({ opacity: 0.7, weight: 5 }); });
+
+                    riskHeatmapLayer.addLayer(poly);
+                });
+            }
+        } catch (e) {
+            console.error('Heatmap load failed:', e);
+            showToast('error', 'Failed to load heatmap data');
+            btn.innerHTML = '<i class="fas fa-layer-group"></i> Show Risk Heatmap';
+            return;
+        }
+    }
+
+    riskHeatmapLayer.addTo(map);
+    btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Risk Heatmap';
+    btn.classList.add('heatmap-active');
+}
+
+document.getElementById('heatmapToggle')?.addEventListener('click', toggleRiskHeatmap);
 
 // ═══════════════════════════════════════════════════════
 // DISPLAY ROUTES ON MAP & UI
@@ -118,8 +320,8 @@ function displayRoutes(routes) {
     routes.forEach(route => {
         const color =
             route.risk_level === 'low' ? '#28a745' :
-            route.risk_level === 'medium' ? '#ffc107' :
-            '#dc3545';
+                route.risk_level === 'medium' ? '#ffc107' :
+                    '#dc3545';
 
         const polyline = L.polyline(route.waypoints, {
             color: color,
@@ -140,7 +342,7 @@ function displayRoutes(routes) {
 
 function selectRoute(routeId) {
     selectedRouteId = routeId;
-    
+
     // Update route cards UI
     const allCards = document.querySelectorAll('.route-card');
     allCards.forEach(card => {
@@ -151,7 +353,7 @@ function selectRoute(routeId) {
             card.classList.remove('route-card-selected');
         }
     });
-    
+
     // Update map polylines
     routeLayers.forEach(layer => {
         if (layer.options && layer.options.routeId === routeId) {
@@ -174,11 +376,22 @@ function displayRouteCards(routes) {
 
         const color =
             route.risk_level === 'low' ? '#28a745' :
-            route.risk_level === 'medium' ? '#ffc107' :
-            '#dc3545';
+                route.risk_level === 'medium' ? '#ffc107' :
+                    '#dc3545';
 
-        const selectedBadge = route.recommended ? 
+        const selectedBadge = route.recommended ?
             '<span class="badge bg-success">Recommended</span>' : '';
+
+        const weatherHtml = route.weather_data ? `
+            <div class="weather-mini mt-1" style="font-size: 0.75rem; color: #aaa;">
+                <i class="fas fa-cloud-sun"></i> ${route.weather_data.weather_category} 
+                | <i class="fas fa-droplet"></i> ${route.weather_data.humidity}%
+            </div>` : '';
+
+        const trafficHtml = route.traffic_delay ? `
+            <div class="traffic-mini mt-1" style="font-size: 0.75rem; color: #ff9800;">
+                <i class="fas fa-traffic-light"></i> Traffic Delay: +${route.traffic_delay} min
+            </div>` : '';
 
         card.innerHTML = `
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -190,6 +403,8 @@ function displayRouteCards(routes) {
                 <span><i class="fas fa-clock"></i> ${route.time_minutes} min</span>
                 <span style="color:${color}; font-weight:bold;"><i class="fas fa-shield-alt"></i> Risk: ${route.risk_score}%</span>
             </div>
+            ${weatherHtml}
+            ${trafficHtml}
         `;
 
         card.onclick = () => {
@@ -206,7 +421,18 @@ function displayRouteCards(routes) {
 function showRouteDetails(route) {
     const container = document.getElementById('detailsContent');
     const color = route.risk_level === 'low' ? '#28a745' : route.risk_level === 'medium' ? '#ffc107' : '#dc3545';
-    
+
+    const weatherInfo = route.weather_data ? `
+        <li class="list-group-item bg-transparent text-white border-secondary">
+            <i class="fas fa-cloud-sun text-warning"></i> Weather: <strong>${route.weather_data.weather_category}</strong> 
+            (Rain: ${route.weather_data.rain_mm}mm, Hum: ${route.weather_data.humidity}%)
+        </li>` : '';
+
+    const trafficInfo = route.traffic_delay ? `
+        <li class="list-group-item bg-transparent text-white border-secondary">
+            <i class="fas fa-traffic-light text-danger"></i> Traffic Delay: <strong>+${route.traffic_delay} mins</strong>
+        </li>` : '';
+
     container.innerHTML = `
         <div class="alert ${route.recommended ? 'alert-success' : 'alert-info'} mb-3" style="border-left: 4px solid ${color};">
             <strong>${route.name}</strong> - Currently Selected Route
@@ -214,7 +440,9 @@ function showRouteDetails(route) {
         <ul class="list-group list-group-flush bg-transparent">
             <li class="list-group-item bg-transparent text-white border-secondary"><i class="fas fa-road text-primary"></i> Distance: <strong>${route.distance_km} km</strong></li>
             <li class="list-group-item bg-transparent text-white border-secondary"><i class="fas fa-clock text-info"></i> Time: <strong>${route.time_minutes} mins</strong></li>
+            ${trafficInfo}
             <li class="list-group-item bg-transparent text-white border-secondary"><i class="fas fa-exclamation-triangle text-warning"></i> Risk Score: <strong style="color:${color}">${route.risk_score}% (${route.risk_level.toUpperCase()})</strong></li>
+            ${weatherInfo}
         </ul>
     `;
 
@@ -262,15 +490,15 @@ document.getElementById('submitAccidentReport')?.addEventListener('click', async
 function cancelAccidentReport() {
     accidentReportMode = false;
     selectedAccidentLocation = null;
-    
+
     if (tempAccidentMarker) {
         map.removeLayer(tempAccidentMarker);
         tempAccidentMarker = null;
     }
-    
+
     const form = document.getElementById('accidentReportForm');
     const desc = document.getElementById('accidentDescription');
-    
+
     if (form) form.style.display = 'none';
     if (desc) desc.value = '';
 }
@@ -281,15 +509,15 @@ async function loadActiveAccidents() {
     try {
         const resp = await fetch('/api/accidents/active');
         const data = await resp.json();
-        
+
         if (data.success) {
             // Remove old markers
             accidentMarkers.forEach(m => map.removeLayer(m));
             accidentMarkers = [];
-            
+
             data.accidents.forEach(acc => {
                 const color = acc.severity === 'minor' ? '#28a745' : acc.severity === 'moderate' ? '#ffc107' : '#dc3545';
-                
+
                 // Create pulsing marker (Requires CSS injected below)
                 const icon = L.divIcon({
                     className: 'accident-marker-container',
@@ -302,7 +530,7 @@ async function loadActiveAccidents() {
                     iconSize: [32, 32],
                     iconAnchor: [16, 16]
                 });
-                
+
                 const marker = L.marker([acc.latitude, acc.longitude], { icon: icon }).addTo(map);
                 marker.bindPopup(`<b>${acc.severity.toUpperCase()} Accident</b><br>${acc.description || 'Watch out for delays.'}`);
                 accidentMarkers.push(marker);
@@ -322,13 +550,13 @@ async function loadFavorites() {
     try {
         const response = await fetch('/api/favorites');
         const data = await response.json();
-        
+
         if (data.success && data.favorites) {
             const container = document.getElementById('favoritesContainer');
             if (!container) return;
-            
+
             container.innerHTML = '';
-            
+
             data.favorites.forEach(fav => {
                 const btn = document.createElement('button');
                 btn.className = 'btn btn-sm btn-outline-secondary m-1';
@@ -337,7 +565,7 @@ async function loadFavorites() {
                     e.preventDefault();
                     const startInput = document.getElementById('startLocation');
                     const endInput = document.getElementById('endLocation');
-                    
+
                     if (!startInput.value) {
                         startInput.value = fav.locationName;
                     } else {
@@ -353,54 +581,54 @@ async function loadFavorites() {
 }
 
 // 2. Open Save Favorite Modal
-window.triggerSaveFavorite = function() {
+window.triggerSaveFavorite = function () {
     const start = document.getElementById('startLocation').value;
     const end = document.getElementById('endLocation').value;
-    
+
     if (!start || !end) return showToast('error', 'Please calculate a route first.');
 
     document.getElementById('modalStartLocation').textContent = start;
     document.getElementById('modalEndLocation').textContent = end;
-    
+
     const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('saveFavoriteModal'));
     modal.show();
 };
 
 // 3. Save Favorite Action
-window.confirmSaveFavoriteAction = async function() {
+window.confirmSaveFavoriteAction = async function () {
     const name = document.getElementById('favoriteName').value;
     const end = document.getElementById('endLocation').value;
-    
+
     if (!name) return showToast('error', 'Enter a name for this favorite');
-    
+
     try {
         const getResp = await fetch('/api/favorites');
         let favs = (await getResp.json()).favorites || [];
         favs.push({ id: 'fav_' + Date.now(), name: '⭐ ' + name, locationName: end });
-        
-        await fetch('/api/favorites', { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ favorites: favs }) 
+
+        await fetch('/api/favorites', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ favorites: favs })
         });
-        
+
         showToast('success', 'Favorite saved successfully!');
-        document.getElementById('favoriteName').value = ''; 
-        
+        document.getElementById('favoriteName').value = '';
+
         bootstrap.Modal.getInstance(document.getElementById('saveFavoriteModal')).hide();
         loadFavorites();
-    } catch (err) { 
-        showToast('error', 'Failed to save favorite'); 
+    } catch (err) {
+        showToast('error', 'Failed to save favorite');
     }
 };
 
 // 4. Open WhatsApp Share Modal
-window.triggerShareWhatsApp = function() {
+window.triggerShareWhatsApp = function () {
     if (!selectedRouteId) return showToast('error', 'Select a route to share first.');
-    
+
     document.getElementById('shareStartLocation').textContent = document.getElementById('startLocation').value;
     document.getElementById('shareEndLocation').textContent = document.getElementById('endLocation').value;
-    
+
     const route = currentRoutes.find(r => r.id === selectedRouteId);
     document.getElementById('shareRouteOptions').innerHTML = `
         <div class="alert alert-info">Sharing: <strong>${route.name}</strong></div>
@@ -408,13 +636,13 @@ window.triggerShareWhatsApp = function() {
             <i class="fab fa-whatsapp"></i> Send Now
         </button>
     `;
-    
+
     const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('shareWhatsAppModal'));
     modal.show();
 };
 
 // 5. Execute WhatsApp Share (with Popup Bypass)
-window.executeShare = async function() {
+window.executeShare = async function () {
     const route = currentRoutes.find(r => r.id === selectedRouteId);
     if (!route) return;
 
@@ -431,18 +659,18 @@ window.executeShare = async function() {
     }
 
     try {
-        const response = await fetch('/api/share-route', { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify(routeData) 
+        const response = await fetch('/api/share-route', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(routeData)
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             const shareUrl = `${window.location.origin}/route/${data.route_id}`;
             const text = `🚗 I'm taking the "${route.name}" from ${routeData.start} to ${routeData.end}.\nRisk level: ${route.risk_level.toUpperCase()}.\nTrack my safe route here: ${shareUrl}`;
-            
+
             if (navigator.share && window.isSecureContext) {
                 try {
                     await navigator.share({ title: 'Safe Route', text: text, url: shareUrl });
@@ -460,7 +688,7 @@ window.executeShare = async function() {
     } catch (err) {
         console.error('Error sharing route:', err);
         showToast('error', 'Could not generate share link.');
-        if (fallbackPopup) fallbackPopup.close(); 
+        if (fallbackPopup) fallbackPopup.close();
     }
 };
 
@@ -471,7 +699,7 @@ window.executeShare = async function() {
 function showToast(type, message) {
     const toastBody = document.getElementById(type + 'ToastBody');
     if (toastBody) toastBody.textContent = message;
-    
+
     const toastEl = document.getElementById(type + 'Toast');
     if (toastEl) {
         const toast = new bootstrap.Toast(toastEl);
@@ -522,10 +750,10 @@ setTimeout(() => {
 window.addEventListener('load', () => {
     initMap();
     loadActiveAccidents();
-    loadFavorites(); 
-    
+    loadFavorites();
+
     // Auto-refresh accidents every 60 seconds
-    setInterval(loadActiveAccidents, 60000); 
+    setInterval(loadActiveAccidents, 60000);
 
     // Handle shared routes (hydration)
     if (typeof preloadedRouteData !== 'undefined' && preloadedRouteData) {
@@ -534,7 +762,7 @@ window.addEventListener('load', () => {
         if (document.getElementById('vehicleType')) {
             document.getElementById('vehicleType').value = preloadedRouteData.vehicle_type;
         }
-        
+
         // Programmatically submit the form
         const routeForm = document.getElementById('routeForm');
         if (routeForm) {
