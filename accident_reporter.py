@@ -11,7 +11,29 @@ class AccidentReporter:
     def __init__(self, db_path: str = "data/mumbai_safe_route.db"):
         self.db_path = db_path
         self.expiry_hours = 2
-        # Database should already be initialized by init_db.py
+        self._init_db()
+        
+    def _init_db(self):
+        """Initialize the database table if it doesn't exist."""
+        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS accidents (
+            id TEXT PRIMARY KEY,
+            timestamp TEXT,
+            latitude REAL,
+            longitude REAL,
+            severity TEXT,
+            description TEXT,
+            upvotes INTEGER DEFAULT 0,
+            downvotes INTEGER DEFAULT 0,
+            verified BOOLEAN DEFAULT 0,
+            expires_at TEXT
+        )
+        ''')
+        conn.commit()
+        conn.close()
     
     def _get_connection(self):
         return sqlite3.connect(self.db_path)

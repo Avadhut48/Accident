@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mumbai Safe Route Navigator 🚗</title>
+    <title>Safe Route Navigator 🚗</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -22,8 +22,8 @@
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <div class="brand-icon"><i class="fas fa-route"></i></div>
                 <div class="ms-3">
-                    <div class="brand-title">Mumbai Safe Route</div>
-                    <div class="brand-subtitle">AI-Powered Navigation</div>
+                    <div class="brand-title">Safe Route Navigator</div>
+                    <div class="brand-subtitle">AI-Powered Multi-City Navigation</div>
                 </div>
             </a>
             <div class="navbar-stats d-none d-lg-flex">
@@ -35,6 +35,36 @@
     <div class="container-fluid main-container">
         <div class="row g-3">
             <div class="col-lg-3">
+                <!-- ═══ CITY SELECTOR CARD ═══ -->
+                <div class="glass-card slide-in-left mb-3">
+                    <div class="card-header-modern">
+                        <div class="header-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h5>Select City</h5>
+                    </div>
+                    <div class="card-body-modern">
+                        <div class="input-group-modern mb-1">
+                            <label for="citySelector">
+                                <i class="fas fa-map-marked-alt text-primary"></i>
+                                Choose Your City
+                            </label>
+                            <div class="select-wrapper">
+                                <select class="form-select-modern" id="citySelector">
+                                    <option value="mumbai" selected>🏙️ Mumbai</option>
+                                    <option value="pune">🏛️ Pune</option>
+                                    <option value="delhi">🏛️ Delhi</option>
+                                    <option value="bangalore">🏢 Bangalore</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+                        <div id="cityStats" style="font-size:0.75rem; color:#aaa; margin-top:8px;">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="cityLocationCount">Loading...</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="glass-card slide-in-left">
                     <div class="card-header-modern">
                         <div class="header-icon"><i class="fas fa-map-marked-alt"></i></div>

@@ -14,6 +14,7 @@ let userMarker = null;
 let geocoder = null;
 let riskChart = null;
 let riskHeatmapLayer = null;
+let currentCity = 'mumbai';
 
 // ═══════════════════════════════════════════════════════
 // 🚗 VEHICLE CONFIG
@@ -32,12 +33,36 @@ const VEHICLE_INFO = {
 // ═══════════════════════════════════════════════════════
 
 function initMap() {
-    map = L.map('map').setView([19.0760, 72.8777], 11);
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    // 🎨 BASE TILES
+    const darkTile = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap contributors © CARTO',
         maxZoom: 18
-    }).addTo(map);
+    });
+
+    const streetTile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+    });
+
+    const satelliteTile = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EBP, and the GIS User Community'
+    });
+
+    // Default to Mumbai center
+    map = L.map('map', {
+        center: [19.0760, 72.8777],
+        zoom: 11,
+        layers: [darkTile]
+    });
+
+    // 🛠️ LAYER CONTROL
+    const baseMaps = {
+        "Dark Mode": darkTile,
+        "Standard Streets": streetTile,
+        "Satellite View": satelliteTile
+    };
+
+    L.control.layers(baseMaps, null, { position: 'bottomright' }).addTo(map);
 
     // Initialize Geocoder
     geocoder = L.Control.Geocoder.nominatim();
@@ -57,6 +82,106 @@ function initMap() {
         document.getElementById('accidentReportForm').style.display = 'block';
         document.getElementById('accidentLocationPreview').textContent =
             `${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)}`;
+    });
+
+    // Initialize city selector
+    initCitySelector();
+}
+
+async function initCitySelector() {
+    const selector = document.getElementById('citySelector');
+    if (!selector) return;
+
+    selector.addEventListener('change', async (e) => {
+        const cityId = e.target.value;
+        await switchCity(cityId);
+    });
+
+    // Load initial city locations
+    await loadLocationsForCity(currentCity);
+}
+
+async function switchCity(cityId) {
+    currentCity = cityId;
+
+    // Clear existing map data
+    routeLayers.forEach(l => map.removeLayer(l));
+    routeLayers = [];
+    accidentMarkers.forEach(m => map.removeLayer(m));
+    accidentMarkers = [];
+    if (riskHeatmapLayer) {
+        map.removeLayer(riskHeatmapLayer);
+        riskHeatmapLayer = null;
+        const heatmapBtn = document.getElementById('heatmapToggle');
+        if (heatmapBtn) {
+            heatmapBtn.innerHTML = '<i class="fas fa-layer-group"></i> Show Risk Heatmap';
+            heatmapBtn.classList.remove('heatmap-active');
+        }
+    }
+
+    // Reset route results
+    document.getElementById('routeResults').style.display = 'none';
+    document.getElementById('routeDetails').style.display = 'none';
+    document.getElementById('riskForecastSection').style.display = 'none';
+
+    try {
+        const response = await fetch(`/api/locations?city=${cityId}`);
+        const data = await response.json();
+
+        if (data.success) {
+            // Update map view
+            map.setView(data.center, data.zoom || 11);
+
+            // Update dropdowns
+            updateLocationDropdowns(data.locations);
+
+            // Update location count stat
+            const count = Object.keys(data.locations).length;
+            document.getElementById('cityLocationCount').textContent = `${count} locations available`;
+
+            // Reload accidents for this city
+            loadActiveAccidents();
+
+            showToast('success', `Switched to ${data.city_name}`);
+        }
+    } catch (err) {
+        console.error('Failed to switch city:', err);
+        showToast('error', 'Failed to load city data');
+    }
+}
+
+async function loadLocationsForCity(cityId) {
+    try {
+        const response = await fetch(`/api/locations?city=${cityId}`);
+        const data = await response.json();
+        if (data.success) {
+            updateLocationDropdowns(data.locations);
+            const count = Object.keys(data.locations).length;
+            document.getElementById('cityLocationCount').textContent = `${count} locations available`;
+        }
+    } catch (err) {
+        console.error('Failed to load locations:', err);
+    }
+}
+
+function updateLocationDropdowns(locations) {
+    const startSelect = document.getElementById('startLocation');
+    const endSelect = document.getElementById('endLocation');
+
+    if (!startSelect || !endSelect) return;
+
+    // Clear and add placeholder
+    const placeholder = '<option value="" disabled selected>Select point...</option>';
+    startSelect.innerHTML = placeholder;
+    endSelect.innerHTML = placeholder;
+
+    // Add new locations
+    Object.keys(locations).sort().forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = name;
+        startSelect.appendChild(opt.cloneNode(true));
+        endSelect.appendChild(opt);
     });
 }
 
@@ -105,7 +230,8 @@ document.getElementById('routeForm')?.addEventListener('submit', async (e) => {
                     JSON.parse(document.getElementById('startLocation').dataset.latlng) : start,
                 end: document.getElementById('endLocation').dataset.latlng ?
                     JSON.parse(document.getElementById('endLocation').dataset.latlng) : end,
-                vehicle_type: vehicleType
+                vehicle_type: vehicleType,
+                city: currentCity
             })
         });
 
@@ -150,7 +276,7 @@ async function fetchTimeRisk(start, end, vehicleType) {
         const response = await fetch('/api/time-risk', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ start, end, vehicle_type: vehicleType })
+            body: JSON.stringify({ start, end, vehicle_type: vehicleType, city: currentCity })
         });
         const data = await response.json();
         if (data.predictions) {
@@ -269,7 +395,7 @@ async function toggleRiskHeatmap() {
 
     if (!riskHeatmapLayer) {
         try {
-            const resp = await fetch('/api/heatmap-data');
+            const resp = await fetch(`/api/heatmap-data?city=${currentCity}`);
             const data = await resp.json();
 
             if (data.success) {
@@ -313,31 +439,58 @@ document.getElementById('heatmapToggle')?.addEventListener('click', toggleRiskHe
 // DISPLAY ROUTES ON MAP & UI
 // ═══════════════════════════════════════════════════════
 
+function getRiskColor(score) {
+    if (score <= 35) return '#28a745'; // Green
+    if (score <= 65) return '#ffc107'; // Yellow
+    return '#dc3545'; // Red
+}
+
 function displayRoutes(routes) {
     routeLayers.forEach(l => map.removeLayer(l));
     routeLayers = [];
 
     routes.forEach(route => {
-        const color =
-            route.risk_level === 'low' ? '#28a745' :
-                route.risk_level === 'medium' ? '#ffc107' :
-                    '#dc3545';
+        const routeGroup = L.featureGroup().addTo(map);
 
-        const polyline = L.polyline(route.waypoints, {
-            color: color,
-            weight: route.recommended ? 6 : 4,
-            routeId: route.id
-        }).addTo(map);
+        // Draw individual segments with different colors
+        for (let i = 0; i < route.waypoints.length - 1; i++) {
+            const segmentCoords = [route.waypoints[i], route.waypoints[i + 1]];
+            const segmentRisk = route.risk_details[i] ? route.risk_details[i].risk : route.risk_score;
+            const roadName = route.risk_details[i] ? route.risk_details[i].road : "Unknown Segment";
 
-        polyline.on('click', () => {
+            const poly = L.polyline(segmentCoords, {
+                color: getRiskColor(segmentRisk),
+                weight: route.selected ? 8 : 5,
+                opacity: route.selected ? 1.0 : 0.7,
+                smoothFactor: 1
+            }).addTo(routeGroup);
+
+            // Add tooltip with risk info
+            poly.bindTooltip(`
+                <div class="risk-tooltip">
+                    <strong>${roadName}</strong><br>
+                    <span>Risk Level: ${segmentRisk}%</span>
+                </div>
+            `, { sticky: true });
+
+            poly.on('click', (e) => {
+                L.DomEvent.stopPropagation(e);
+                selectRoute(route.id);
+                showRouteDetails(route);
+            });
+        }
+
+        routeGroup.on('click', () => {
             selectRoute(route.id);
             showRouteDetails(route);
         });
 
-        routeLayers.push(polyline);
+        routeLayers.push(routeGroup);
     });
 
-    map.fitBounds(routes[0].waypoints);
+    if (routes.length > 0) {
+        map.fitBounds(routes[0].waypoints, { padding: [50, 50] });
+    }
 }
 
 function selectRoute(routeId) {
@@ -475,7 +628,8 @@ document.getElementById('submitAccidentReport')?.addEventListener('click', async
                 latitude: selectedAccidentLocation.lat,
                 longitude: selectedAccidentLocation.lng,
                 severity: severity,
-                description: desc
+                description: desc,
+                city: currentCity
             })
         });
 
@@ -507,7 +661,7 @@ document.getElementById('cancelAccidentReport')?.addEventListener('click', cance
 
 async function loadActiveAccidents() {
     try {
-        const resp = await fetch('/api/accidents/active');
+        const resp = await fetch(`/api/accidents/active?city=${currentCity}`);
         const data = await resp.json();
 
         if (data.success) {

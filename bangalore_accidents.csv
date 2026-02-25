@@ -1,0 +1,1001 @@
+id,latitude,longitude,road_name,severity,date,time,datetime,weather,vehicle_type,road_risk_level
+1,12.918265,77.60701,Sarjapur Road,Minor,2023-07-17,19:26,2023-07-17 19:26:22,Clear,Car,medium
+2,12.855156,77.662611,Hosur Road,Minor,2023-04-17,12:31,2023-04-17 12:31:22,Rain,Bike,high
+3,12.902191,77.64133,Outer Ring Road,Moderate,2024-12-15,20:54,2024-12-15 20:54:22,Clear,Car,high
+4,12.934663,77.60265,Bannerghatta Road,Minor,2023-11-06,11:06,2023-11-06 11:06:22,Clear,Bike,medium
+5,13.092778,77.600884,Airport Road,Moderate,2025-04-20,19:56,2025-04-20 19:56:22,Fog,Bike,medium
+6,12.922179,77.609551,Sarjapur Road,Moderate,2025-11-16,08:36,2025-11-16 08:36:22,Clear,Bike,medium
+7,12.847907,77.65058,Hosur Road,Minor,2025-07-04,20:00,2025-07-04 20:00:22,Clear,Bike,high
+8,12.938892,77.619771,Koramangala 80ft Road,Moderate,2024-09-23,06:52,2024-09-23 06:52:22,Heavy Rain,Truck,low
+9,12.924501,77.602508,Sarjapur Road,Moderate,2025-05-05,11:41,2025-05-05 11:41:22,Clear,Car,medium
+10,12.916556,77.636047,Outer Ring Road,Severe,2024-04-05,06:44,2024-04-05 06:44:22,Fog,Auto,high
+11,12.984269,77.644198,Indiranagar 100ft Road,Severe,2023-09-04,12:49,2023-09-04 12:49:22,Clear,Auto,low
+12,12.969443,77.610968,Old Madras Road,Moderate,2024-08-24,22:57,2024-08-24 22:57:22,Heavy Rain,Car,high
+13,12.93022,77.627773,Koramangala 80ft Road,Minor,2025-12-09,23:58,2025-12-09 23:58:22,Rain,Bus,low
+14,12.986515,77.633449,Indiranagar 100ft Road,Minor,2023-12-10,07:25,2023-12-10 07:25:22,Clear,Auto,low
+15,12.974872,77.74234,Whitefield Main Road,Moderate,2024-10-20,15:59,2024-10-20 15:59:22,Clear,Truck,high
+16,12.905229,77.645367,Outer Ring Road,Severe,2025-10-02,11:34,2025-10-02 11:34:22,Clear,Bike,high
+17,12.84463,77.665873,Hosur Road,Moderate,2025-09-18,19:12,2025-09-18 19:12:22,Rain,Auto,high
+18,12.908629,77.612032,Sarjapur Road,Fatal,2023-05-04,21:36,2023-05-04 21:36:22,Rain,Car,medium
+19,12.838212,77.65837,Hosur Road,Severe,2025-08-27,09:17,2025-08-27 09:17:22,Rain,Car,high
+20,12.973465,77.648781,Indiranagar 100ft Road,Minor,2025-11-15,07:59,2025-11-15 07:59:22,Clear,Auto,low
+21,12.928036,77.593615,Bannerghatta Road,Moderate,2025-11-15,18:38,2025-11-15 18:38:22,Clear,Truck,medium
+22,12.910639,77.617247,Sarjapur Road,Moderate,2023-07-14,13:32,2023-07-14 13:32:22,Fog,Car,medium
+23,12.941783,77.621872,Koramangala 80ft Road,Minor,2024-12-24,18:08,2024-12-24 18:08:22,Clear,Auto,low
+24,12.961648,77.691975,Marathahalli Bridge Road,Severe,2025-02-02,08:28,2025-02-02 08:28:22,Clear,Bus,high
+25,12.975746,77.745384,Whitefield Main Road,Minor,2023-04-12,10:13,2023-04-12 10:13:22,Clear,Truck,high
+26,12.908417,77.606828,Sarjapur Road,Severe,2025-01-02,10:05,2025-01-02 10:05:22,Clear,Truck,medium
+27,12.838521,77.655101,Hosur Road,Minor,2026-02-23,17:11,2026-02-23 17:11:22,Rain,Truck,high
+28,12.914824,77.64284,Outer Ring Road,Severe,2025-03-01,07:51,2025-03-01 07:51:22,Heavy Rain,Bus,high
+29,12.912469,77.611849,Sarjapur Road,Minor,2023-03-31,16:09,2023-03-31 16:09:22,Heavy Rain,Bike,medium
+30,13.10257,77.587862,Airport Road,Minor,2023-05-24,03:08,2023-05-24 03:08:22,Clear,Bike,medium
+31,12.851311,77.655605,Hosur Road,Moderate,2025-04-13,07:55,2025-04-13 07:55:22,Clear,Bike,high
+32,12.933724,77.625011,Koramangala 80ft Road,Severe,2024-05-29,19:34,2024-05-29 19:34:22,Clear,Truck,low
+33,12.977106,77.603935,Old Madras Road,Minor,2024-06-15,18:56,2024-06-15 18:56:22,Rain,Bus,high
+34,12.917429,77.650519,Outer Ring Road,Minor,2025-11-02,13:55,2025-11-02 13:55:22,Clear,Bus,high
+35,12.926186,77.606359,Sarjapur Road,Minor,2025-06-14,07:29,2025-06-14 07:29:22,Heavy Rain,Truck,medium
+36,12.843617,77.666511,Hosur Road,Moderate,2025-07-28,16:47,2025-07-28 16:47:22,Heavy Rain,Bike,high
+37,12.984841,77.593812,Old Madras Road,Minor,2023-10-26,07:17,2023-10-26 07:17:22,Clear,Bus,high
+38,12.96902,77.751218,Whitefield Main Road,Minor,2024-10-23,05:04,2024-10-23 05:04:22,Rain,Bus,high
+39,12.9751,77.605844,Old Madras Road,Moderate,2023-07-01,17:21,2023-07-01 17:21:22,Fog,Car,high
+40,12.944656,77.627472,Koramangala 80ft Road,Minor,2024-03-21,14:19,2024-03-21 14:19:22,Clear,Bike,low
+41,12.978329,77.594443,Old Madras Road,Minor,2023-04-29,13:45,2023-04-29 13:45:22,Clear,Bus,high
+42,12.961828,77.749447,Whitefield Main Road,Moderate,2024-01-09,10:45,2024-01-09 10:45:22,Rain,Truck,high
+43,12.837881,77.668933,Hosur Road,Fatal,2023-05-23,21:29,2023-05-23 21:29:22,Rain,Bike,high
+44,13.09819,77.588635,Airport Road,Fatal,2024-05-06,11:48,2024-05-06 11:48:22,Rain,Bike,medium
+45,12.850194,77.662584,Hosur Road,Fatal,2025-01-19,03:36,2025-01-19 03:36:22,Fog,Auto,high
+46,12.983667,77.638593,Indiranagar 100ft Road,Severe,2024-10-27,19:11,2024-10-27 19:11:22,Rain,Auto,low
+47,12.977228,77.602886,Old Madras Road,Moderate,2024-11-28,18:59,2024-11-28 18:59:22,Clear,Auto,high
+48,13.099747,77.593219,Airport Road,Severe,2025-10-27,17:00,2025-10-27 17:00:22,Rain,Bus,medium
+49,12.93731,77.630375,Koramangala 80ft Road,Severe,2025-01-31,19:04,2025-01-31 19:04:22,Clear,Bus,low
+50,12.843674,77.654634,Hosur Road,Fatal,2023-09-12,09:23,2023-09-12 09:23:22,Clear,Bike,high
+51,12.91394,77.647518,Outer Ring Road,Minor,2023-05-18,17:16,2023-05-18 17:16:22,Clear,Car,high
+52,12.851925,77.652707,Hosur Road,Minor,2024-02-23,07:50,2024-02-23 07:50:22,Clear,Bike,high
+53,12.918358,77.618395,Sarjapur Road,Minor,2024-12-08,18:59,2024-12-08 18:59:22,Fog,Bike,medium
+54,12.97907,77.753936,Whitefield Main Road,Minor,2023-06-10,08:01,2023-06-10 08:01:22,Clear,Bike,high
+55,12.854814,77.670107,Hosur Road,Moderate,2024-06-01,18:01,2024-06-01 18:01:22,Rain,Truck,high
+56,12.928401,77.588847,Bannerghatta Road,Severe,2024-02-25,07:54,2024-02-25 07:54:22,Clear,Bus,medium
+57,13.093217,77.588117,Airport Road,Severe,2025-04-09,20:53,2025-04-09 20:53:22,Rain,Auto,medium
+58,13.10656,77.596096,Airport Road,Fatal,2025-01-21,14:14,2025-01-21 14:14:22,Clear,Car,medium
+59,13.100529,77.598331,Airport Road,Moderate,2025-12-13,05:18,2025-12-13 05:18:22,Rain,Truck,medium
+60,12.919044,77.599633,Bannerghatta Road,Minor,2026-01-20,06:06,2026-01-20 06:06:22,Fog,Truck,medium
+61,12.967249,77.741893,Whitefield Main Road,Moderate,2023-03-29,07:14,2023-03-29 07:14:22,Clear,Bus,high
+62,12.967382,77.743847,Whitefield Main Road,Minor,2023-04-30,13:58,2023-04-30 13:58:22,Clear,Bike,high
+63,12.911998,77.619787,Sarjapur Road,Fatal,2023-07-03,19:42,2023-07-03 19:42:22,Clear,Car,medium
+64,12.918253,77.608939,Sarjapur Road,Moderate,2025-06-01,08:45,2025-06-01 08:45:22,Clear,Auto,medium
+65,12.966303,77.706208,Marathahalli Bridge Road,Minor,2024-05-18,21:59,2024-05-18 21:59:22,Heavy Rain,Truck,high
+66,12.915248,77.591143,Bannerghatta Road,Minor,2025-04-20,20:14,2025-04-20 20:14:22,Clear,Auto,medium
+67,12.979046,77.603335,Old Madras Road,Moderate,2023-12-17,20:10,2023-12-17 20:10:22,Clear,Bus,high
+68,12.974902,77.638563,Indiranagar 100ft Road,Severe,2024-12-02,16:14,2024-12-02 16:14:22,Fog,Bike,low
+69,12.85217,77.668346,Hosur Road,Minor,2024-06-12,22:03,2024-06-12 22:03:22,Rain,Truck,high
+70,12.844992,77.668042,Hosur Road,Moderate,2023-08-14,18:31,2023-08-14 18:31:22,Rain,Truck,high
+71,12.939285,77.628306,Koramangala 80ft Road,Minor,2023-11-08,05:27,2023-11-08 05:27:22,Clear,Bus,low
+72,12.980499,77.605783,Old Madras Road,Minor,2024-09-08,11:35,2024-09-08 11:35:22,Rain,Bike,high
+73,12.967379,77.750677,Whitefield Main Road,Moderate,2025-06-15,09:34,2025-06-15 09:34:22,Clear,Bike,high
+74,12.915068,77.592742,Bannerghatta Road,Moderate,2023-07-13,12:47,2023-07-13 12:47:22,Clear,Bus,medium
+75,12.983878,77.599411,Old Madras Road,Severe,2025-09-26,16:08,2025-09-26 16:08:22,Clear,Bus,high
+76,12.844742,77.655043,Hosur Road,Moderate,2025-11-15,19:46,2025-11-15 19:46:22,Heavy Rain,Bus,high
+77,12.910967,77.637141,Outer Ring Road,Severe,2026-01-29,19:20,2026-01-29 19:20:22,Fog,Truck,high
+78,12.837373,77.651177,Hosur Road,Severe,2023-11-13,10:31,2023-11-13 10:31:22,Rain,Auto,high
+79,12.913458,77.611815,Sarjapur Road,Fatal,2025-11-04,02:23,2025-11-04 02:23:22,Fog,Truck,medium
+80,12.971266,77.606227,Old Madras Road,Moderate,2025-10-31,18:17,2025-10-31 18:17:22,Rain,Auto,high
+81,12.958416,77.704314,Marathahalli Bridge Road,Moderate,2024-12-16,16:16,2024-12-16 16:16:22,Clear,Car,high
+82,13.096194,77.602348,Airport Road,Minor,2025-01-10,18:10,2025-01-10 18:10:22,Clear,Auto,medium
+83,12.967439,77.757104,Whitefield Main Road,Moderate,2025-05-20,08:52,2025-05-20 08:52:22,Clear,Bike,high
+84,12.925088,77.614328,Sarjapur Road,Severe,2023-10-02,21:01,2023-10-02 21:01:22,Clear,Auto,medium
+85,12.941309,77.62106,Koramangala 80ft Road,Minor,2025-08-03,19:01,2025-08-03 19:01:22,Clear,Truck,low
+86,12.955602,77.702736,Marathahalli Bridge Road,Minor,2024-09-29,07:27,2024-09-29 07:27:22,Clear,Truck,high
+87,12.938053,77.616888,Koramangala 80ft Road,Moderate,2025-04-09,08:30,2025-04-09 08:30:22,Clear,Auto,low
+88,12.944908,77.62146,Koramangala 80ft Road,Severe,2024-09-16,10:31,2024-09-16 10:31:22,Heavy Rain,Auto,low
+89,12.846174,77.667383,Hosur Road,Minor,2023-10-17,07:35,2023-10-17 07:35:22,Clear,Truck,high
+90,12.912464,77.615977,Sarjapur Road,Moderate,2024-12-02,15:40,2024-12-02 15:40:22,Clear,Bus,medium
+91,12.973389,77.636846,Indiranagar 100ft Road,Minor,2026-01-17,08:43,2026-01-17 08:43:22,Clear,Auto,low
+92,12.913841,77.645974,Outer Ring Road,Minor,2025-03-15,07:49,2025-03-15 07:49:22,Clear,Auto,high
+93,12.917282,77.600567,Sarjapur Road,Moderate,2024-11-21,23:18,2024-11-21 23:18:22,Rain,Truck,medium
+94,12.92104,77.596723,Bannerghatta Road,Severe,2025-11-21,18:09,2025-11-21 18:09:22,Fog,Bike,medium
+95,12.924998,77.598029,Bannerghatta Road,Moderate,2025-10-25,11:02,2025-10-25 11:02:22,Clear,Truck,medium
+96,12.847977,77.651253,Hosur Road,Moderate,2023-03-01,08:31,2023-03-01 08:31:22,Clear,Bus,high
+97,12.963858,77.742752,Whitefield Main Road,Moderate,2025-12-29,07:03,2025-12-29 07:03:22,Clear,Bike,high
+98,12.972534,77.758667,Whitefield Main Road,Moderate,2023-03-06,23:07,2023-03-06 23:07:22,Clear,Car,high
+99,12.919738,77.635555,Outer Ring Road,Moderate,2023-05-17,15:42,2023-05-17 15:42:22,Rain,Truck,high
+100,12.973641,77.607893,Old Madras Road,Minor,2024-12-15,06:20,2024-12-15 06:20:22,Clear,Bus,high
+101,12.849553,77.661796,Hosur Road,Minor,2025-02-24,10:23,2025-02-24 10:23:22,Clear,Auto,high
+102,12.920039,77.6538,Outer Ring Road,Severe,2024-05-09,14:24,2024-05-09 14:24:22,Fog,Auto,high
+103,12.919484,77.587995,Bannerghatta Road,Moderate,2023-12-27,08:17,2023-12-27 08:17:22,Heavy Rain,Bus,medium
+104,12.987016,77.640453,Indiranagar 100ft Road,Moderate,2024-02-01,22:53,2024-02-01 22:53:22,Rain,Bike,low
+105,12.920165,77.604449,Sarjapur Road,Moderate,2024-03-20,06:08,2024-03-20 06:08:22,Clear,Car,medium
+106,12.838243,77.653671,Hosur Road,Minor,2024-08-28,16:37,2024-08-28 16:37:22,Clear,Auto,high
+107,12.836198,77.654288,Hosur Road,Minor,2024-07-09,20:04,2024-07-09 20:04:22,Clear,Truck,high
+108,12.907614,77.641542,Outer Ring Road,Minor,2025-04-23,06:53,2025-04-23 06:53:22,Clear,Truck,high
+109,13.091289,77.60499,Airport Road,Minor,2024-07-25,15:15,2024-07-25 15:15:22,Clear,Car,medium
+110,12.979184,77.757768,Whitefield Main Road,Severe,2025-10-05,09:56,2025-10-05 09:56:22,Rain,Truck,high
+111,12.978137,77.605355,Old Madras Road,Minor,2025-09-30,06:19,2025-09-30 06:19:22,Clear,Bike,high
+112,12.967729,77.603004,Old Madras Road,Severe,2024-03-11,05:24,2024-03-11 05:24:22,Clear,Bus,high
+113,12.91172,77.606242,Sarjapur Road,Minor,2025-06-20,18:49,2025-06-20 18:49:22,Fog,Auto,medium
+114,12.926256,77.622939,Koramangala 80ft Road,Minor,2025-11-11,16:05,2025-11-11 16:05:22,Rain,Auto,low
+115,12.903119,77.649837,Outer Ring Road,Moderate,2024-12-04,08:21,2024-12-04 08:21:22,Clear,Auto,high
+116,12.97588,77.631602,Indiranagar 100ft Road,Minor,2023-12-01,20:06,2023-12-01 20:06:22,Rain,Car,low
+117,12.92032,77.641844,Outer Ring Road,Severe,2024-07-05,23:24,2024-07-05 23:24:22,Clear,Bus,high
+118,12.961625,77.750398,Whitefield Main Road,Minor,2023-12-20,12:48,2023-12-20 12:48:22,Fog,Car,high
+119,12.985831,77.632227,Indiranagar 100ft Road,Moderate,2023-11-30,06:38,2023-11-30 06:38:22,Heavy Rain,Bus,low
+120,12.961077,77.748211,Whitefield Main Road,Minor,2024-11-06,17:20,2024-11-06 17:20:22,Fog,Bus,high
+121,12.968756,77.699792,Marathahalli Bridge Road,Moderate,2024-06-25,03:00,2024-06-25 03:00:22,Fog,Bus,high
+122,12.974907,77.752346,Whitefield Main Road,Minor,2023-12-06,07:17,2023-12-06 07:17:22,Clear,Auto,high
+123,12.961636,77.704064,Marathahalli Bridge Road,Fatal,2023-11-07,16:23,2023-11-07 16:23:22,Rain,Car,high
+124,12.981355,77.601966,Old Madras Road,Minor,2023-04-17,08:18,2023-04-17 08:18:22,Clear,Bus,high
+125,12.920808,77.608242,Sarjapur Road,Severe,2024-08-30,03:44,2024-08-30 03:44:22,Rain,Auto,medium
+126,12.949919,77.69652,Marathahalli Bridge Road,Minor,2026-01-06,03:12,2026-01-06 03:12:22,Clear,Truck,high
+127,12.972422,77.608131,Old Madras Road,Minor,2024-07-23,04:38,2024-07-23 04:38:22,Clear,Auto,high
+128,12.971163,77.646316,Indiranagar 100ft Road,Minor,2025-09-12,08:08,2025-09-12 08:08:22,Fog,Auto,low
+129,12.964615,77.751226,Whitefield Main Road,Fatal,2024-01-17,08:11,2024-01-17 08:11:22,Clear,Truck,high
+130,12.918304,77.596036,Bannerghatta Road,Minor,2023-06-13,10:48,2023-06-13 10:48:22,Fog,Auto,medium
+131,12.962286,77.701777,Marathahalli Bridge Road,Minor,2024-07-14,11:58,2024-07-14 11:58:22,Clear,Truck,high
+132,12.969071,77.708826,Marathahalli Bridge Road,Minor,2024-12-02,10:22,2024-12-02 10:22:22,Rain,Truck,high
+133,12.912055,77.602808,Sarjapur Road,Minor,2025-06-30,18:14,2025-06-30 18:14:22,Clear,Auto,medium
+134,12.987253,77.650313,Indiranagar 100ft Road,Minor,2024-11-30,10:41,2024-11-30 10:41:22,Clear,Bus,low
+135,12.851971,77.665179,Hosur Road,Severe,2023-11-16,18:46,2023-11-16 18:46:22,Clear,Bike,high
+136,12.927399,77.598665,Bannerghatta Road,Minor,2024-03-17,05:46,2024-03-17 05:46:22,Rain,Auto,medium
+137,12.911787,77.611356,Sarjapur Road,Severe,2025-06-19,10:20,2025-06-19 10:20:22,Rain,Car,medium
+138,12.911923,77.641112,Outer Ring Road,Severe,2023-12-18,14:45,2023-12-18 14:45:22,Clear,Bus,high
+139,12.936902,77.618967,Koramangala 80ft Road,Minor,2025-01-12,16:30,2025-01-12 16:30:22,Clear,Truck,low
+140,12.921114,77.586314,Bannerghatta Road,Minor,2025-08-17,08:01,2025-08-17 08:01:22,Rain,Bus,medium
+141,12.962196,77.710478,Marathahalli Bridge Road,Moderate,2024-01-06,16:40,2024-01-06 16:40:22,Clear,Truck,high
+142,12.970471,77.75703,Whitefield Main Road,Minor,2025-01-13,19:11,2025-01-13 19:11:22,Clear,Bus,high
+143,12.91834,77.595096,Bannerghatta Road,Moderate,2023-03-03,18:03,2023-03-03 18:03:22,Fog,Truck,medium
+144,12.981683,77.601722,Old Madras Road,Minor,2024-02-10,08:46,2024-02-10 08:46:22,Clear,Car,high
+145,12.967749,77.607514,Old Madras Road,Moderate,2024-08-22,19:21,2024-08-22 19:21:22,Fog,Auto,high
+146,12.907999,77.604839,Sarjapur Road,Minor,2025-07-15,20:47,2025-07-15 20:47:22,Fog,Auto,medium
+147,12.853321,77.661043,Hosur Road,Moderate,2024-02-09,15:43,2024-02-09 15:43:22,Fog,Auto,high
+148,12.978792,77.609366,Old Madras Road,Minor,2025-01-27,06:56,2025-01-27 06:56:22,Rain,Auto,high
+149,12.907597,77.641216,Outer Ring Road,Minor,2024-02-25,22:29,2024-02-25 22:29:22,Clear,Car,high
+150,12.911975,77.647014,Outer Ring Road,Fatal,2025-09-30,15:16,2025-09-30 15:16:22,Rain,Truck,high
+151,12.925695,77.599861,Bannerghatta Road,Severe,2025-09-30,16:37,2025-09-30 16:37:22,Fog,Car,medium
+152,12.921985,77.602967,Bannerghatta Road,Fatal,2024-02-03,09:16,2024-02-03 09:16:22,Clear,Bike,medium
+153,12.963308,77.746061,Whitefield Main Road,Moderate,2023-12-27,07:41,2023-12-27 07:41:22,Rain,Bike,high
+154,12.838335,77.652465,Hosur Road,Minor,2024-04-28,21:31,2024-04-28 21:31:22,Clear,Auto,high
+155,12.920728,77.642017,Outer Ring Road,Moderate,2024-06-01,21:10,2024-06-01 21:10:22,Rain,Truck,high
+156,12.913306,77.635289,Outer Ring Road,Moderate,2024-03-02,06:36,2024-03-02 06:36:22,Fog,Bus,high
+157,12.978112,77.61262,Old Madras Road,Minor,2024-05-16,08:56,2024-05-16 08:56:22,Clear,Car,high
+158,13.095481,77.590172,Airport Road,Moderate,2023-04-21,15:20,2023-04-21 15:20:22,Clear,Car,medium
+159,12.905602,77.63588,Outer Ring Road,Minor,2025-01-05,06:45,2025-01-05 06:45:22,Clear,Auto,high
+160,12.922954,77.597409,Bannerghatta Road,Severe,2025-09-03,18:26,2025-09-03 18:26:22,Clear,Car,medium
+161,12.971104,77.600699,Old Madras Road,Severe,2023-06-02,05:15,2023-06-02 05:15:22,Rain,Car,high
+162,12.981682,77.637576,Indiranagar 100ft Road,Moderate,2024-06-07,18:17,2024-06-07 18:17:22,Rain,Bus,low
+163,12.913667,77.603208,Sarjapur Road,Minor,2025-07-16,08:01,2025-07-16 08:01:22,Clear,Car,medium
+164,12.921578,77.612318,Sarjapur Road,Moderate,2023-07-03,02:43,2023-07-03 02:43:22,Fog,Auto,medium
+165,12.983056,77.598365,Old Madras Road,Minor,2025-09-01,20:52,2025-09-01 20:52:22,Clear,Truck,high
+166,12.968363,77.74269,Whitefield Main Road,Moderate,2023-03-11,12:49,2023-03-11 12:49:22,Clear,Truck,high
+167,12.907151,77.61401,Sarjapur Road,Moderate,2023-07-08,07:15,2023-07-08 07:15:22,Clear,Bike,medium
+168,12.93056,77.622625,Koramangala 80ft Road,Moderate,2024-08-01,06:57,2024-08-01 06:57:22,Clear,Bus,low
+169,12.849658,77.660342,Hosur Road,Moderate,2024-01-26,21:09,2024-01-26 21:09:22,Clear,Car,high
+170,12.982465,77.649664,Indiranagar 100ft Road,Moderate,2025-09-27,18:56,2025-09-27 18:56:22,Fog,Bus,low
+171,12.981517,77.60893,Old Madras Road,Moderate,2024-02-25,10:09,2024-02-25 10:09:22,Clear,Bus,high
+172,13.095405,77.601939,Airport Road,Minor,2024-01-18,14:00,2024-01-18 14:00:22,Clear,Car,medium
+173,12.850519,77.653958,Hosur Road,Moderate,2023-07-31,22:38,2023-07-31 22:38:22,Rain,Car,high
+174,12.929004,77.62899,Koramangala 80ft Road,Minor,2025-07-20,08:35,2025-07-20 08:35:22,Fog,Auto,low
+175,12.981293,77.595708,Old Madras Road,Moderate,2024-05-30,09:45,2024-05-30 09:45:22,Clear,Truck,high
+176,12.911989,77.646906,Outer Ring Road,Moderate,2024-03-15,17:00,2024-03-15 17:00:22,Rain,Bike,high
+177,12.917691,77.590774,Bannerghatta Road,Moderate,2024-03-20,13:13,2024-03-20 13:13:22,Fog,Car,medium
+178,12.907571,77.616752,Sarjapur Road,Minor,2024-04-17,18:53,2024-04-17 18:53:22,Clear,Bus,medium
+179,12.934404,77.618129,Koramangala 80ft Road,Moderate,2025-05-26,19:44,2025-05-26 19:44:22,Clear,Bike,low
+180,12.970182,77.756369,Whitefield Main Road,Moderate,2023-10-19,07:20,2023-10-19 07:20:22,Clear,Auto,high
+181,12.917399,77.647218,Outer Ring Road,Moderate,2024-08-06,11:28,2024-08-06 11:28:22,Clear,Car,high
+182,12.972047,77.6337,Indiranagar 100ft Road,Fatal,2023-04-13,10:27,2023-04-13 10:27:22,Rain,Car,low
+183,13.093418,77.592859,Airport Road,Minor,2023-11-13,20:17,2023-11-13 20:17:22,Clear,Bike,medium
+184,12.970422,77.601884,Old Madras Road,Minor,2024-01-07,18:30,2024-01-07 18:30:22,Clear,Auto,high
+185,12.921662,77.59556,Bannerghatta Road,Minor,2024-01-05,03:38,2024-01-05 03:38:22,Fog,Car,medium
+186,12.965486,77.710031,Marathahalli Bridge Road,Fatal,2026-02-02,10:54,2026-02-02 10:54:22,Rain,Truck,high
+187,12.969524,77.594926,Old Madras Road,Severe,2024-05-30,06:09,2024-05-30 06:09:22,Clear,Auto,high
+188,12.973708,77.740386,Whitefield Main Road,Severe,2024-12-05,17:15,2024-12-05 17:15:22,Fog,Car,high
+189,12.916226,77.600192,Bannerghatta Road,Moderate,2025-01-06,00:50,2025-01-06 00:50:22,Clear,Car,medium
+190,12.93037,77.618733,Koramangala 80ft Road,Minor,2024-03-05,19:26,2024-03-05 19:26:22,Clear,Bus,low
+191,12.941189,77.61768,Koramangala 80ft Road,Minor,2023-03-29,14:07,2023-03-29 14:07:22,Rain,Car,low
+192,12.849015,77.667343,Hosur Road,Moderate,2023-08-07,08:01,2023-08-07 08:01:22,Clear,Car,high
+193,12.98009,77.643357,Indiranagar 100ft Road,Minor,2023-09-09,07:36,2023-09-09 07:36:22,Rain,Bus,low
+194,12.915784,77.611616,Sarjapur Road,Minor,2024-09-28,07:33,2024-09-28 07:33:22,Clear,Truck,medium
+195,13.106319,77.598943,Airport Road,Minor,2024-06-07,10:51,2024-06-07 10:51:22,Clear,Truck,medium
+196,12.962108,77.694533,Marathahalli Bridge Road,Severe,2023-08-27,18:28,2023-08-27 18:28:22,Clear,Bus,high
+197,12.942151,77.62169,Koramangala 80ft Road,Minor,2024-02-16,00:36,2024-02-16 00:36:22,Clear,Truck,low
+198,12.97928,77.638226,Indiranagar 100ft Road,Severe,2026-01-21,17:26,2026-01-21 17:26:22,Clear,Bus,low
+199,12.929106,77.623174,Koramangala 80ft Road,Severe,2026-02-04,15:53,2026-02-04 15:53:22,Rain,Car,low
+200,12.934809,77.584217,Bannerghatta Road,Severe,2023-07-04,10:09,2023-07-04 10:09:22,Fog,Bike,medium
+201,12.918406,77.650352,Outer Ring Road,Minor,2025-10-30,07:51,2025-10-30 07:51:22,Clear,Bus,high
+202,12.952499,77.704306,Marathahalli Bridge Road,Minor,2024-08-10,10:37,2024-08-10 10:37:22,Clear,Bike,high
+203,12.845438,77.660093,Hosur Road,Minor,2025-02-21,10:21,2025-02-21 10:21:22,Clear,Car,high
+204,12.949466,77.704464,Marathahalli Bridge Road,Minor,2023-08-08,18:54,2023-08-08 18:54:22,Clear,Bike,high
+205,12.972575,77.59904,Old Madras Road,Moderate,2023-06-21,14:15,2023-06-21 14:15:22,Heavy Rain,Bike,high
+206,13.097294,77.593944,Airport Road,Moderate,2024-01-16,15:43,2024-01-16 15:43:22,Rain,Bus,medium
+207,12.956284,77.696398,Marathahalli Bridge Road,Minor,2025-01-31,00:02,2025-01-31 00:02:22,Rain,Bike,high
+208,12.957176,77.700075,Marathahalli Bridge Road,Moderate,2023-03-17,05:28,2023-03-17 05:28:22,Rain,Bus,high
+209,12.911637,77.61515,Sarjapur Road,Moderate,2025-02-10,07:18,2025-02-10 07:18:22,Clear,Bike,medium
+210,12.933418,77.59207,Bannerghatta Road,Severe,2025-04-30,23:45,2025-04-30 23:45:22,Fog,Car,medium
+211,12.963381,77.700861,Marathahalli Bridge Road,Minor,2025-10-22,21:21,2025-10-22 21:21:22,Clear,Bike,high
+212,12.85513,77.654609,Hosur Road,Severe,2024-01-26,19:36,2024-01-26 19:36:22,Rain,Car,high
+213,12.927818,77.585583,Bannerghatta Road,Minor,2023-03-23,13:30,2023-03-23 13:30:22,Rain,Bike,medium
+214,12.920813,77.594641,Bannerghatta Road,Minor,2025-10-24,19:37,2025-10-24 19:37:22,Clear,Bus,medium
+215,12.902171,77.648191,Outer Ring Road,Minor,2023-07-11,05:02,2023-07-11 05:02:22,Clear,Bike,high
+216,12.916906,77.637388,Outer Ring Road,Minor,2023-09-20,08:13,2023-09-20 08:13:22,Clear,Bus,high
+217,12.931249,77.627539,Koramangala 80ft Road,Minor,2023-04-04,10:41,2023-04-04 10:41:22,Clear,Bike,low
+218,12.985328,77.603558,Old Madras Road,Minor,2023-10-15,19:47,2023-10-15 19:47:22,Clear,Bike,high
+219,12.929278,77.597583,Bannerghatta Road,Moderate,2025-04-07,18:25,2025-04-07 18:25:22,Clear,Car,medium
+220,12.935057,77.61899,Koramangala 80ft Road,Minor,2025-11-05,19:19,2025-11-05 19:19:22,Clear,Auto,low
+221,12.963814,77.752671,Whitefield Main Road,Minor,2025-11-04,05:39,2025-11-04 05:39:22,Clear,Bus,high
+222,13.095568,77.590411,Airport Road,Moderate,2025-11-18,16:49,2025-11-18 16:49:22,Clear,Auto,medium
+223,13.106952,77.60106,Airport Road,Minor,2023-10-18,08:44,2023-10-18 08:44:22,Clear,Auto,medium
+224,12.84244,77.659846,Hosur Road,Minor,2025-03-14,15:12,2025-03-14 15:12:22,Clear,Auto,high
+225,12.852407,77.658309,Hosur Road,Minor,2023-08-28,21:39,2023-08-28 21:39:22,Fog,Auto,high
+226,12.910963,77.646125,Outer Ring Road,Minor,2025-10-31,07:28,2025-10-31 07:28:22,Clear,Bike,high
+227,12.840597,77.668388,Hosur Road,Severe,2025-02-02,09:22,2025-02-02 09:22:22,Rain,Bus,high
+228,12.950347,77.693721,Marathahalli Bridge Road,Moderate,2024-10-23,18:57,2024-10-23 18:57:22,Fog,Bus,high
+229,12.933926,77.632464,Koramangala 80ft Road,Severe,2025-04-04,15:11,2025-04-04 15:11:22,Clear,Truck,low
+230,12.844652,77.664232,Hosur Road,Severe,2023-12-20,05:15,2023-12-20 05:15:22,Clear,Car,high
+231,12.916599,77.605087,Sarjapur Road,Minor,2024-02-09,17:01,2024-02-09 17:01:22,Rain,Bus,medium
+232,12.960282,77.704331,Marathahalli Bridge Road,Fatal,2025-02-26,20:28,2025-02-26 20:28:22,Rain,Bus,high
+233,12.918285,77.606294,Sarjapur Road,Severe,2023-10-22,18:50,2023-10-22 18:50:22,Clear,Car,medium
+234,12.977077,77.650512,Indiranagar 100ft Road,Moderate,2023-07-03,15:39,2023-07-03 15:39:22,Rain,Auto,low
+235,12.984362,77.647716,Indiranagar 100ft Road,Severe,2025-11-19,05:24,2025-11-19 05:24:22,Clear,Truck,low
+236,12.938699,77.634195,Koramangala 80ft Road,Minor,2023-04-26,08:38,2023-04-26 08:38:22,Clear,Bus,low
+237,12.974331,77.607252,Old Madras Road,Moderate,2025-11-23,21:47,2025-11-23 21:47:22,Rain,Truck,high
+238,12.836925,77.660831,Hosur Road,Severe,2024-02-24,17:26,2024-02-24 17:26:22,Rain,Bus,high
+239,12.850942,77.670298,Hosur Road,Moderate,2024-10-26,08:42,2024-10-26 08:42:22,Clear,Truck,high
+240,12.911741,77.611095,Sarjapur Road,Severe,2025-09-11,14:06,2025-09-11 14:06:22,Fog,Car,medium
+241,12.965296,77.756554,Whitefield Main Road,Minor,2025-03-11,00:49,2025-03-11 00:49:22,Clear,Auto,high
+242,12.96781,77.7577,Whitefield Main Road,Moderate,2023-09-15,10:08,2023-09-15 10:08:22,Clear,Auto,high
+243,12.962792,77.694661,Marathahalli Bridge Road,Minor,2026-02-09,07:59,2026-02-09 07:59:22,Rain,Bike,high
+244,12.986769,77.646001,Indiranagar 100ft Road,Severe,2024-06-21,07:13,2024-06-21 07:13:22,Clear,Car,low
+245,12.983115,77.611543,Old Madras Road,Moderate,2023-08-06,08:26,2023-08-06 08:26:22,Rain,Bike,high
+246,12.850786,77.653842,Hosur Road,Moderate,2024-04-22,15:09,2024-04-22 15:09:22,Rain,Truck,high
+247,12.936299,77.615201,Koramangala 80ft Road,Minor,2023-10-10,14:19,2023-10-10 14:19:22,Fog,Car,low
+248,13.097035,77.593674,Airport Road,Minor,2026-01-24,09:53,2026-01-24 09:53:22,Clear,Auto,medium
+249,12.921404,77.585761,Bannerghatta Road,Minor,2025-06-30,20:50,2025-06-30 20:50:22,Clear,Truck,medium
+250,12.978262,77.650553,Indiranagar 100ft Road,Minor,2023-11-14,12:43,2023-11-14 12:43:22,Clear,Auto,low
+251,13.100467,77.596053,Airport Road,Moderate,2024-12-02,22:03,2024-12-02 22:03:22,Clear,Car,medium
+252,12.936065,77.618789,Koramangala 80ft Road,Moderate,2024-10-17,07:48,2024-10-17 07:48:22,Clear,Bike,low
+253,12.932623,77.615145,Koramangala 80ft Road,Minor,2025-05-22,19:51,2025-05-22 19:51:22,Rain,Bus,low
+254,12.975478,77.647997,Indiranagar 100ft Road,Minor,2024-11-25,10:59,2024-11-25 10:59:22,Heavy Rain,Bike,low
+255,13.096355,77.59598,Airport Road,Minor,2024-02-19,04:05,2024-02-19 04:05:22,Clear,Bus,medium
+256,12.852884,77.666631,Hosur Road,Minor,2024-07-23,10:23,2024-07-23 10:23:22,Rain,Bus,high
+257,12.908793,77.637299,Outer Ring Road,Moderate,2023-07-10,11:40,2023-07-10 11:40:22,Clear,Bike,high
+258,12.971519,77.759164,Whitefield Main Road,Minor,2025-02-15,19:24,2025-02-15 19:24:22,Clear,Car,high
+259,12.985842,77.640336,Indiranagar 100ft Road,Moderate,2025-05-03,11:14,2025-05-03 11:14:22,Clear,Car,low
+260,12.940315,77.630305,Koramangala 80ft Road,Minor,2023-06-27,09:55,2023-06-27 09:55:22,Heavy Rain,Truck,low
+261,12.964655,77.748718,Whitefield Main Road,Minor,2024-12-06,21:40,2024-12-06 21:40:22,Clear,Bus,high
+262,13.092616,77.601944,Airport Road,Fatal,2024-05-04,12:26,2024-05-04 12:26:22,Clear,Bike,medium
+263,12.951478,77.699997,Marathahalli Bridge Road,Moderate,2024-01-17,12:43,2024-01-17 12:43:22,Clear,Bike,high
+264,12.985536,77.630973,Indiranagar 100ft Road,Moderate,2025-03-12,09:13,2025-03-12 09:13:22,Heavy Rain,Bus,low
+265,12.979675,77.59989,Old Madras Road,Moderate,2025-01-23,06:04,2025-01-23 06:04:22,Heavy Rain,Auto,high
+266,12.958343,77.707324,Marathahalli Bridge Road,Severe,2024-03-18,10:23,2024-03-18 10:23:22,Clear,Car,high
+267,12.976117,77.74349,Whitefield Main Road,Minor,2025-08-30,20:43,2025-08-30 20:43:22,Clear,Bike,high
+268,12.931696,77.623127,Koramangala 80ft Road,Severe,2024-10-30,07:47,2024-10-30 07:47:22,Heavy Rain,Bike,low
+269,12.942314,77.616912,Koramangala 80ft Road,Minor,2025-09-10,10:31,2025-09-10 10:31:22,Clear,Bus,low
+270,12.849862,77.663568,Hosur Road,Moderate,2024-01-10,20:45,2024-01-10 20:45:22,Rain,Auto,high
+271,12.979608,77.743322,Whitefield Main Road,Minor,2025-06-10,14:38,2025-06-10 14:38:22,Clear,Car,high
+272,12.978323,77.611026,Old Madras Road,Moderate,2024-11-26,05:06,2024-11-26 05:06:22,Clear,Bus,high
+273,12.929561,77.586504,Bannerghatta Road,Minor,2023-03-11,09:26,2023-03-11 09:26:22,Rain,Truck,medium
+274,13.106446,77.603498,Airport Road,Minor,2025-12-01,18:49,2025-12-01 18:49:22,Clear,Truck,medium
+275,12.853285,77.660554,Hosur Road,Minor,2023-10-02,19:51,2023-10-02 19:51:22,Rain,Bus,high
+276,12.964988,77.758432,Whitefield Main Road,Moderate,2025-03-30,18:17,2025-03-30 18:17:22,Heavy Rain,Bike,high
+277,12.910811,77.607441,Sarjapur Road,Moderate,2025-10-12,13:27,2025-10-12 13:27:22,Clear,Auto,medium
+278,12.929905,77.615722,Koramangala 80ft Road,Moderate,2023-04-20,09:32,2023-04-20 09:32:22,Rain,Car,low
+279,12.941775,77.627207,Koramangala 80ft Road,Minor,2024-04-04,18:38,2024-04-04 18:38:22,Heavy Rain,Bus,low
+280,12.955638,77.707926,Marathahalli Bridge Road,Minor,2025-01-03,07:07,2025-01-03 07:07:22,Clear,Bike,high
+281,12.922258,77.596743,Bannerghatta Road,Minor,2023-07-13,16:11,2023-07-13 16:11:22,Clear,Bus,medium
+282,12.850979,77.655038,Hosur Road,Minor,2024-09-30,05:43,2024-09-30 05:43:22,Rain,Car,high
+283,12.944097,77.614697,Koramangala 80ft Road,Moderate,2023-06-07,02:45,2023-06-07 02:45:22,Clear,Auto,low
+284,12.97037,77.741077,Whitefield Main Road,Moderate,2024-09-27,07:27,2024-09-27 07:27:22,Heavy Rain,Bus,high
+285,12.915809,77.639511,Outer Ring Road,Fatal,2025-04-30,18:11,2025-04-30 18:11:22,Rain,Bike,high
+286,12.968885,77.748447,Whitefield Main Road,Fatal,2024-07-17,09:21,2024-07-17 09:21:22,Fog,Bike,high
+287,12.918515,77.593098,Bannerghatta Road,Minor,2024-09-27,18:24,2024-09-27 18:24:22,Clear,Car,medium
+288,12.959888,77.706877,Marathahalli Bridge Road,Severe,2023-12-07,15:44,2023-12-07 15:44:22,Heavy Rain,Truck,high
+289,12.979278,77.636727,Indiranagar 100ft Road,Moderate,2023-06-20,14:36,2023-06-20 14:36:22,Fog,Car,low
+290,12.912404,77.650375,Outer Ring Road,Severe,2023-12-28,13:21,2023-12-28 13:21:22,Clear,Auto,high
+291,12.976286,77.64543,Indiranagar 100ft Road,Moderate,2024-05-15,18:04,2024-05-15 18:04:22,Heavy Rain,Bus,low
+292,12.90791,77.651259,Outer Ring Road,Minor,2025-05-27,09:13,2025-05-27 09:13:22,Fog,Bike,high
+293,12.950247,77.70919,Marathahalli Bridge Road,Minor,2023-12-15,07:35,2023-12-15 07:35:22,Clear,Truck,high
+294,12.940095,77.615047,Koramangala 80ft Road,Minor,2025-09-01,18:00,2025-09-01 18:00:22,Clear,Auto,low
+295,12.968297,77.758264,Whitefield Main Road,Minor,2026-01-28,12:56,2026-01-28 12:56:22,Clear,Bike,high
+296,13.10116,77.588323,Airport Road,Moderate,2025-05-23,22:10,2025-05-23 22:10:22,Clear,Auto,medium
+297,12.96895,77.646615,Indiranagar 100ft Road,Moderate,2023-05-09,23:58,2023-05-09 23:58:22,Heavy Rain,Bike,low
+298,12.983312,77.601203,Old Madras Road,Minor,2023-06-27,09:49,2023-06-27 09:49:22,Rain,Auto,high
+299,13.107539,77.593701,Airport Road,Severe,2023-03-01,02:32,2023-03-01 02:32:22,Rain,Bike,medium
+300,12.903065,77.635735,Outer Ring Road,Moderate,2024-05-18,18:19,2024-05-18 18:19:22,Clear,Bike,high
+301,12.916505,77.597071,Bannerghatta Road,Moderate,2025-11-09,19:55,2025-11-09 19:55:22,Rain,Bus,medium
+302,12.933588,77.626225,Koramangala 80ft Road,Minor,2023-12-16,13:02,2023-12-16 13:02:22,Clear,Car,low
+303,12.844967,77.663499,Hosur Road,Severe,2024-11-20,07:49,2024-11-20 07:49:22,Clear,Bus,high
+304,12.964934,77.703906,Marathahalli Bridge Road,Moderate,2025-03-11,16:48,2025-03-11 16:48:22,Clear,Bus,high
+305,12.968677,77.631632,Indiranagar 100ft Road,Severe,2024-05-31,14:49,2024-05-31 14:49:22,Rain,Auto,low
+306,12.974265,77.597569,Old Madras Road,Minor,2023-06-17,09:59,2023-06-17 09:59:22,Fog,Bus,high
+307,12.836506,77.653346,Hosur Road,Moderate,2023-12-21,18:11,2023-12-21 18:11:22,Clear,Bus,high
+308,12.927649,77.595239,Bannerghatta Road,Severe,2025-08-09,20:29,2025-08-09 20:29:22,Clear,Car,medium
+309,12.841206,77.669442,Hosur Road,Minor,2023-09-06,03:24,2023-09-06 03:24:22,Clear,Truck,high
+310,12.966318,77.742492,Whitefield Main Road,Moderate,2024-08-05,07:49,2024-08-05 07:49:22,Clear,Truck,high
+311,12.920731,77.591812,Bannerghatta Road,Severe,2025-02-17,17:46,2025-02-17 17:46:22,Rain,Bike,medium
+312,12.935575,77.625308,Koramangala 80ft Road,Moderate,2025-06-18,18:40,2025-06-18 18:40:22,Heavy Rain,Auto,low
+313,12.91993,77.599638,Bannerghatta Road,Minor,2024-01-02,22:34,2024-01-02 22:34:22,Rain,Car,medium
+314,12.942143,77.623289,Koramangala 80ft Road,Moderate,2023-04-08,06:08,2023-04-08 06:08:22,Clear,Bus,low
+315,12.92882,77.583982,Bannerghatta Road,Severe,2025-05-31,18:40,2025-05-31 18:40:22,Clear,Truck,medium
+316,12.975204,77.758803,Whitefield Main Road,Severe,2024-05-19,06:35,2024-05-19 06:35:22,Clear,Auto,high
+317,12.962841,77.749838,Whitefield Main Road,Moderate,2023-08-08,17:05,2023-08-08 17:05:22,Clear,Auto,high
+318,12.917023,77.650587,Outer Ring Road,Minor,2024-11-03,17:53,2024-11-03 17:53:22,Clear,Car,high
+319,12.967898,77.700028,Marathahalli Bridge Road,Moderate,2024-12-25,08:03,2024-12-25 08:03:22,Clear,Auto,high
+320,12.96565,77.746216,Whitefield Main Road,Moderate,2023-04-02,05:52,2023-04-02 05:52:22,Fog,Bus,high
+321,12.973423,77.639313,Indiranagar 100ft Road,Fatal,2024-03-10,18:51,2024-03-10 18:51:22,Fog,Car,low
+322,12.969234,77.747331,Whitefield Main Road,Minor,2023-11-14,00:12,2023-11-14 00:12:22,Clear,Truck,high
+323,12.972581,77.6368,Indiranagar 100ft Road,Minor,2025-09-24,21:28,2025-09-24 21:28:22,Clear,Bus,low
+324,12.915631,77.590761,Bannerghatta Road,Minor,2026-02-22,17:26,2026-02-22 17:26:22,Clear,Car,medium
+325,12.918932,77.605339,Sarjapur Road,Minor,2023-06-02,17:26,2023-06-02 17:26:22,Clear,Bus,medium
+326,12.925997,77.589399,Bannerghatta Road,Minor,2025-10-05,14:51,2025-10-05 14:51:22,Clear,Truck,medium
+327,12.917914,77.643751,Outer Ring Road,Minor,2023-03-05,08:57,2023-03-05 08:57:22,Rain,Auto,high
+328,13.110536,77.597536,Airport Road,Severe,2024-01-30,18:37,2024-01-30 18:37:22,Heavy Rain,Car,medium
+329,12.933703,77.58543,Bannerghatta Road,Minor,2023-05-23,19:27,2023-05-23 19:27:22,Rain,Bus,medium
+330,12.936137,77.630045,Koramangala 80ft Road,Minor,2025-06-25,18:11,2025-06-25 18:11:22,Clear,Bus,low
+331,12.967222,77.755039,Whitefield Main Road,Minor,2023-12-28,16:55,2023-12-28 16:55:22,Clear,Car,high
+332,12.9417,77.617913,Koramangala 80ft Road,Fatal,2025-03-03,07:32,2025-03-03 07:32:22,Clear,Bike,low
+333,12.916072,77.594307,Bannerghatta Road,Minor,2023-09-26,17:23,2023-09-26 17:23:22,Fog,Auto,medium
+334,12.916186,77.586525,Bannerghatta Road,Minor,2025-08-04,23:30,2025-08-04 23:30:22,Clear,Car,medium
+335,12.844913,77.668804,Hosur Road,Minor,2023-05-26,17:56,2023-05-26 17:56:22,Rain,Auto,high
+336,12.925205,77.615673,Koramangala 80ft Road,Minor,2024-05-24,07:45,2024-05-24 07:45:22,Clear,Bus,low
+337,12.976345,77.632929,Indiranagar 100ft Road,Minor,2025-11-11,20:28,2025-11-11 20:28:22,Clear,Auto,low
+338,12.921605,77.639946,Outer Ring Road,Severe,2023-07-27,16:21,2023-07-27 16:21:22,Clear,Auto,high
+339,13.107217,77.597464,Airport Road,Minor,2024-03-15,17:45,2024-03-15 17:45:22,Clear,Car,medium
+340,12.902897,77.636606,Outer Ring Road,Minor,2026-01-24,19:06,2026-01-24 19:06:22,Rain,Auto,high
+341,12.98101,77.610199,Old Madras Road,Severe,2024-08-14,15:59,2024-08-14 15:59:22,Clear,Car,high
+342,12.910009,77.610676,Sarjapur Road,Severe,2025-02-26,08:54,2025-02-26 08:54:22,Rain,Bus,medium
+343,12.942463,77.631114,Koramangala 80ft Road,Minor,2025-05-08,18:02,2025-05-08 18:02:22,Clear,Car,low
+344,12.94919,77.691328,Marathahalli Bridge Road,Minor,2025-04-12,16:00,2025-04-12 16:00:22,Clear,Car,high
+345,12.842222,77.663571,Hosur Road,Minor,2024-11-27,13:24,2024-11-27 13:24:22,Clear,Auto,high
+346,12.921673,77.615705,Sarjapur Road,Moderate,2025-05-02,21:08,2025-05-02 21:08:22,Rain,Bike,medium
+347,12.836642,77.65068,Hosur Road,Moderate,2025-11-23,17:54,2025-11-23 17:54:22,Clear,Truck,high
+348,12.92026,77.597909,Bannerghatta Road,Minor,2025-08-06,08:22,2025-08-06 08:22:22,Clear,Truck,medium
+349,12.983379,77.594689,Old Madras Road,Severe,2023-08-29,19:54,2023-08-29 19:54:22,Heavy Rain,Bus,high
+350,12.973964,77.745816,Whitefield Main Road,Minor,2023-03-21,16:45,2023-03-21 16:45:22,Clear,Bike,high
+351,12.920586,77.636326,Outer Ring Road,Moderate,2025-08-08,07:18,2025-08-08 07:18:22,Heavy Rain,Truck,high
+352,12.982548,77.605242,Old Madras Road,Moderate,2023-12-17,08:07,2023-12-17 08:07:22,Clear,Bike,high
+353,12.93882,77.615848,Koramangala 80ft Road,Severe,2024-12-10,08:52,2024-12-10 08:52:22,Clear,Bus,low
+354,12.966755,77.694466,Marathahalli Bridge Road,Minor,2024-10-23,06:12,2024-10-23 06:12:22,Clear,Auto,high
+355,12.918981,77.600959,Sarjapur Road,Fatal,2023-05-23,15:09,2023-05-23 15:09:22,Clear,Auto,medium
+356,12.956643,77.697146,Marathahalli Bridge Road,Moderate,2025-08-11,13:15,2025-08-11 13:15:22,Fog,Truck,high
+357,12.928016,77.632178,Koramangala 80ft Road,Moderate,2024-11-22,08:34,2024-11-22 08:34:22,Clear,Bike,low
+358,12.917684,77.592467,Bannerghatta Road,Moderate,2025-11-06,19:12,2025-11-06 19:12:22,Clear,Auto,medium
+359,12.910705,77.607451,Sarjapur Road,Minor,2023-08-29,16:17,2023-08-29 16:17:22,Clear,Truck,medium
+360,12.916809,77.616213,Sarjapur Road,Minor,2024-10-31,09:54,2024-10-31 09:54:22,Rain,Car,medium
+361,13.100257,77.589697,Airport Road,Moderate,2025-11-08,06:38,2025-11-08 06:38:22,Rain,Bus,medium
+362,12.913373,77.609346,Sarjapur Road,Severe,2023-07-24,13:12,2023-07-24 13:12:22,Rain,Truck,medium
+363,12.949637,77.693143,Marathahalli Bridge Road,Minor,2025-12-28,13:49,2025-12-28 13:49:22,Clear,Bus,high
+364,12.846221,77.667989,Hosur Road,Moderate,2024-08-23,19:45,2024-08-23 19:45:22,Clear,Auto,high
+365,12.905669,77.651271,Outer Ring Road,Severe,2024-07-14,19:28,2024-07-14 19:28:22,Clear,Bike,high
+366,12.853458,77.654265,Hosur Road,Moderate,2025-01-21,11:37,2025-01-21 11:37:22,Clear,Auto,high
+367,13.095387,77.590895,Airport Road,Minor,2023-10-17,17:35,2023-10-17 17:35:22,Clear,Truck,medium
+368,13.100985,77.590782,Airport Road,Minor,2025-03-18,06:59,2025-03-18 06:59:22,Clear,Bus,medium
+369,12.9143,77.643302,Outer Ring Road,Fatal,2024-02-02,09:19,2024-02-02 09:19:22,Clear,Auto,high
+370,12.913399,77.619449,Sarjapur Road,Minor,2025-11-02,18:15,2025-11-02 18:15:22,Rain,Car,medium
+371,12.921599,77.646077,Outer Ring Road,Minor,2023-03-30,11:58,2023-03-30 11:58:22,Rain,Truck,high
+372,12.917525,77.605863,Sarjapur Road,Moderate,2023-10-15,19:37,2023-10-15 19:37:22,Clear,Auto,medium
+373,13.103657,77.598745,Airport Road,Severe,2023-12-19,17:48,2023-12-19 17:48:22,Fog,Auto,medium
+374,12.971018,77.611918,Old Madras Road,Minor,2025-05-20,15:16,2025-05-20 15:16:22,Fog,Truck,high
+375,12.964793,77.70291,Marathahalli Bridge Road,Severe,2025-07-24,17:51,2025-07-24 17:51:22,Clear,Bike,high
+376,12.976832,77.595461,Old Madras Road,Moderate,2025-03-19,01:03,2025-03-19 01:03:22,Clear,Truck,high
+377,12.972011,77.643441,Indiranagar 100ft Road,Moderate,2024-07-10,21:30,2024-07-10 21:30:22,Rain,Bus,low
+378,12.918779,77.58741,Bannerghatta Road,Moderate,2025-07-16,12:15,2025-07-16 12:15:22,Clear,Car,medium
+379,12.849182,77.669525,Hosur Road,Severe,2025-06-10,00:31,2025-06-10 00:31:22,Clear,Car,high
+380,12.919427,77.617154,Sarjapur Road,Minor,2025-04-23,20:05,2025-04-23 20:05:22,Clear,Truck,medium
+381,12.843042,77.66581,Hosur Road,Moderate,2025-08-31,17:01,2025-08-31 17:01:22,Clear,Truck,high
+382,12.92596,77.592532,Bannerghatta Road,Minor,2024-06-25,14:46,2024-06-25 14:46:22,Fog,Truck,medium
+383,12.978783,77.754906,Whitefield Main Road,Fatal,2023-11-08,23:37,2023-11-08 23:37:22,Rain,Car,high
+384,12.938879,77.619378,Koramangala 80ft Road,Minor,2023-06-18,22:06,2023-06-18 22:06:22,Clear,Truck,low
+385,12.970007,77.643643,Indiranagar 100ft Road,Minor,2023-08-14,23:22,2023-08-14 23:22:22,Clear,Bus,low
+386,12.983374,77.603532,Old Madras Road,Minor,2024-07-31,21:10,2024-07-31 21:10:22,Clear,Auto,high
+387,12.918052,77.598936,Bannerghatta Road,Severe,2023-11-21,09:53,2023-11-21 09:53:22,Clear,Auto,medium
+388,12.967613,77.740101,Whitefield Main Road,Minor,2024-01-10,16:30,2024-01-10 16:30:22,Clear,Bus,high
+389,12.918969,77.604652,Sarjapur Road,Minor,2025-05-01,00:49,2025-05-01 00:49:22,Clear,Bus,medium
+390,12.930173,77.593283,Bannerghatta Road,Moderate,2024-07-20,18:04,2024-07-20 18:04:22,Heavy Rain,Auto,medium
+391,12.977175,77.633293,Indiranagar 100ft Road,Moderate,2024-07-12,09:04,2024-07-12 09:04:22,Clear,Car,low
+392,12.908568,77.639232,Outer Ring Road,Moderate,2023-07-24,17:06,2023-07-24 17:06:22,Clear,Auto,high
+393,12.920662,77.643697,Outer Ring Road,Minor,2024-10-26,13:32,2024-10-26 13:32:22,Rain,Car,high
+394,13.110656,77.590261,Airport Road,Moderate,2024-11-07,09:16,2024-11-07 09:16:22,Clear,Bike,medium
+395,12.91457,77.608865,Sarjapur Road,Moderate,2023-03-04,20:17,2023-03-04 20:17:22,Rain,Truck,medium
+396,12.939909,77.622391,Koramangala 80ft Road,Moderate,2023-12-30,13:42,2023-12-30 13:42:22,Clear,Bus,low
+397,12.966845,77.709175,Marathahalli Bridge Road,Severe,2026-02-15,08:11,2026-02-15 08:11:22,Rain,Car,high
+398,12.988152,77.642905,Indiranagar 100ft Road,Severe,2023-09-16,17:10,2023-09-16 17:10:22,Clear,Auto,low
+399,12.93833,77.617029,Koramangala 80ft Road,Minor,2024-06-23,16:24,2024-06-23 16:24:22,Rain,Truck,low
+400,12.908409,77.637791,Outer Ring Road,Minor,2024-09-21,08:25,2024-09-21 08:25:22,Clear,Bike,high
+401,12.908206,77.63581,Outer Ring Road,Severe,2026-02-13,09:50,2026-02-13 09:50:22,Clear,Truck,high
+402,12.982897,77.597502,Old Madras Road,Moderate,2024-03-16,19:54,2024-03-16 19:54:22,Clear,Bike,high
+403,12.934403,77.626526,Koramangala 80ft Road,Minor,2025-12-17,19:03,2025-12-17 19:03:22,Heavy Rain,Car,low
+404,12.987742,77.636206,Indiranagar 100ft Road,Moderate,2024-02-10,20:45,2024-02-10 20:45:22,Fog,Bike,low
+405,12.918037,77.602819,Sarjapur Road,Minor,2023-10-25,05:10,2023-10-25 05:10:22,Fog,Car,medium
+406,12.944729,77.632998,Koramangala 80ft Road,Moderate,2025-02-16,19:36,2025-02-16 19:36:22,Clear,Bike,low
+407,12.950311,77.699507,Marathahalli Bridge Road,Moderate,2025-12-20,08:39,2025-12-20 08:39:22,Clear,Truck,high
+408,12.919634,77.637978,Outer Ring Road,Fatal,2023-12-15,18:41,2023-12-15 18:41:22,Clear,Car,high
+409,12.916247,77.594618,Bannerghatta Road,Severe,2023-07-30,19:44,2023-07-30 19:44:22,Clear,Auto,medium
+410,12.917273,77.603435,Sarjapur Road,Moderate,2024-10-09,11:27,2024-10-09 11:27:22,Clear,Bike,medium
+411,12.917232,77.654594,Outer Ring Road,Severe,2025-11-10,08:42,2025-11-10 08:42:22,Clear,Car,high
+412,12.966865,77.599334,Old Madras Road,Severe,2024-10-24,16:44,2024-10-24 16:44:22,Rain,Auto,high
+413,12.920067,77.609441,Sarjapur Road,Fatal,2025-05-23,02:48,2025-05-23 02:48:22,Clear,Car,medium
+414,12.915314,77.612325,Sarjapur Road,Minor,2024-02-12,21:15,2024-02-12 21:15:22,Fog,Truck,medium
+415,12.907854,77.607425,Sarjapur Road,Fatal,2025-08-18,07:24,2025-08-18 07:24:22,Clear,Truck,medium
+416,12.941828,77.625449,Koramangala 80ft Road,Severe,2023-08-13,15:36,2023-08-13 15:36:22,Clear,Bus,low
+417,12.909405,77.610171,Sarjapur Road,Severe,2023-03-13,17:31,2023-03-13 17:31:22,Clear,Auto,medium
+418,12.917716,77.61566,Sarjapur Road,Moderate,2025-03-01,21:16,2025-03-01 21:16:22,Clear,Bike,medium
+419,12.966004,77.748242,Whitefield Main Road,Moderate,2025-03-12,21:45,2025-03-12 21:45:22,Clear,Auto,high
+420,12.973664,77.746338,Whitefield Main Road,Minor,2025-02-17,16:28,2025-02-17 16:28:22,Clear,Car,high
+421,12.970127,77.605492,Old Madras Road,Moderate,2023-12-29,04:41,2023-12-29 04:41:22,Rain,Car,high
+422,12.975993,77.604123,Old Madras Road,Moderate,2023-06-28,13:27,2023-06-28 13:27:22,Clear,Truck,high
+423,12.93771,77.619383,Koramangala 80ft Road,Minor,2025-10-17,18:38,2025-10-17 18:38:22,Clear,Truck,low
+424,12.906638,77.636675,Outer Ring Road,Moderate,2025-08-12,17:08,2025-08-12 17:08:22,Clear,Auto,high
+425,12.981984,77.599877,Old Madras Road,Fatal,2024-10-28,07:32,2024-10-28 07:32:22,Clear,Auto,high
+426,12.914134,77.60327,Sarjapur Road,Minor,2023-06-04,14:07,2023-06-04 14:07:22,Clear,Auto,medium
+427,13.105378,77.5933,Airport Road,Fatal,2025-01-16,09:27,2025-01-16 09:27:22,Rain,Auto,medium
+428,12.936866,77.633626,Koramangala 80ft Road,Minor,2023-03-13,16:30,2023-03-13 16:30:22,Fog,Bike,low
+429,12.953328,77.702542,Marathahalli Bridge Road,Moderate,2026-01-22,06:20,2026-01-22 06:20:22,Clear,Truck,high
+430,13.102046,77.594686,Airport Road,Minor,2026-02-18,20:50,2026-02-18 20:50:22,Rain,Auto,medium
+431,12.92413,77.599252,Bannerghatta Road,Severe,2025-01-30,14:53,2025-01-30 14:53:22,Clear,Car,medium
+432,12.902269,77.639828,Outer Ring Road,Severe,2024-02-14,08:50,2024-02-14 08:50:22,Clear,Car,high
+433,12.91968,77.606005,Sarjapur Road,Minor,2023-10-27,07:00,2023-10-27 07:00:22,Clear,Bus,medium
+434,12.841911,77.657494,Hosur Road,Moderate,2025-08-25,18:32,2025-08-25 18:32:22,Clear,Bike,high
+435,12.921442,77.607131,Sarjapur Road,Moderate,2023-11-05,17:14,2023-11-05 17:14:22,Clear,Auto,medium
+436,12.913456,77.610467,Sarjapur Road,Minor,2023-12-18,06:28,2023-12-18 06:28:22,Clear,Car,medium
+437,12.922913,77.584675,Bannerghatta Road,Severe,2025-10-06,18:00,2025-10-06 18:00:22,Clear,Car,medium
+438,12.922508,77.610206,Sarjapur Road,Severe,2023-05-28,08:16,2023-05-28 08:16:22,Clear,Auto,medium
+439,12.921491,77.638819,Outer Ring Road,Minor,2025-03-01,20:19,2025-03-01 20:19:22,Clear,Bus,high
+440,13.096134,77.587597,Airport Road,Minor,2024-12-26,18:44,2024-12-26 18:44:22,Clear,Truck,medium
+441,12.940027,77.626271,Koramangala 80ft Road,Moderate,2025-04-11,21:40,2025-04-11 21:40:22,Rain,Auto,low
+442,12.975052,77.754486,Whitefield Main Road,Moderate,2023-11-26,12:31,2023-11-26 12:31:22,Clear,Bus,high
+443,12.962378,77.707075,Marathahalli Bridge Road,Minor,2023-04-30,21:43,2023-04-30 21:43:22,Clear,Truck,high
+444,12.913419,77.64967,Outer Ring Road,Moderate,2023-12-24,18:27,2023-12-24 18:27:22,Clear,Bike,high
+445,12.907548,77.619605,Sarjapur Road,Minor,2025-04-09,07:49,2025-04-09 07:49:22,Clear,Auto,medium
+446,12.977401,77.64772,Indiranagar 100ft Road,Severe,2024-04-06,08:03,2024-04-06 08:03:22,Clear,Truck,low
+447,12.962306,77.70896,Marathahalli Bridge Road,Minor,2023-12-15,11:07,2023-12-15 11:07:22,Clear,Auto,high
+448,12.91185,77.609334,Sarjapur Road,Severe,2023-05-07,17:32,2023-05-07 17:32:22,Rain,Truck,medium
+449,12.926426,77.604479,Sarjapur Road,Minor,2025-01-03,10:26,2025-01-03 10:26:22,Clear,Bike,medium
+450,12.927398,77.61769,Koramangala 80ft Road,Severe,2026-01-30,02:49,2026-01-30 02:49:22,Fog,Truck,low
+451,13.091945,77.600213,Airport Road,Moderate,2024-01-13,09:08,2024-01-13 09:08:22,Clear,Truck,medium
+452,12.980531,77.594134,Old Madras Road,Minor,2024-09-07,15:06,2024-09-07 15:06:22,Clear,Auto,high
+453,12.984439,77.603564,Old Madras Road,Severe,2025-01-06,08:10,2025-01-06 08:10:22,Clear,Bike,high
+454,12.966431,77.705889,Marathahalli Bridge Road,Moderate,2023-06-25,19:16,2023-06-25 19:16:22,Clear,Auto,high
+455,12.980266,77.641122,Indiranagar 100ft Road,Moderate,2025-09-28,12:44,2025-09-28 12:44:22,Clear,Bus,low
+456,12.928436,77.623275,Koramangala 80ft Road,Minor,2023-10-04,01:21,2023-10-04 01:21:22,Clear,Truck,low
+457,12.972983,77.642649,Indiranagar 100ft Road,Moderate,2024-06-20,14:41,2024-06-20 14:41:22,Rain,Car,low
+458,12.949757,77.707231,Marathahalli Bridge Road,Moderate,2023-09-11,06:28,2023-09-11 06:28:22,Clear,Bike,high
+459,12.966386,77.754079,Whitefield Main Road,Moderate,2025-01-11,15:31,2025-01-11 15:31:22,Clear,Truck,high
+460,12.841638,77.653229,Hosur Road,Minor,2023-02-28,21:00,2023-02-28 21:00:22,Clear,Truck,high
+461,12.924822,77.614719,Sarjapur Road,Moderate,2023-06-19,06:58,2023-06-19 06:58:22,Clear,Auto,medium
+462,12.849492,77.665502,Hosur Road,Minor,2024-01-15,08:29,2024-01-15 08:29:22,Clear,Bike,high
+463,12.968004,77.741336,Whitefield Main Road,Moderate,2023-11-30,02:20,2023-11-30 02:20:22,Rain,Bus,high
+464,12.971333,77.747482,Whitefield Main Road,Moderate,2024-05-29,07:14,2024-05-29 07:14:22,Clear,Car,high
+465,12.957177,77.692154,Marathahalli Bridge Road,Minor,2025-03-30,07:34,2025-03-30 07:34:22,Clear,Auto,high
+466,12.917875,77.600708,Sarjapur Road,Moderate,2024-02-20,08:13,2024-02-20 08:13:22,Clear,Truck,medium
+467,12.950353,77.695875,Marathahalli Bridge Road,Moderate,2026-01-25,13:29,2026-01-25 13:29:22,Clear,Auto,high
+468,12.924325,77.60622,Sarjapur Road,Moderate,2024-12-23,13:40,2024-12-23 13:40:22,Clear,Truck,medium
+469,13.098734,77.598124,Airport Road,Minor,2023-06-23,10:04,2023-06-23 10:04:22,Clear,Car,medium
+470,12.915535,77.601224,Bannerghatta Road,Severe,2024-03-10,17:08,2024-03-10 17:08:22,Clear,Truck,medium
+471,12.912144,77.649522,Outer Ring Road,Minor,2023-05-09,08:51,2023-05-09 08:51:22,Clear,Car,high
+472,12.838977,77.656546,Hosur Road,Severe,2023-07-19,20:57,2023-07-19 20:57:22,Rain,Bus,high
+473,12.962065,77.755149,Whitefield Main Road,Moderate,2023-06-22,13:07,2023-06-22 13:07:22,Clear,Car,high
+474,12.923667,77.588213,Bannerghatta Road,Severe,2023-07-16,04:40,2023-07-16 04:40:22,Fog,Truck,medium
+475,12.967599,77.709795,Marathahalli Bridge Road,Moderate,2024-02-14,05:55,2024-02-14 05:55:22,Rain,Car,high
+476,12.850427,77.662821,Hosur Road,Minor,2026-01-25,16:44,2026-01-25 16:44:22,Rain,Truck,high
+477,12.939443,77.627005,Koramangala 80ft Road,Minor,2024-05-04,08:22,2024-05-04 08:22:22,Clear,Auto,low
+478,12.904122,77.635676,Outer Ring Road,Severe,2024-04-22,09:17,2024-04-22 09:17:22,Rain,Bus,high
+479,12.970074,77.632135,Indiranagar 100ft Road,Minor,2025-12-16,01:05,2025-12-16 01:05:22,Clear,Auto,low
+480,12.85117,77.658677,Hosur Road,Minor,2025-05-04,08:59,2025-05-04 08:59:22,Fog,Car,high
+481,12.972315,77.595091,Old Madras Road,Minor,2025-03-05,10:24,2025-03-05 10:24:22,Clear,Truck,high
+482,12.957029,77.700059,Marathahalli Bridge Road,Moderate,2023-06-02,17:16,2023-06-02 17:16:22,Rain,Auto,high
+483,12.910945,77.650055,Outer Ring Road,Fatal,2023-02-28,09:20,2023-02-28 09:20:22,Clear,Auto,high
+484,12.957887,77.708938,Marathahalli Bridge Road,Minor,2023-11-04,21:46,2023-11-04 21:46:22,Rain,Bus,high
+485,12.942262,77.625957,Koramangala 80ft Road,Moderate,2023-12-03,08:49,2023-12-03 08:49:22,Clear,Truck,low
+486,12.980713,77.608324,Old Madras Road,Minor,2024-04-10,05:00,2024-04-10 05:00:22,Clear,Bus,high
+487,12.841591,77.658944,Hosur Road,Fatal,2024-07-09,17:40,2024-07-09 17:40:22,Rain,Auto,high
+488,12.843794,77.650409,Hosur Road,Minor,2025-01-19,10:36,2025-01-19 10:36:22,Clear,Auto,high
+489,12.956741,77.709778,Marathahalli Bridge Road,Minor,2023-07-24,08:01,2023-07-24 08:01:22,Rain,Bike,high
+490,12.841029,77.652896,Hosur Road,Moderate,2023-06-08,09:46,2023-06-08 09:46:22,Clear,Auto,high
+491,12.977569,77.644385,Indiranagar 100ft Road,Moderate,2023-09-21,19:10,2023-09-21 19:10:22,Clear,Auto,low
+492,12.938784,77.626973,Koramangala 80ft Road,Moderate,2023-08-07,09:10,2023-08-07 09:10:22,Fog,Car,low
+493,12.912182,77.653846,Outer Ring Road,Fatal,2025-03-23,20:58,2025-03-23 20:58:22,Rain,Bike,high
+494,12.985187,77.596542,Old Madras Road,Minor,2025-10-26,11:46,2025-10-26 11:46:22,Rain,Bike,high
+495,12.972156,77.597748,Old Madras Road,Severe,2024-01-19,14:12,2024-01-19 14:12:22,Rain,Truck,high
+496,12.986433,77.642332,Indiranagar 100ft Road,Minor,2025-04-29,17:35,2025-04-29 17:35:22,Clear,Car,low
+497,13.095169,77.588904,Airport Road,Moderate,2023-11-26,11:51,2023-11-26 11:51:22,Clear,Bike,medium
+498,12.920071,77.654341,Outer Ring Road,Minor,2025-06-24,15:44,2025-06-24 15:44:22,Clear,Bike,high
+499,12.972926,77.644311,Indiranagar 100ft Road,Moderate,2025-11-13,14:14,2025-11-13 14:14:22,Clear,Bike,low
+500,12.913535,77.644945,Outer Ring Road,Minor,2024-10-07,19:36,2024-10-07 19:36:22,Clear,Auto,high
+501,12.912211,77.635484,Outer Ring Road,Moderate,2024-05-15,12:42,2024-05-15 12:42:22,Fog,Truck,high
+502,12.85312,77.656519,Hosur Road,Minor,2026-01-17,17:28,2026-01-17 17:28:22,Clear,Auto,high
+503,12.921216,77.616908,Sarjapur Road,Moderate,2025-05-09,17:19,2025-05-09 17:19:22,Clear,Truck,medium
+504,12.837962,77.655852,Hosur Road,Moderate,2025-12-27,19:58,2025-12-27 19:58:22,Rain,Truck,high
+505,12.974022,77.610245,Old Madras Road,Moderate,2024-01-02,16:45,2024-01-02 16:45:22,Rain,Bus,high
+506,12.924137,77.590674,Bannerghatta Road,Minor,2025-06-23,11:11,2025-06-23 11:11:22,Clear,Truck,medium
+507,12.914938,77.604367,Sarjapur Road,Minor,2023-12-02,17:59,2023-12-02 17:59:22,Clear,Auto,medium
+508,12.974026,77.641199,Indiranagar 100ft Road,Minor,2023-09-09,19:06,2023-09-09 19:06:22,Clear,Car,low
+509,12.91241,77.636395,Outer Ring Road,Minor,2023-09-12,17:55,2023-09-12 17:55:22,Clear,Bike,high
+510,12.933761,77.623356,Koramangala 80ft Road,Severe,2024-08-27,15:37,2024-08-27 15:37:22,Clear,Bus,low
+511,12.842188,77.651399,Hosur Road,Severe,2025-02-05,10:32,2025-02-05 10:32:22,Clear,Truck,high
+512,12.921978,77.610358,Sarjapur Road,Severe,2024-03-16,06:51,2024-03-16 06:51:22,Clear,Bus,medium
+513,12.840863,77.657677,Hosur Road,Moderate,2024-03-01,19:14,2024-03-01 19:14:22,Clear,Auto,high
+514,12.972535,77.604662,Old Madras Road,Minor,2023-03-13,06:03,2023-03-13 06:03:22,Rain,Bike,high
+515,12.977654,77.6077,Old Madras Road,Moderate,2024-05-03,08:44,2024-05-03 08:44:22,Rain,Bike,high
+516,12.844562,77.654171,Hosur Road,Minor,2023-03-26,10:25,2023-03-26 10:25:22,Fog,Bike,high
+517,12.962051,77.703621,Marathahalli Bridge Road,Moderate,2024-10-31,09:37,2024-10-31 09:37:22,Clear,Bus,high
+518,13.097545,77.596993,Airport Road,Minor,2024-02-10,18:15,2024-02-10 18:15:22,Clear,Bike,medium
+519,12.905478,77.647759,Outer Ring Road,Minor,2025-08-16,09:59,2025-08-16 09:59:22,Clear,Bus,high
+520,13.096562,77.603363,Airport Road,Minor,2023-10-14,06:00,2023-10-14 06:00:22,Clear,Bike,medium
+521,12.931229,77.626738,Koramangala 80ft Road,Moderate,2023-12-26,17:51,2023-12-26 17:51:22,Rain,Truck,low
+522,13.096064,77.588826,Airport Road,Moderate,2023-04-04,21:10,2023-04-04 21:10:22,Clear,Bus,medium
+523,12.979619,77.638831,Indiranagar 100ft Road,Severe,2025-10-13,09:30,2025-10-13 09:30:22,Fog,Car,low
+524,12.920519,77.590877,Bannerghatta Road,Moderate,2025-10-01,14:26,2025-10-01 14:26:22,Rain,Truck,medium
+525,12.917488,77.591268,Bannerghatta Road,Minor,2024-10-26,08:25,2024-10-26 08:25:22,Rain,Bike,medium
+526,12.960481,77.753144,Whitefield Main Road,Minor,2024-06-14,02:42,2024-06-14 02:42:22,Clear,Bike,high
+527,12.984582,77.650755,Indiranagar 100ft Road,Severe,2023-12-19,07:40,2023-12-19 07:40:22,Clear,Truck,low
+528,12.850213,77.668362,Hosur Road,Severe,2023-05-31,13:25,2023-05-31 13:25:22,Rain,Car,high
+529,12.963337,77.694807,Marathahalli Bridge Road,Minor,2024-02-17,18:36,2024-02-17 18:36:22,Clear,Bike,high
+530,12.969147,77.740008,Whitefield Main Road,Minor,2025-11-04,17:48,2025-11-04 17:48:22,Clear,Truck,high
+531,12.915331,77.593812,Bannerghatta Road,Minor,2024-04-03,07:08,2024-04-03 07:08:22,Clear,Auto,medium
+532,12.841028,77.668131,Hosur Road,Minor,2025-03-22,21:24,2025-03-22 21:24:22,Rain,Bike,high
+533,12.957286,77.694211,Marathahalli Bridge Road,Minor,2023-03-27,03:37,2023-03-27 03:37:22,Fog,Bike,high
+534,12.970583,77.759426,Whitefield Main Road,Minor,2026-01-31,06:27,2026-01-31 06:27:22,Clear,Bus,high
+535,12.966602,77.701887,Marathahalli Bridge Road,Fatal,2025-07-01,15:55,2025-07-01 15:55:22,Rain,Car,high
+536,12.912975,77.600845,Sarjapur Road,Severe,2024-07-02,23:23,2024-07-02 23:23:22,Clear,Car,medium
+537,12.903265,77.643089,Outer Ring Road,Minor,2023-10-10,19:19,2023-10-10 19:19:22,Rain,Bike,high
+538,12.838148,77.656648,Hosur Road,Minor,2024-01-10,12:11,2024-01-10 12:11:22,Clear,Bike,high
+539,12.975675,77.63383,Indiranagar 100ft Road,Moderate,2023-11-15,22:35,2023-11-15 22:35:22,Rain,Auto,low
+540,12.934739,77.629605,Koramangala 80ft Road,Moderate,2023-10-08,03:15,2023-10-08 03:15:22,Rain,Truck,low
+541,12.944502,77.631219,Koramangala 80ft Road,Moderate,2024-07-22,12:03,2024-07-22 12:03:22,Fog,Bus,low
+542,12.974729,77.595762,Old Madras Road,Minor,2023-11-19,00:51,2023-11-19 00:51:22,Fog,Bike,high
+543,13.102806,77.590613,Airport Road,Moderate,2025-11-16,06:17,2025-11-16 06:17:22,Clear,Car,medium
+544,12.980152,77.646321,Indiranagar 100ft Road,Moderate,2023-08-19,19:44,2023-08-19 19:44:22,Clear,Truck,low
+545,12.987019,77.633078,Indiranagar 100ft Road,Minor,2023-03-28,13:58,2023-03-28 13:58:22,Clear,Bus,low
+546,12.914866,77.635612,Outer Ring Road,Minor,2024-12-12,08:57,2024-12-12 08:57:22,Rain,Bike,high
+547,12.961127,77.69558,Marathahalli Bridge Road,Moderate,2023-08-26,10:14,2023-08-26 10:14:22,Clear,Bus,high
+548,12.982755,77.598192,Old Madras Road,Severe,2024-12-30,06:39,2024-12-30 06:39:22,Fog,Auto,high
+549,12.949633,77.704198,Marathahalli Bridge Road,Minor,2023-11-10,16:30,2023-11-10 16:30:22,Clear,Car,high
+550,12.924289,77.607135,Sarjapur Road,Minor,2023-05-04,19:56,2023-05-04 19:56:22,Heavy Rain,Bus,medium
+551,12.915538,77.602654,Sarjapur Road,Moderate,2024-11-29,17:41,2024-11-29 17:41:22,Clear,Truck,medium
+552,12.927119,77.62538,Koramangala 80ft Road,Moderate,2025-10-29,19:19,2025-10-29 19:19:22,Clear,Auto,low
+553,13.109347,77.589062,Airport Road,Minor,2024-02-02,09:50,2024-02-02 09:50:22,Clear,Auto,medium
+554,12.972957,77.75222,Whitefield Main Road,Minor,2024-04-22,18:53,2024-04-22 18:53:22,Clear,Truck,high
+555,12.978084,77.750606,Whitefield Main Road,Minor,2024-03-28,15:01,2024-03-28 15:01:22,Clear,Car,high
+556,12.907871,77.644694,Outer Ring Road,Severe,2023-05-24,02:15,2023-05-24 02:15:22,Clear,Auto,high
+557,13.104234,77.586913,Airport Road,Minor,2026-01-28,02:38,2026-01-28 02:38:22,Rain,Truck,medium
+558,12.913367,77.646899,Outer Ring Road,Moderate,2025-09-18,10:32,2025-09-18 10:32:22,Clear,Bike,high
+559,13.09765,77.599107,Airport Road,Minor,2023-12-04,10:55,2023-12-04 10:55:22,Rain,Car,medium
+560,12.85243,77.667179,Hosur Road,Minor,2025-07-30,07:44,2025-07-30 07:44:22,Rain,Car,high
+561,12.930965,77.616553,Koramangala 80ft Road,Minor,2024-05-04,17:39,2024-05-04 17:39:22,Clear,Car,low
+562,12.956733,77.698402,Marathahalli Bridge Road,Moderate,2026-01-13,10:12,2026-01-13 10:12:22,Heavy Rain,Bike,high
+563,13.106789,77.603778,Airport Road,Moderate,2023-07-17,06:25,2023-07-17 06:25:22,Rain,Car,medium
+564,12.962499,77.744185,Whitefield Main Road,Minor,2025-06-16,10:47,2025-06-16 10:47:22,Clear,Auto,high
+565,12.95092,77.699836,Marathahalli Bridge Road,Moderate,2023-08-22,19:07,2023-08-22 19:07:22,Rain,Truck,high
+566,12.916136,77.602743,Sarjapur Road,Minor,2023-05-21,10:47,2023-05-21 10:47:22,Clear,Auto,medium
+567,12.927765,77.600594,Bannerghatta Road,Severe,2024-10-10,18:08,2024-10-10 18:08:22,Clear,Bike,medium
+568,12.962896,77.693515,Marathahalli Bridge Road,Minor,2025-04-22,01:10,2025-04-22 01:10:22,Clear,Truck,high
+569,12.981023,77.638903,Indiranagar 100ft Road,Minor,2023-10-22,18:45,2023-10-22 18:45:22,Clear,Truck,low
+570,12.988095,77.635913,Indiranagar 100ft Road,Minor,2024-10-19,13:54,2024-10-19 13:54:22,Fog,Bike,low
+571,12.919132,77.640793,Outer Ring Road,Minor,2023-07-25,18:51,2023-07-25 18:51:22,Clear,Truck,high
+572,12.90621,77.648543,Outer Ring Road,Severe,2024-06-16,06:45,2024-06-16 06:45:22,Clear,Truck,high
+573,12.972642,77.750376,Whitefield Main Road,Moderate,2024-08-17,12:10,2024-08-17 12:10:22,Rain,Bike,high
+574,12.973362,77.640898,Indiranagar 100ft Road,Minor,2023-05-09,14:06,2023-05-09 14:06:22,Clear,Truck,low
+575,12.852982,77.654206,Hosur Road,Severe,2024-12-28,15:56,2024-12-28 15:56:22,Heavy Rain,Car,high
+576,12.967198,77.609793,Old Madras Road,Severe,2025-03-20,07:21,2025-03-20 07:21:22,Clear,Truck,high
+577,12.92232,77.588809,Bannerghatta Road,Minor,2025-06-10,17:58,2025-06-10 17:58:22,Clear,Car,medium
+578,12.931987,77.615508,Koramangala 80ft Road,Severe,2025-02-19,08:43,2025-02-19 08:43:22,Clear,Bus,low
+579,12.977093,77.611694,Old Madras Road,Minor,2025-07-17,06:15,2025-07-17 06:15:22,Clear,Car,high
+580,12.968155,77.607861,Old Madras Road,Moderate,2023-10-25,08:50,2023-10-25 08:50:22,Rain,Bike,high
+581,12.904493,77.649077,Outer Ring Road,Moderate,2023-11-14,07:36,2023-11-14 07:36:22,Clear,Truck,high
+582,12.919724,77.589639,Bannerghatta Road,Severe,2025-03-04,23:58,2025-03-04 23:58:22,Rain,Car,medium
+583,12.910929,77.603594,Sarjapur Road,Minor,2025-12-27,08:57,2025-12-27 08:57:22,Clear,Bus,medium
+584,13.101322,77.602307,Airport Road,Minor,2025-11-22,20:44,2025-11-22 20:44:22,Clear,Car,medium
+585,13.102469,77.589978,Airport Road,Minor,2024-02-23,09:26,2024-02-23 09:26:22,Rain,Bus,medium
+586,12.969194,77.740663,Whitefield Main Road,Minor,2023-11-22,02:12,2023-11-22 02:12:22,Clear,Bike,high
+587,12.852419,77.658589,Hosur Road,Severe,2024-06-14,18:01,2024-06-14 18:01:22,Clear,Auto,high
+588,12.978321,77.637586,Indiranagar 100ft Road,Minor,2024-10-17,17:45,2024-10-17 17:45:22,Clear,Car,low
+589,12.954923,77.69309,Marathahalli Bridge Road,Minor,2023-09-07,18:01,2023-09-07 18:01:22,Clear,Bus,high
+590,12.845245,77.652065,Hosur Road,Minor,2024-09-16,19:17,2024-09-16 19:17:22,Rain,Truck,high
+591,12.973462,77.605711,Old Madras Road,Moderate,2025-11-01,07:50,2025-11-01 07:50:22,Clear,Truck,high
+592,12.907194,77.64721,Outer Ring Road,Severe,2024-02-03,17:08,2024-02-03 17:08:22,Clear,Truck,high
+593,12.972014,77.604828,Old Madras Road,Minor,2023-07-31,07:45,2023-07-31 07:45:22,Rain,Truck,high
+594,12.963674,77.695377,Marathahalli Bridge Road,Minor,2025-04-18,06:33,2025-04-18 06:33:22,Fog,Auto,high
+595,12.930562,77.586047,Bannerghatta Road,Moderate,2026-01-23,12:46,2026-01-23 12:46:22,Rain,Bus,medium
+596,12.973995,77.746344,Whitefield Main Road,Minor,2024-09-23,20:45,2024-09-23 20:45:22,Rain,Bike,high
+597,13.098017,77.605741,Airport Road,Minor,2023-12-02,18:01,2023-12-02 18:01:22,Heavy Rain,Auto,medium
+598,12.98762,77.640561,Indiranagar 100ft Road,Minor,2024-02-22,20:41,2024-02-22 20:41:22,Clear,Car,low
+599,12.838628,77.667477,Hosur Road,Minor,2024-11-12,23:53,2024-11-12 23:53:22,Clear,Auto,high
+600,12.92117,77.613519,Sarjapur Road,Minor,2024-11-21,12:46,2024-11-21 12:46:22,Clear,Car,medium
+601,12.930702,77.620177,Koramangala 80ft Road,Fatal,2023-08-29,19:33,2023-08-29 19:33:22,Clear,Bus,low
+602,12.971607,77.608405,Old Madras Road,Minor,2025-05-05,12:52,2025-05-05 12:52:22,Clear,Car,high
+603,12.854843,77.650505,Hosur Road,Moderate,2025-08-07,07:59,2025-08-07 07:59:22,Rain,Bike,high
+604,12.983471,77.595893,Old Madras Road,Moderate,2023-09-15,18:09,2023-09-15 18:09:22,Clear,Auto,high
+605,12.935017,77.623675,Koramangala 80ft Road,Moderate,2025-09-02,09:24,2025-09-02 09:24:22,Heavy Rain,Bus,low
+606,12.922219,77.612785,Sarjapur Road,Fatal,2023-03-19,13:11,2023-03-19 13:11:22,Clear,Bus,medium
+607,12.974941,77.596611,Old Madras Road,Minor,2024-10-12,18:26,2024-10-12 18:26:22,Clear,Car,high
+608,12.961159,77.695123,Marathahalli Bridge Road,Severe,2023-04-03,19:38,2023-04-03 19:38:22,Rain,Bike,high
+609,12.973021,77.599664,Old Madras Road,Severe,2024-12-19,07:46,2024-12-19 07:46:22,Clear,Auto,high
+610,12.904149,77.63962,Outer Ring Road,Minor,2023-11-08,13:53,2023-11-08 13:53:22,Clear,Bike,high
+611,13.108869,77.589823,Airport Road,Moderate,2023-09-19,11:11,2023-09-19 11:11:22,Fog,Bike,medium
+612,12.915687,77.620074,Sarjapur Road,Minor,2023-10-02,20:37,2023-10-02 20:37:22,Clear,Bike,medium
+613,12.850244,77.668327,Hosur Road,Moderate,2023-07-18,06:19,2023-07-18 06:19:22,Clear,Bike,high
+614,12.919452,77.601423,Sarjapur Road,Severe,2023-05-11,16:19,2023-05-11 16:19:22,Rain,Bike,medium
+615,12.902616,77.64481,Outer Ring Road,Severe,2023-12-03,14:12,2023-12-03 14:12:22,Clear,Auto,high
+616,12.915084,77.585818,Bannerghatta Road,Minor,2023-05-26,17:08,2023-05-26 17:08:22,Clear,Auto,medium
+617,12.975864,77.632461,Indiranagar 100ft Road,Moderate,2025-11-26,23:34,2025-11-26 23:34:22,Clear,Car,low
+618,12.979971,77.594176,Old Madras Road,Minor,2024-10-10,21:13,2024-10-10 21:13:22,Clear,Truck,high
+619,12.915832,77.593562,Bannerghatta Road,Severe,2024-01-12,14:06,2024-01-12 14:06:22,Clear,Auto,medium
+620,12.910805,77.611798,Sarjapur Road,Minor,2023-09-27,08:31,2023-09-27 08:31:22,Clear,Bus,medium
+621,12.966147,77.759377,Whitefield Main Road,Moderate,2024-01-05,09:06,2024-01-05 09:06:22,Rain,Truck,high
+622,12.97821,77.647604,Indiranagar 100ft Road,Minor,2023-10-24,05:23,2023-10-24 05:23:22,Rain,Auto,low
+623,12.977781,77.613027,Old Madras Road,Moderate,2023-06-11,07:25,2023-06-11 07:25:22,Clear,Car,high
+624,12.847477,77.668849,Hosur Road,Minor,2024-02-28,20:08,2024-02-28 20:08:22,Clear,Truck,high
+625,12.960492,77.694679,Marathahalli Bridge Road,Moderate,2024-06-11,15:55,2024-06-11 15:55:22,Rain,Auto,high
+626,12.959587,77.70747,Marathahalli Bridge Road,Minor,2025-01-24,05:11,2025-01-24 05:11:22,Clear,Auto,high
+627,12.851761,77.660566,Hosur Road,Moderate,2024-08-17,13:54,2024-08-17 13:54:22,Clear,Car,high
+628,12.944237,77.631626,Koramangala 80ft Road,Fatal,2025-04-04,11:22,2025-04-04 11:22:22,Clear,Truck,low
+629,12.932055,77.592393,Bannerghatta Road,Minor,2024-01-30,03:13,2024-01-30 03:13:22,Clear,Bike,medium
+630,12.843423,77.664151,Hosur Road,Moderate,2024-03-02,23:56,2024-03-02 23:56:22,Rain,Truck,high
+631,12.966261,77.699448,Marathahalli Bridge Road,Minor,2024-04-06,19:32,2024-04-06 19:32:22,Clear,Auto,high
+632,12.972187,77.59991,Old Madras Road,Minor,2024-11-05,21:00,2024-11-05 21:00:22,Clear,Auto,high
+633,12.966911,77.710976,Marathahalli Bridge Road,Minor,2024-07-27,23:19,2024-07-27 23:19:22,Rain,Auto,high
+634,13.091911,77.596355,Airport Road,Minor,2024-01-22,08:23,2024-01-22 08:23:22,Clear,Auto,medium
+635,12.941555,77.617168,Koramangala 80ft Road,Moderate,2025-01-19,08:36,2025-01-19 08:36:22,Rain,Bus,low
+636,12.963905,77.741429,Whitefield Main Road,Severe,2024-07-04,13:25,2024-07-04 13:25:22,Rain,Car,high
+637,12.977674,77.64391,Indiranagar 100ft Road,Severe,2025-10-26,06:04,2025-10-26 06:04:22,Rain,Bus,low
+638,12.918389,77.589307,Bannerghatta Road,Minor,2024-11-19,04:31,2024-11-19 04:31:22,Clear,Auto,medium
+639,12.978359,77.647693,Indiranagar 100ft Road,Severe,2024-09-12,19:43,2024-09-12 19:43:22,Heavy Rain,Car,low
+640,12.914569,77.604302,Sarjapur Road,Moderate,2025-06-12,03:50,2025-06-12 03:50:22,Clear,Bus,medium
+641,12.968762,77.647869,Indiranagar 100ft Road,Minor,2025-10-04,16:17,2025-10-04 16:17:22,Clear,Car,low
+642,13.100362,77.596548,Airport Road,Minor,2024-02-15,07:19,2024-02-15 07:19:22,Clear,Truck,medium
+643,12.96268,77.757861,Whitefield Main Road,Minor,2025-04-27,22:01,2025-04-27 22:01:22,Rain,Car,high
+644,12.933702,77.59049,Bannerghatta Road,Moderate,2025-01-13,18:18,2025-01-13 18:18:22,Clear,Bus,medium
+645,12.911174,77.618928,Sarjapur Road,Moderate,2023-10-18,20:13,2023-10-18 20:13:22,Clear,Bike,medium
+646,12.944422,77.615475,Koramangala 80ft Road,Minor,2024-02-27,16:50,2024-02-27 16:50:22,Clear,Bike,low
+647,12.987783,77.649751,Indiranagar 100ft Road,Minor,2023-06-30,09:42,2023-06-30 09:42:22,Clear,Bus,low
+648,12.930279,77.596086,Bannerghatta Road,Moderate,2023-04-22,17:05,2023-04-22 17:05:22,Clear,Bus,medium
+649,12.921339,77.595451,Bannerghatta Road,Fatal,2024-12-29,08:17,2024-12-29 08:17:22,Rain,Bike,medium
+650,12.923725,77.619575,Sarjapur Road,Moderate,2024-07-14,08:24,2024-07-14 08:24:22,Rain,Bus,medium
+651,12.915753,77.644175,Outer Ring Road,Fatal,2025-04-28,21:11,2025-04-28 21:11:22,Rain,Truck,high
+652,12.854921,77.663505,Hosur Road,Moderate,2023-12-06,07:43,2023-12-06 07:43:22,Rain,Car,high
+653,12.930981,77.621328,Koramangala 80ft Road,Fatal,2024-12-30,19:17,2024-12-30 19:17:22,Clear,Truck,low
+654,12.962805,77.700919,Marathahalli Bridge Road,Minor,2023-06-24,13:14,2023-06-24 13:14:22,Heavy Rain,Bus,high
+655,13.109725,77.600386,Airport Road,Moderate,2023-03-06,14:26,2023-03-06 14:26:22,Rain,Truck,medium
+656,12.931884,77.600215,Bannerghatta Road,Minor,2023-08-15,10:25,2023-08-15 10:25:22,Clear,Auto,medium
+657,12.965249,77.739987,Whitefield Main Road,Minor,2025-06-16,08:42,2025-06-16 08:42:22,Rain,Car,high
+658,12.917734,77.607317,Sarjapur Road,Severe,2023-12-27,20:37,2023-12-27 20:37:22,Rain,Truck,medium
+659,12.972924,77.600588,Old Madras Road,Minor,2025-07-24,04:56,2025-07-24 04:56:22,Clear,Bus,high
+660,13.094713,77.587265,Airport Road,Minor,2024-04-16,09:34,2024-04-16 09:34:22,Rain,Bus,medium
+661,12.91253,77.637426,Outer Ring Road,Minor,2024-11-18,08:51,2024-11-18 08:51:22,Rain,Auto,high
+662,12.965182,77.753481,Whitefield Main Road,Minor,2024-11-13,19:54,2024-11-13 19:54:22,Clear,Bus,high
+663,13.103441,77.586427,Airport Road,Minor,2025-12-15,10:29,2025-12-15 10:29:22,Clear,Bike,medium
+664,12.913075,77.640093,Outer Ring Road,Moderate,2023-06-07,18:08,2023-06-07 18:08:22,Clear,Auto,high
+665,12.966354,77.69124,Marathahalli Bridge Road,Minor,2024-09-03,14:09,2024-09-03 14:09:22,Clear,Truck,high
+666,12.930286,77.596544,Bannerghatta Road,Moderate,2025-07-01,18:43,2025-07-01 18:43:22,Clear,Truck,medium
+667,12.961398,77.695356,Marathahalli Bridge Road,Moderate,2025-05-17,18:02,2025-05-17 18:02:22,Fog,Truck,high
+668,12.964266,77.744221,Whitefield Main Road,Minor,2024-01-07,08:21,2024-01-07 08:21:22,Clear,Truck,high
+669,12.972574,77.744917,Whitefield Main Road,Severe,2025-01-25,13:53,2025-01-25 13:53:22,Rain,Bus,high
+670,12.954716,77.706865,Marathahalli Bridge Road,Minor,2025-12-23,12:57,2025-12-23 12:57:22,Clear,Bus,high
+671,12.960554,77.759404,Whitefield Main Road,Severe,2024-01-22,09:18,2024-01-22 09:18:22,Fog,Bus,high
+672,12.918439,77.647293,Outer Ring Road,Fatal,2024-12-17,20:59,2024-12-17 20:59:22,Clear,Bike,high
+673,12.958422,77.709375,Marathahalli Bridge Road,Severe,2025-03-23,20:46,2025-03-23 20:46:22,Clear,Car,high
+674,12.985916,77.596104,Old Madras Road,Severe,2024-11-19,18:36,2024-11-19 18:36:22,Clear,Auto,high
+675,12.930102,77.58625,Bannerghatta Road,Moderate,2024-05-06,07:13,2024-05-06 07:13:22,Rain,Bus,medium
+676,13.091877,77.605073,Airport Road,Minor,2023-11-27,20:48,2023-11-27 20:48:22,Fog,Truck,medium
+677,13.10235,77.590237,Airport Road,Minor,2024-11-05,20:15,2024-11-05 20:15:22,Rain,Bike,medium
+678,12.986968,77.635255,Indiranagar 100ft Road,Minor,2023-10-21,14:01,2023-10-21 14:01:22,Clear,Truck,low
+679,12.977846,77.759792,Whitefield Main Road,Moderate,2026-01-30,07:57,2026-01-30 07:57:22,Clear,Car,high
+680,12.908697,77.637721,Outer Ring Road,Minor,2025-04-10,18:06,2025-04-10 18:06:22,Clear,Bus,high
+681,12.920324,77.599987,Bannerghatta Road,Minor,2025-01-27,19:44,2025-01-27 19:44:22,Clear,Truck,medium
+682,12.837473,77.652526,Hosur Road,Severe,2025-02-27,15:33,2025-02-27 15:33:22,Rain,Bike,high
+683,12.974716,77.6012,Old Madras Road,Minor,2023-03-10,13:01,2023-03-10 13:01:22,Fog,Bus,high
+684,12.969469,77.758193,Whitefield Main Road,Minor,2025-05-02,19:43,2025-05-02 19:43:22,Clear,Auto,high
+685,12.913435,77.640933,Outer Ring Road,Minor,2024-12-24,18:07,2024-12-24 18:07:22,Clear,Bike,high
+686,12.963937,77.757721,Whitefield Main Road,Moderate,2025-05-10,08:47,2025-05-10 08:47:22,Clear,Auto,high
+687,12.958609,77.697454,Marathahalli Bridge Road,Moderate,2025-04-29,18:59,2025-04-29 18:59:22,Clear,Auto,high
+688,12.910188,77.644242,Outer Ring Road,Moderate,2023-10-11,21:27,2023-10-11 21:27:22,Rain,Auto,high
+689,12.974925,77.644399,Indiranagar 100ft Road,Minor,2025-07-17,07:44,2025-07-17 07:44:22,Clear,Bike,low
+690,12.966041,77.696548,Marathahalli Bridge Road,Moderate,2025-07-27,08:31,2025-07-27 08:31:22,Clear,Truck,high
+691,12.927663,77.624561,Koramangala 80ft Road,Minor,2026-01-18,17:59,2026-01-18 17:59:22,Clear,Bus,low
+692,12.929225,77.591948,Bannerghatta Road,Moderate,2024-09-08,05:39,2024-09-08 05:39:22,Rain,Car,medium
+693,12.976459,77.648974,Indiranagar 100ft Road,Minor,2025-10-07,11:22,2025-10-07 11:22:22,Clear,Auto,low
+694,12.908996,77.602576,Sarjapur Road,Severe,2023-03-27,08:53,2023-03-27 08:53:22,Clear,Auto,medium
+695,12.954568,77.707418,Marathahalli Bridge Road,Severe,2023-10-21,10:38,2023-10-21 10:38:22,Rain,Truck,high
+696,13.102387,77.592135,Airport Road,Fatal,2025-12-05,07:23,2025-12-05 07:23:22,Rain,Truck,medium
+697,13.098722,77.60042,Airport Road,Minor,2024-05-01,07:14,2024-05-01 07:14:22,Clear,Truck,medium
+698,12.922065,77.594116,Bannerghatta Road,Minor,2026-01-04,09:16,2026-01-04 09:16:22,Clear,Bike,medium
+699,12.909675,77.638554,Outer Ring Road,Fatal,2024-09-03,07:02,2024-09-03 07:02:22,Clear,Bus,high
+700,13.107037,77.603543,Airport Road,Minor,2023-06-18,14:48,2023-06-18 14:48:22,Clear,Bus,medium
+701,12.850759,77.667679,Hosur Road,Moderate,2024-05-14,20:42,2024-05-14 20:42:22,Rain,Auto,high
+702,13.100769,77.591093,Airport Road,Minor,2024-05-13,08:04,2024-05-13 08:04:22,Clear,Truck,medium
+703,12.916245,77.64585,Outer Ring Road,Fatal,2023-12-18,03:09,2023-12-18 03:09:22,Rain,Bike,high
+704,12.966654,77.701429,Marathahalli Bridge Road,Moderate,2023-12-05,07:31,2023-12-05 07:31:22,Heavy Rain,Car,high
+705,12.984148,77.609168,Old Madras Road,Moderate,2025-04-03,10:28,2025-04-03 10:28:22,Clear,Car,high
+706,12.983912,77.594652,Old Madras Road,Moderate,2025-10-02,20:12,2025-10-02 20:12:22,Rain,Bike,high
+707,13.097239,77.601924,Airport Road,Fatal,2024-07-29,07:21,2024-07-29 07:21:22,Rain,Auto,medium
+708,12.960996,77.694618,Marathahalli Bridge Road,Minor,2024-06-25,19:32,2024-06-25 19:32:22,Fog,Truck,high
+709,12.967944,77.693435,Marathahalli Bridge Road,Moderate,2025-11-26,17:31,2025-11-26 17:31:22,Clear,Bike,high
+710,12.967998,77.695001,Marathahalli Bridge Road,Moderate,2023-04-09,17:50,2023-04-09 17:50:22,Fog,Truck,high
+711,13.105564,77.602909,Airport Road,Fatal,2024-05-05,21:33,2024-05-05 21:33:22,Rain,Bike,medium
+712,12.921514,77.612513,Sarjapur Road,Severe,2023-06-22,03:46,2023-06-22 03:46:22,Heavy Rain,Bus,medium
+713,12.92709,77.618693,Koramangala 80ft Road,Severe,2024-05-23,20:36,2024-05-23 20:36:22,Clear,Bike,low
+714,12.953793,77.694973,Marathahalli Bridge Road,Fatal,2025-05-17,12:34,2025-05-17 12:34:22,Clear,Truck,high
+715,12.982675,77.644592,Indiranagar 100ft Road,Minor,2026-01-17,18:29,2026-01-17 18:29:22,Rain,Car,low
+716,13.100432,77.599418,Airport Road,Fatal,2025-07-04,22:28,2025-07-04 22:28:22,Clear,Truck,medium
+717,12.971613,77.64437,Indiranagar 100ft Road,Moderate,2026-02-16,07:43,2026-02-16 07:43:22,Rain,Truck,low
+718,12.915182,77.60342,Sarjapur Road,Moderate,2026-01-17,07:35,2026-01-17 07:35:22,Clear,Bus,medium
+719,12.953886,77.694446,Marathahalli Bridge Road,Moderate,2024-11-04,17:27,2024-11-04 17:27:22,Fog,Car,high
+720,12.979705,77.750612,Whitefield Main Road,Moderate,2026-02-05,17:32,2026-02-05 17:32:22,Clear,Truck,high
+721,12.837725,77.651776,Hosur Road,Fatal,2024-05-09,21:26,2024-05-09 21:26:22,Rain,Car,high
+722,12.908881,77.615334,Sarjapur Road,Minor,2025-02-06,14:35,2025-02-06 14:35:22,Clear,Truck,medium
+723,12.835717,77.665853,Hosur Road,Moderate,2025-08-05,19:20,2025-08-05 19:20:22,Clear,Bus,high
+724,12.916247,77.615358,Sarjapur Road,Minor,2024-01-25,14:28,2024-01-25 14:28:22,Clear,Car,medium
+725,12.920141,77.635042,Outer Ring Road,Severe,2025-01-20,14:11,2025-01-20 14:11:22,Clear,Bus,high
+726,12.929808,77.614627,Koramangala 80ft Road,Minor,2023-10-09,19:50,2023-10-09 19:50:22,Clear,Car,low
+727,12.931172,77.630651,Koramangala 80ft Road,Severe,2025-11-27,16:06,2025-11-27 16:06:22,Clear,Bus,low
+728,13.093116,77.588137,Airport Road,Fatal,2025-11-27,18:23,2025-11-27 18:23:22,Clear,Auto,medium
+729,12.964149,77.756948,Whitefield Main Road,Moderate,2023-04-01,23:16,2023-04-01 23:16:22,Rain,Auto,high
+730,12.952854,77.704974,Marathahalli Bridge Road,Moderate,2023-11-20,06:47,2023-11-20 06:47:22,Clear,Car,high
+731,12.924287,77.607076,Sarjapur Road,Moderate,2024-01-13,17:08,2024-01-13 17:08:22,Fog,Bus,medium
+732,12.926911,77.591014,Bannerghatta Road,Minor,2023-05-12,20:36,2023-05-12 20:36:22,Heavy Rain,Bus,medium
+733,12.920155,77.609859,Sarjapur Road,Minor,2025-02-17,16:02,2025-02-17 16:02:22,Clear,Bike,medium
+734,12.980494,77.596147,Old Madras Road,Severe,2025-05-03,20:37,2025-05-03 20:37:22,Clear,Truck,high
+735,13.105473,77.595729,Airport Road,Moderate,2024-03-26,19:38,2024-03-26 19:38:22,Clear,Auto,medium
+736,12.930461,77.617962,Koramangala 80ft Road,Fatal,2024-11-08,07:35,2024-11-08 07:35:22,Clear,Car,low
+737,12.967683,77.597753,Old Madras Road,Moderate,2024-01-28,03:34,2024-01-28 03:34:22,Fog,Bike,high
+738,12.845571,77.656019,Hosur Road,Moderate,2024-04-24,21:35,2024-04-24 21:35:22,Fog,Bus,high
+739,12.966591,77.703763,Marathahalli Bridge Road,Severe,2023-09-04,08:12,2023-09-04 08:12:22,Clear,Auto,high
+740,12.930044,77.619577,Koramangala 80ft Road,Minor,2024-02-16,16:27,2024-02-16 16:27:22,Clear,Car,low
+741,12.964747,77.752159,Whitefield Main Road,Moderate,2024-08-27,23:38,2024-08-27 23:38:22,Clear,Truck,high
+742,12.977538,77.742499,Whitefield Main Road,Moderate,2025-03-24,14:23,2025-03-24 14:23:22,Rain,Bus,high
+743,12.97067,77.642142,Indiranagar 100ft Road,Minor,2023-03-10,07:53,2023-03-10 07:53:22,Clear,Car,low
+744,12.940523,77.620394,Koramangala 80ft Road,Minor,2024-07-10,09:08,2024-07-10 09:08:22,Heavy Rain,Car,low
+745,12.925252,77.606337,Sarjapur Road,Minor,2023-06-20,10:05,2023-06-20 10:05:22,Clear,Bus,medium
+746,12.91366,77.609326,Sarjapur Road,Minor,2024-09-25,19:07,2024-09-25 19:07:22,Rain,Auto,medium
+747,12.972,77.758799,Whitefield Main Road,Moderate,2023-04-20,23:19,2023-04-20 23:19:22,Clear,Bike,high
+748,12.980164,77.632052,Indiranagar 100ft Road,Fatal,2024-03-13,16:04,2024-03-13 16:04:22,Clear,Car,low
+749,12.926037,77.621692,Koramangala 80ft Road,Severe,2025-10-06,00:32,2025-10-06 00:32:22,Clear,Bus,low
+750,13.099836,77.599242,Airport Road,Moderate,2025-11-08,19:03,2025-11-08 19:03:22,Fog,Auto,medium
+751,13.103983,77.587948,Airport Road,Minor,2023-08-17,09:45,2023-08-17 09:45:22,Clear,Car,medium
+752,13.110367,77.587731,Airport Road,Fatal,2023-08-28,07:02,2023-08-28 07:02:22,Clear,Bus,medium
+753,12.913829,77.614973,Sarjapur Road,Minor,2025-04-18,23:03,2025-04-18 23:03:22,Clear,Bike,medium
+754,12.968503,77.645308,Indiranagar 100ft Road,Moderate,2025-03-21,19:18,2025-03-21 19:18:22,Clear,Bus,low
+755,13.10894,77.595227,Airport Road,Moderate,2024-07-06,16:56,2024-07-06 16:56:22,Clear,Auto,medium
+756,12.844451,77.650627,Hosur Road,Severe,2025-06-24,20:03,2025-06-24 20:03:22,Rain,Bike,high
+757,12.929697,77.598561,Bannerghatta Road,Minor,2026-01-03,22:52,2026-01-03 22:52:22,Clear,Truck,medium
+758,12.854506,77.653292,Hosur Road,Minor,2024-09-12,22:51,2024-09-12 22:51:22,Clear,Bus,high
+759,12.9379,77.618282,Koramangala 80ft Road,Severe,2024-09-27,20:20,2024-09-27 20:20:22,Fog,Car,low
+760,12.847752,77.667267,Hosur Road,Fatal,2025-02-06,06:50,2025-02-06 06:50:22,Rain,Truck,high
+761,12.907102,77.601226,Sarjapur Road,Moderate,2026-01-16,08:58,2026-01-16 08:58:22,Fog,Auto,medium
+762,12.915954,77.65196,Outer Ring Road,Moderate,2024-06-19,11:00,2024-06-19 11:00:22,Clear,Truck,high
+763,13.103322,77.60241,Airport Road,Fatal,2024-01-23,15:52,2024-01-23 15:52:22,Rain,Auto,medium
+764,12.851478,77.661099,Hosur Road,Moderate,2025-11-07,07:00,2025-11-07 07:00:22,Clear,Car,high
+765,13.091613,77.59421,Airport Road,Fatal,2024-07-04,13:01,2024-07-04 13:01:22,Clear,Auto,medium
+766,12.907236,77.605855,Sarjapur Road,Moderate,2024-02-24,05:22,2024-02-24 05:22:22,Clear,Bike,medium
+767,12.902866,77.649259,Outer Ring Road,Moderate,2023-07-21,12:58,2023-07-21 12:58:22,Rain,Auto,high
+768,12.914419,77.600456,Sarjapur Road,Minor,2025-07-28,08:40,2025-07-28 08:40:22,Rain,Car,medium
+769,12.980038,77.647183,Indiranagar 100ft Road,Minor,2023-06-30,17:19,2023-06-30 17:19:22,Rain,Truck,low
+770,12.844876,77.661864,Hosur Road,Severe,2025-07-08,09:26,2025-07-08 09:26:22,Clear,Truck,high
+771,12.952287,77.710359,Marathahalli Bridge Road,Minor,2024-11-08,08:40,2024-11-08 08:40:22,Clear,Bus,high
+772,12.979297,77.648406,Indiranagar 100ft Road,Minor,2025-07-31,18:52,2025-07-31 18:52:22,Clear,Car,low
+773,12.918019,77.61591,Sarjapur Road,Severe,2025-11-04,21:13,2025-11-04 21:13:22,Clear,Truck,medium
+774,12.903047,77.646323,Outer Ring Road,Minor,2024-05-17,20:12,2024-05-17 20:12:22,Rain,Truck,high
+775,12.930219,77.632509,Koramangala 80ft Road,Minor,2025-01-14,05:40,2025-01-14 05:40:22,Rain,Bike,low
+776,13.105754,77.594491,Airport Road,Minor,2023-04-02,13:31,2023-04-02 13:31:22,Rain,Truck,medium
+777,12.836787,77.6611,Hosur Road,Minor,2023-08-18,01:35,2023-08-18 01:35:22,Clear,Bus,high
+778,12.920654,77.596623,Bannerghatta Road,Minor,2024-09-11,05:59,2024-09-11 05:59:22,Clear,Auto,medium
+779,12.91995,77.606436,Sarjapur Road,Minor,2023-09-16,08:13,2023-09-16 08:13:22,Clear,Bike,medium
+780,12.96402,77.742167,Whitefield Main Road,Moderate,2025-06-25,23:32,2025-06-25 23:32:22,Clear,Truck,high
+781,12.979857,77.635265,Indiranagar 100ft Road,Minor,2025-05-04,22:31,2025-05-04 22:31:22,Clear,Bus,low
+782,12.926876,77.614859,Koramangala 80ft Road,Minor,2025-11-26,18:07,2025-11-26 18:07:22,Clear,Bike,low
+783,12.983575,77.639731,Indiranagar 100ft Road,Minor,2024-02-06,09:47,2024-02-06 09:47:22,Rain,Auto,low
+784,12.90828,77.613357,Sarjapur Road,Moderate,2025-03-31,18:54,2025-03-31 18:54:22,Rain,Truck,medium
+785,12.917133,77.642451,Outer Ring Road,Minor,2024-03-01,15:20,2024-03-01 15:20:22,Rain,Truck,high
+786,12.918956,77.592297,Bannerghatta Road,Minor,2026-02-05,19:52,2026-02-05 19:52:22,Clear,Truck,medium
+787,13.104984,77.599007,Airport Road,Severe,2024-04-16,06:59,2024-04-16 06:59:22,Fog,Bike,medium
+788,12.907664,77.616112,Sarjapur Road,Moderate,2025-09-24,15:30,2025-09-24 15:30:22,Rain,Car,medium
+789,12.903756,77.637883,Outer Ring Road,Minor,2025-03-04,15:42,2025-03-04 15:42:22,Rain,Truck,high
+790,12.981483,77.639822,Indiranagar 100ft Road,Severe,2024-09-23,09:44,2024-09-23 09:44:22,Clear,Car,low
+791,12.938634,77.628951,Koramangala 80ft Road,Minor,2025-10-03,18:16,2025-10-03 18:16:22,Clear,Bike,low
+792,12.919361,77.591355,Bannerghatta Road,Minor,2025-11-09,09:45,2025-11-09 09:45:22,Rain,Car,medium
+793,12.931632,77.590595,Bannerghatta Road,Moderate,2025-11-17,03:06,2025-11-17 03:06:22,Clear,Bus,medium
+794,12.963146,77.69685,Marathahalli Bridge Road,Minor,2024-06-06,09:44,2024-06-06 09:44:22,Clear,Bus,high
+795,12.963068,77.704745,Marathahalli Bridge Road,Minor,2024-01-29,20:57,2024-01-29 20:57:22,Clear,Truck,high
+796,12.977409,77.603869,Old Madras Road,Minor,2023-06-15,15:13,2023-06-15 15:13:22,Clear,Truck,high
+797,12.938377,77.6201,Koramangala 80ft Road,Minor,2023-08-29,05:26,2023-08-29 05:26:22,Clear,Auto,low
+798,12.971515,77.644065,Indiranagar 100ft Road,Moderate,2024-07-26,07:16,2024-07-26 07:16:22,Rain,Bus,low
+799,12.91782,77.642113,Outer Ring Road,Severe,2024-02-06,09:04,2024-02-06 09:04:22,Clear,Bus,high
+800,12.954295,77.707234,Marathahalli Bridge Road,Moderate,2024-01-08,08:51,2024-01-08 08:51:22,Fog,Bike,high
+801,12.911386,77.641204,Outer Ring Road,Severe,2023-07-28,05:37,2023-07-28 05:37:22,Fog,Truck,high
+802,12.904537,77.641907,Outer Ring Road,Minor,2025-12-18,08:51,2025-12-18 08:51:22,Clear,Car,high
+803,13.108685,77.60238,Airport Road,Minor,2025-06-30,09:28,2025-06-30 09:28:22,Rain,Bus,medium
+804,12.919303,77.605472,Sarjapur Road,Moderate,2023-05-08,18:36,2023-05-08 18:36:22,Rain,Auto,medium
+805,12.933071,77.625439,Koramangala 80ft Road,Moderate,2025-07-18,17:34,2025-07-18 17:34:22,Clear,Auto,low
+806,12.938207,77.625715,Koramangala 80ft Road,Moderate,2023-07-23,09:22,2023-07-23 09:22:22,Clear,Auto,low
+807,12.973816,77.64549,Indiranagar 100ft Road,Minor,2023-07-23,10:57,2023-07-23 10:57:22,Clear,Bike,low
+808,12.975781,77.751125,Whitefield Main Road,Minor,2023-11-26,20:31,2023-11-26 20:31:22,Clear,Bus,high
+809,12.910788,77.618118,Sarjapur Road,Severe,2024-09-19,17:31,2024-09-19 17:31:22,Fog,Car,medium
+810,13.096247,77.593042,Airport Road,Minor,2026-01-16,09:11,2026-01-16 09:11:22,Clear,Truck,medium
+811,12.974001,77.757733,Whitefield Main Road,Moderate,2025-07-16,16:09,2025-07-16 16:09:22,Clear,Bike,high
+812,12.912744,77.60767,Sarjapur Road,Minor,2026-01-29,12:47,2026-01-29 12:47:22,Fog,Auto,medium
+813,12.920687,77.597691,Bannerghatta Road,Moderate,2025-12-13,15:54,2025-12-13 15:54:22,Clear,Car,medium
+814,12.938934,77.625486,Koramangala 80ft Road,Minor,2024-01-10,02:44,2024-01-10 02:44:22,Clear,Car,low
+815,12.915693,77.651942,Outer Ring Road,Fatal,2025-12-20,18:36,2025-12-20 18:36:22,Heavy Rain,Bike,high
+816,12.978952,77.632624,Indiranagar 100ft Road,Severe,2025-09-11,19:31,2025-09-11 19:31:22,Clear,Bus,low
+817,12.980973,77.608327,Old Madras Road,Moderate,2024-04-15,06:20,2024-04-15 06:20:22,Rain,Bus,high
+818,12.924213,77.60313,Bannerghatta Road,Minor,2023-11-18,17:14,2023-11-18 17:14:22,Clear,Auto,medium
+819,12.968026,77.69668,Marathahalli Bridge Road,Moderate,2024-11-26,11:12,2024-11-26 11:12:22,Clear,Truck,high
+820,12.931378,77.597139,Bannerghatta Road,Moderate,2026-02-02,04:58,2026-02-02 04:58:22,Clear,Car,medium
+821,12.907317,77.651139,Outer Ring Road,Moderate,2025-10-20,10:10,2025-10-20 10:10:22,Fog,Auto,high
+822,12.853524,77.661092,Hosur Road,Severe,2023-04-16,10:46,2023-04-16 10:46:22,Rain,Car,high
+823,12.853775,77.65448,Hosur Road,Moderate,2024-02-24,23:34,2024-02-24 23:34:22,Rain,Bus,high
+824,12.905427,77.640302,Outer Ring Road,Minor,2024-11-08,09:25,2024-11-08 09:25:22,Clear,Bike,high
+825,13.090928,77.592522,Airport Road,Minor,2025-11-29,08:49,2025-11-29 08:49:22,Clear,Bike,medium
+826,12.9098,77.617443,Sarjapur Road,Moderate,2023-07-19,16:01,2023-07-19 16:01:22,Clear,Bus,medium
+827,12.959141,77.700522,Marathahalli Bridge Road,Minor,2024-01-13,15:49,2024-01-13 15:49:22,Clear,Bike,high
+828,12.977627,77.742944,Whitefield Main Road,Minor,2025-02-24,18:41,2025-02-24 18:41:22,Heavy Rain,Car,high
+829,12.968816,77.740236,Whitefield Main Road,Minor,2025-02-01,17:24,2025-02-01 17:24:22,Clear,Car,high
+830,12.917903,77.598635,Bannerghatta Road,Minor,2025-07-16,09:53,2025-07-16 09:53:22,Rain,Bus,medium
+831,12.846842,77.661323,Hosur Road,Minor,2025-08-05,22:59,2025-08-05 22:59:22,Clear,Truck,high
+832,12.941156,77.618529,Koramangala 80ft Road,Minor,2023-04-07,05:57,2023-04-07 05:57:22,Fog,Auto,low
+833,13.095192,77.603645,Airport Road,Moderate,2025-05-09,00:00,2025-05-09 00:00:22,Rain,Car,medium
+834,12.930438,77.63193,Koramangala 80ft Road,Moderate,2023-08-19,09:15,2023-08-19 09:15:22,Clear,Bus,low
+835,12.912346,77.645616,Outer Ring Road,Severe,2025-09-01,00:26,2025-09-01 00:26:22,Clear,Bus,high
+836,12.949481,77.701389,Marathahalli Bridge Road,Moderate,2023-03-09,18:02,2023-03-09 18:02:22,Heavy Rain,Car,high
+837,12.838975,77.660931,Hosur Road,Minor,2025-12-18,18:52,2025-12-18 18:52:22,Rain,Bike,high
+838,12.849704,77.654315,Hosur Road,Minor,2024-03-06,23:23,2024-03-06 23:23:22,Clear,Auto,high
+839,12.988392,77.646379,Indiranagar 100ft Road,Moderate,2025-03-18,17:21,2025-03-18 17:21:22,Clear,Bike,low
+840,12.925413,77.624009,Koramangala 80ft Road,Minor,2024-01-16,06:56,2024-01-16 06:56:22,Clear,Bus,low
+841,12.920034,77.647225,Outer Ring Road,Minor,2025-08-28,07:29,2025-08-28 07:29:22,Rain,Truck,high
+842,12.982743,77.635163,Indiranagar 100ft Road,Fatal,2023-07-08,21:19,2023-07-08 21:19:22,Rain,Auto,low
+843,13.101372,77.587913,Airport Road,Minor,2023-09-02,04:27,2023-09-02 04:27:22,Clear,Car,medium
+844,12.973327,77.59409,Old Madras Road,Minor,2023-07-31,16:22,2023-07-31 16:22:22,Clear,Bus,high
+845,12.931755,77.63446,Koramangala 80ft Road,Moderate,2024-03-07,21:43,2024-03-07 21:43:22,Clear,Truck,low
+846,12.919939,77.613155,Sarjapur Road,Moderate,2025-03-15,09:06,2025-03-15 09:06:22,Clear,Bus,medium
+847,13.091398,77.599825,Airport Road,Moderate,2025-10-10,22:14,2025-10-10 22:14:22,Clear,Auto,medium
+848,12.919419,77.59691,Bannerghatta Road,Minor,2024-08-15,21:31,2024-08-15 21:31:22,Rain,Auto,medium
+849,12.964146,77.751739,Whitefield Main Road,Minor,2024-11-05,22:04,2024-11-05 22:04:22,Clear,Auto,high
+850,12.932337,77.589767,Bannerghatta Road,Minor,2024-08-25,08:03,2024-08-25 08:03:22,Clear,Truck,medium
+851,12.98121,77.594601,Old Madras Road,Minor,2023-10-29,07:34,2023-10-29 07:34:22,Clear,Car,high
+852,12.922055,77.602081,Bannerghatta Road,Minor,2024-05-18,07:29,2024-05-18 07:29:22,Rain,Car,medium
+853,12.92981,77.617306,Koramangala 80ft Road,Severe,2023-06-12,22:57,2023-06-12 22:57:22,Clear,Bus,low
+854,12.968429,77.600347,Old Madras Road,Fatal,2023-08-01,05:01,2023-08-01 05:01:22,Clear,Auto,high
+855,12.912551,77.605962,Sarjapur Road,Minor,2025-02-08,13:19,2025-02-08 13:19:22,Clear,Truck,medium
+856,13.093633,77.606219,Airport Road,Minor,2025-10-12,17:18,2025-10-12 17:18:22,Clear,Bike,medium
+857,12.931342,77.592161,Bannerghatta Road,Minor,2023-08-21,18:00,2023-08-21 18:00:22,Clear,Truck,medium
+858,12.975937,77.743219,Whitefield Main Road,Severe,2025-05-23,06:27,2025-05-23 06:27:22,Clear,Bus,high
+859,12.937527,77.626881,Koramangala 80ft Road,Fatal,2025-08-24,17:31,2025-08-24 17:31:22,Fog,Truck,low
+860,12.848762,77.669075,Hosur Road,Fatal,2024-09-19,08:36,2024-09-19 08:36:22,Clear,Truck,high
+861,12.916044,77.645232,Outer Ring Road,Moderate,2026-02-16,09:16,2026-02-16 09:16:22,Fog,Car,high
+862,13.09582,77.586477,Airport Road,Minor,2024-08-30,20:55,2024-08-30 20:55:22,Clear,Auto,medium
+863,12.981504,77.645517,Indiranagar 100ft Road,Severe,2024-05-27,19:23,2024-05-27 19:23:22,Rain,Auto,low
+864,12.950058,77.70308,Marathahalli Bridge Road,Moderate,2023-10-23,20:09,2023-10-23 20:09:22,Clear,Bike,high
+865,12.980206,77.639199,Indiranagar 100ft Road,Minor,2023-12-02,21:14,2023-12-02 21:14:22,Fog,Bus,low
+866,12.985161,77.635702,Indiranagar 100ft Road,Fatal,2023-12-20,10:09,2023-12-20 10:09:22,Clear,Car,low
+867,12.931732,77.622163,Koramangala 80ft Road,Minor,2023-04-11,17:00,2023-04-11 17:00:22,Clear,Bike,low
+868,12.93325,77.598686,Bannerghatta Road,Severe,2024-02-03,20:44,2024-02-03 20:44:22,Clear,Bike,medium
+869,12.918444,77.593294,Bannerghatta Road,Moderate,2025-08-21,05:12,2025-08-21 05:12:22,Fog,Auto,medium
+870,12.977519,77.634902,Indiranagar 100ft Road,Minor,2023-10-31,12:49,2023-10-31 12:49:22,Rain,Truck,low
+871,12.915997,77.601202,Sarjapur Road,Minor,2025-11-03,14:01,2025-11-03 14:01:22,Clear,Auto,medium
+872,12.922242,77.603538,Bannerghatta Road,Minor,2024-02-24,06:35,2024-02-24 06:35:22,Clear,Car,medium
+873,12.92959,77.595392,Bannerghatta Road,Minor,2025-04-01,10:16,2025-04-01 10:16:22,Rain,Auto,medium
+874,13.10234,77.59482,Airport Road,Moderate,2023-04-03,19:17,2023-04-03 19:17:22,Clear,Car,medium
+875,12.976406,77.633503,Indiranagar 100ft Road,Minor,2025-03-05,22:55,2025-03-05 22:55:22,Clear,Bike,low
+876,12.907685,77.611143,Sarjapur Road,Moderate,2024-01-13,18:55,2024-01-13 18:55:22,Clear,Car,medium
+877,12.923703,77.616902,Sarjapur Road,Minor,2023-12-22,16:22,2023-12-22 16:22:22,Rain,Bus,medium
+878,12.975204,77.649287,Indiranagar 100ft Road,Moderate,2023-06-07,07:02,2023-06-07 07:02:22,Clear,Bus,low
+879,12.852058,77.652575,Hosur Road,Fatal,2025-10-21,15:09,2025-10-21 15:09:22,Fog,Car,high
+880,12.97219,77.650588,Indiranagar 100ft Road,Moderate,2023-08-12,01:40,2023-08-12 01:40:22,Clear,Bus,low
+881,12.843381,77.65182,Hosur Road,Moderate,2025-08-10,18:13,2025-08-10 18:13:22,Clear,Auto,high
+882,12.963274,77.740982,Whitefield Main Road,Severe,2024-10-13,07:19,2024-10-13 07:19:22,Clear,Auto,high
+883,12.971001,77.759164,Whitefield Main Road,Moderate,2025-01-03,18:58,2025-01-03 18:58:22,Clear,Truck,high
+884,12.906785,77.603335,Sarjapur Road,Severe,2024-09-03,07:46,2024-09-03 07:46:22,Rain,Truck,medium
+885,12.965199,77.743611,Whitefield Main Road,Minor,2024-11-05,12:08,2024-11-05 12:08:22,Clear,Auto,high
+886,12.933072,77.596315,Bannerghatta Road,Minor,2023-04-08,08:27,2023-04-08 08:27:22,Clear,Truck,medium
+887,12.958488,77.695568,Marathahalli Bridge Road,Minor,2023-04-20,13:18,2023-04-20 13:18:22,Clear,Truck,high
+888,12.978521,77.740087,Whitefield Main Road,Moderate,2024-07-13,20:40,2024-07-13 20:40:22,Rain,Car,high
+889,12.973336,77.753248,Whitefield Main Road,Severe,2025-06-26,07:52,2025-06-26 07:52:22,Rain,Truck,high
+890,12.921977,77.646824,Outer Ring Road,Moderate,2025-06-05,13:12,2025-06-05 13:12:22,Clear,Truck,high
+891,12.94448,77.632855,Koramangala 80ft Road,Minor,2025-03-03,17:18,2025-03-03 17:18:22,Clear,Truck,low
+892,13.099875,77.586404,Airport Road,Severe,2024-08-22,20:11,2024-08-22 20:11:22,Rain,Bus,medium
+893,12.977862,77.610921,Old Madras Road,Severe,2024-12-10,05:19,2024-12-10 05:19:22,Rain,Bus,high
+894,12.972523,77.647957,Indiranagar 100ft Road,Severe,2024-02-08,01:08,2024-02-08 01:08:22,Rain,Car,low
+895,12.847845,77.663205,Hosur Road,Minor,2024-08-01,09:35,2024-08-01 09:35:22,Clear,Auto,high
+896,12.908507,77.650695,Outer Ring Road,Severe,2024-05-01,19:08,2024-05-01 19:08:22,Clear,Bus,high
+897,12.976325,77.637938,Indiranagar 100ft Road,Severe,2026-02-11,07:44,2026-02-11 07:44:22,Heavy Rain,Truck,low
+898,13.093713,77.603523,Airport Road,Minor,2024-12-28,15:09,2024-12-28 15:09:22,Clear,Auto,medium
+899,13.09999,77.600972,Airport Road,Moderate,2025-03-26,18:02,2025-03-26 18:02:22,Clear,Auto,medium
+900,12.91372,77.617958,Sarjapur Road,Fatal,2023-05-04,19:34,2023-05-04 19:34:22,Rain,Car,medium
+901,12.930537,77.62008,Koramangala 80ft Road,Minor,2023-04-06,14:39,2023-04-06 14:39:22,Clear,Bus,low
+902,13.106072,77.60189,Airport Road,Severe,2025-10-20,11:54,2025-10-20 11:54:22,Clear,Bike,medium
+903,13.096845,77.605677,Airport Road,Minor,2024-09-27,20:46,2024-09-27 20:46:22,Clear,Truck,medium
+904,12.939024,77.620824,Koramangala 80ft Road,Severe,2024-03-15,00:09,2024-03-15 00:09:22,Fog,Bus,low
+905,12.931133,77.615427,Koramangala 80ft Road,Severe,2023-03-05,15:11,2023-03-05 15:11:22,Fog,Bus,low
+906,12.9792,77.740535,Whitefield Main Road,Severe,2024-06-28,08:29,2024-06-28 08:29:22,Clear,Auto,high
+907,12.907676,77.644719,Outer Ring Road,Minor,2025-03-12,22:36,2025-03-12 22:36:22,Clear,Bike,high
+908,12.920423,77.595579,Bannerghatta Road,Minor,2025-11-07,17:15,2025-11-07 17:15:22,Heavy Rain,Truck,medium
+909,12.97657,77.750528,Whitefield Main Road,Minor,2025-09-12,23:59,2025-09-12 23:59:22,Clear,Auto,high
+910,12.930721,77.625525,Koramangala 80ft Road,Minor,2025-12-01,12:59,2025-12-01 12:59:22,Clear,Bike,low
+911,12.916306,77.641409,Outer Ring Road,Moderate,2024-11-05,10:58,2024-11-05 10:58:22,Rain,Bike,high
+912,12.925549,77.591224,Bannerghatta Road,Moderate,2024-12-17,18:26,2024-12-17 18:26:22,Clear,Bike,medium
+913,12.926814,77.625228,Koramangala 80ft Road,Severe,2025-02-05,15:12,2025-02-05 15:12:22,Clear,Bike,low
+914,12.921109,77.596884,Bannerghatta Road,Minor,2025-02-26,08:50,2025-02-26 08:50:22,Clear,Car,medium
+915,12.974848,77.604597,Old Madras Road,Minor,2023-03-08,17:14,2023-03-08 17:14:22,Clear,Bus,high
+916,12.957342,77.696706,Marathahalli Bridge Road,Fatal,2025-07-21,18:09,2025-07-21 18:09:22,Clear,Car,high
+917,12.840927,77.666821,Hosur Road,Severe,2024-12-15,17:30,2024-12-15 17:30:22,Rain,Bike,high
+918,12.979543,77.594096,Old Madras Road,Fatal,2024-11-18,12:57,2024-11-18 12:57:22,Fog,Auto,high
+919,12.980074,77.607325,Old Madras Road,Severe,2023-10-30,13:23,2023-10-30 13:23:22,Heavy Rain,Auto,high
+920,12.846655,77.651061,Hosur Road,Severe,2023-04-12,20:38,2023-04-12 20:38:22,Clear,Car,high
+921,12.933882,77.619479,Koramangala 80ft Road,Moderate,2024-09-29,13:26,2024-09-29 13:26:22,Rain,Bike,low
+922,12.984733,77.637633,Indiranagar 100ft Road,Minor,2023-04-20,15:32,2023-04-20 15:32:22,Clear,Bus,low
+923,12.919202,77.60974,Sarjapur Road,Moderate,2023-09-12,10:31,2023-09-12 10:31:22,Clear,Auto,medium
+924,12.971119,77.595449,Old Madras Road,Severe,2023-03-12,23:42,2023-03-12 23:42:22,Clear,Auto,high
+925,12.937424,77.618236,Koramangala 80ft Road,Minor,2024-06-20,16:32,2024-06-20 16:32:22,Clear,Auto,low
+926,12.906978,77.603811,Sarjapur Road,Minor,2026-01-28,18:16,2026-01-28 18:16:22,Clear,Car,medium
+927,12.958524,77.707601,Marathahalli Bridge Road,Minor,2023-11-30,18:51,2023-11-30 18:51:22,Clear,Truck,high
+928,12.914358,77.618075,Sarjapur Road,Severe,2025-09-14,02:38,2025-09-14 02:38:22,Clear,Car,medium
+929,12.949415,77.70811,Marathahalli Bridge Road,Moderate,2024-02-11,00:23,2024-02-11 00:23:22,Clear,Auto,high
+930,12.968744,77.606759,Old Madras Road,Severe,2024-01-28,10:17,2024-01-28 10:17:22,Fog,Car,high
+931,12.974423,77.638136,Indiranagar 100ft Road,Fatal,2024-11-12,15:25,2024-11-12 15:25:22,Clear,Truck,low
+932,12.944394,77.627381,Koramangala 80ft Road,Minor,2025-04-08,19:52,2025-04-08 19:52:22,Heavy Rain,Auto,low
+933,12.944603,77.627049,Koramangala 80ft Road,Moderate,2023-03-27,10:20,2023-03-27 10:20:22,Rain,Car,low
+934,12.96225,77.746784,Whitefield Main Road,Minor,2025-10-29,22:06,2025-10-29 22:06:22,Clear,Truck,high
+935,12.975962,77.60823,Old Madras Road,Fatal,2024-02-17,18:49,2024-02-17 18:49:22,Rain,Truck,high
+936,12.841307,77.65986,Hosur Road,Minor,2024-04-09,08:16,2024-04-09 08:16:22,Clear,Bus,high
+937,12.969636,77.75177,Whitefield Main Road,Moderate,2023-06-20,06:04,2023-06-20 06:04:22,Clear,Car,high
+938,12.955248,77.710746,Marathahalli Bridge Road,Moderate,2025-06-02,14:21,2025-06-02 14:21:22,Clear,Car,high
+939,12.960665,77.7027,Marathahalli Bridge Road,Minor,2023-12-04,15:17,2023-12-04 15:17:22,Rain,Bus,high
+940,12.968517,77.692952,Marathahalli Bridge Road,Moderate,2023-03-24,10:39,2023-03-24 10:39:22,Rain,Bike,high
+941,12.959477,77.702274,Marathahalli Bridge Road,Moderate,2023-09-20,09:03,2023-09-20 09:03:22,Clear,Bike,high
+942,12.907219,77.64126,Outer Ring Road,Moderate,2025-10-22,08:32,2025-10-22 08:32:22,Clear,Bus,high
+943,12.913565,77.644641,Outer Ring Road,Minor,2024-03-27,08:27,2024-03-27 08:27:22,Clear,Auto,high
+944,12.915888,77.648067,Outer Ring Road,Minor,2026-02-21,18:00,2026-02-21 18:00:22,Clear,Auto,high
+945,12.97341,77.648004,Indiranagar 100ft Road,Moderate,2026-01-30,22:09,2026-01-30 22:09:22,Clear,Bus,low
+946,12.958815,77.706649,Marathahalli Bridge Road,Minor,2025-12-14,17:15,2025-12-14 17:15:22,Clear,Truck,high
+947,12.971222,77.600544,Old Madras Road,Moderate,2024-04-25,07:16,2024-04-25 07:16:22,Fog,Car,high
+948,12.962459,77.696558,Marathahalli Bridge Road,Moderate,2025-02-05,18:05,2025-02-05 18:05:22,Clear,Truck,high
+949,12.972621,77.635507,Indiranagar 100ft Road,Minor,2023-12-03,20:46,2023-12-03 20:46:22,Clear,Truck,low
+950,12.922047,77.63931,Outer Ring Road,Severe,2025-11-29,04:21,2025-11-29 04:21:22,Clear,Bus,high
+951,12.975829,77.753796,Whitefield Main Road,Moderate,2025-09-26,18:03,2025-09-26 18:03:22,Rain,Car,high
+952,12.920895,77.60654,Sarjapur Road,Fatal,2025-01-24,16:31,2025-01-24 16:31:22,Clear,Auto,medium
+953,12.969564,77.633284,Indiranagar 100ft Road,Minor,2025-04-16,04:51,2025-04-16 04:51:22,Rain,Bus,low
+954,12.916937,77.602753,Bannerghatta Road,Severe,2025-05-30,09:38,2025-05-30 09:38:22,Clear,Truck,medium
+955,12.934393,77.591812,Bannerghatta Road,Minor,2025-04-23,21:24,2025-04-23 21:24:22,Clear,Auto,medium
+956,12.985466,77.606735,Old Madras Road,Moderate,2024-09-25,18:49,2024-09-25 18:49:22,Clear,Bus,high
+957,12.836146,77.656785,Hosur Road,Fatal,2025-09-10,18:24,2025-09-10 18:24:22,Clear,Truck,high
+958,12.968299,77.605666,Old Madras Road,Minor,2024-01-04,08:58,2024-01-04 08:58:22,Rain,Car,high
+959,12.932749,77.615545,Koramangala 80ft Road,Severe,2024-01-29,00:17,2024-01-29 00:17:22,Clear,Truck,low
+960,12.932498,77.59922,Bannerghatta Road,Minor,2023-08-06,14:03,2023-08-06 14:03:22,Heavy Rain,Bike,medium
+961,12.907003,77.607804,Sarjapur Road,Minor,2025-12-28,06:01,2025-12-28 06:01:22,Rain,Bike,medium
+962,12.915461,77.636957,Outer Ring Road,Moderate,2025-07-08,20:39,2025-07-08 20:39:22,Clear,Auto,high
+963,12.92129,77.610981,Sarjapur Road,Moderate,2023-08-11,08:50,2023-08-11 08:50:22,Clear,Bike,medium
+964,12.837816,77.665928,Hosur Road,Minor,2024-10-11,09:07,2024-10-11 09:07:22,Clear,Bus,high
+965,12.849726,77.668318,Hosur Road,Minor,2024-12-31,02:18,2024-12-31 02:18:22,Rain,Truck,high
+966,12.912583,77.604378,Sarjapur Road,Severe,2026-01-10,12:54,2026-01-10 12:54:22,Clear,Car,medium
+967,12.91994,77.63583,Outer Ring Road,Minor,2024-08-12,15:52,2024-08-12 15:52:22,Clear,Truck,high
+968,12.981313,77.596073,Old Madras Road,Minor,2024-10-09,08:45,2024-10-09 08:45:22,Rain,Car,high
+969,12.983572,77.598879,Old Madras Road,Minor,2023-11-03,19:17,2023-11-03 19:17:22,Fog,Bike,high
+970,12.976892,77.63217,Indiranagar 100ft Road,Minor,2023-10-30,08:46,2023-10-30 08:46:22,Clear,Truck,low
+971,12.841685,77.660191,Hosur Road,Fatal,2023-03-31,13:40,2023-03-31 13:40:22,Heavy Rain,Bike,high
+972,12.982477,77.595585,Old Madras Road,Moderate,2023-05-22,15:48,2023-05-22 15:48:22,Clear,Car,high
+973,12.925934,77.591157,Bannerghatta Road,Severe,2025-04-07,22:16,2025-04-07 22:16:22,Rain,Bus,medium
+974,13.092994,77.590867,Airport Road,Minor,2025-01-22,07:20,2025-01-22 07:20:22,Clear,Bus,medium
+975,12.975951,77.642775,Indiranagar 100ft Road,Moderate,2023-11-13,04:47,2023-11-13 04:47:22,Rain,Bus,low
+976,12.903268,77.636121,Outer Ring Road,Moderate,2025-07-01,17:32,2025-07-01 17:32:22,Rain,Bus,high
+977,12.929946,77.590598,Bannerghatta Road,Severe,2026-02-03,08:27,2026-02-03 08:27:22,Clear,Bus,medium
+978,12.917279,77.589805,Bannerghatta Road,Moderate,2025-12-30,17:40,2025-12-30 17:40:22,Clear,Car,medium
+979,12.913683,77.60065,Sarjapur Road,Minor,2025-05-02,19:24,2025-05-02 19:24:22,Clear,Car,medium
+980,12.977046,77.749445,Whitefield Main Road,Moderate,2025-11-09,21:36,2025-11-09 21:36:22,Clear,Bike,high
+981,12.912882,77.641604,Outer Ring Road,Moderate,2025-10-21,19:09,2025-10-21 19:09:22,Clear,Bike,high
+982,12.91908,77.608217,Sarjapur Road,Severe,2024-11-09,02:56,2024-11-09 02:56:22,Heavy Rain,Car,medium
+983,12.973945,77.604804,Old Madras Road,Severe,2023-10-09,10:34,2023-10-09 10:34:22,Rain,Auto,high
+984,12.976632,77.747014,Whitefield Main Road,Minor,2024-05-19,19:55,2024-05-19 19:55:22,Clear,Auto,high
+985,12.933946,77.623987,Koramangala 80ft Road,Severe,2025-06-26,14:23,2025-06-26 14:23:22,Fog,Truck,low
+986,12.96111,77.696335,Marathahalli Bridge Road,Moderate,2024-01-08,05:06,2024-01-08 05:06:22,Clear,Bike,high
+987,12.919735,77.635049,Outer Ring Road,Moderate,2025-08-11,08:47,2025-08-11 08:47:22,Clear,Bus,high
+988,12.954824,77.700223,Marathahalli Bridge Road,Minor,2025-07-22,13:49,2025-07-22 13:49:22,Fog,Bus,high
+989,12.976765,77.64366,Indiranagar 100ft Road,Severe,2025-04-30,19:35,2025-04-30 19:35:22,Clear,Truck,low
+990,12.912978,77.613313,Sarjapur Road,Minor,2024-02-08,11:48,2024-02-08 11:48:22,Clear,Bus,medium
+991,13.09372,77.605924,Airport Road,Moderate,2024-11-07,16:59,2024-11-07 16:59:22,Rain,Truck,medium
+992,12.844203,77.659108,Hosur Road,Minor,2026-01-10,00:56,2026-01-10 00:56:22,Clear,Bike,high
+993,12.969604,77.630804,Indiranagar 100ft Road,Fatal,2023-12-12,09:24,2023-12-12 09:24:22,Clear,Auto,low
+994,12.921212,77.653138,Outer Ring Road,Minor,2025-02-05,06:29,2025-02-05 06:29:22,Clear,Truck,high
+995,12.979018,77.603834,Old Madras Road,Minor,2025-03-15,08:20,2025-03-15 08:20:22,Clear,Bike,high
+996,12.960902,77.70057,Marathahalli Bridge Road,Minor,2023-10-30,21:43,2023-10-30 21:43:22,Clear,Truck,high
+997,12.973128,77.752971,Whitefield Main Road,Moderate,2025-05-30,08:39,2025-05-30 08:39:22,Fog,Truck,high
+998,12.852346,77.654853,Hosur Road,Moderate,2024-03-28,08:42,2024-03-28 08:42:22,Rain,Car,high
+999,12.954678,77.70388,Marathahalli Bridge Road,Moderate,2024-11-28,08:34,2024-11-28 08:34:22,Rain,Bus,high
+1000,12.965305,77.740524,Whitefield Main Road,Minor,2025-04-07,08:00,2025-04-07 08:00:22,Clear,Auto,high
